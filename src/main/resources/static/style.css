@@ -1,0 +1,63 @@
+.FrontPage {
+  background-color: #77eeb6;
+}
+
+.Header {
+  display: inline-block;
+  width: 80%;
+  margin: 0 auto;
+  align-content: space-around;
+}
+
+.MenuItem {
+  margin-top: 2vh;
+}
+
+.MenuItem > a {
+  text-decoration: none;
+  color: white;
+}
+
+#hamburger {
+  width: 5vh;
+  height: 5vh;
+  border: #77eeb6;
+  border-radius: 23px;
+  background-color: #58a58136;
+  box-shadow: 0 0 10px #3c5f4f36;
+  margin-left: 2vh;
+}
+
+#hamburger:hover {
+  border: #77eeb6;
+  background-color: #60b99036;
+  box-shadow: 0 0 15px #3c5f4f36;
+}
+
+.PageContent {
+  display: block;
+  width: 100%;
+  margin: 25vh 78vh;
+  align-items: center;
+}
+
+.PageItem {
+  width: 50vh;
+  height: 7vh;
+  border: #77eeb6;
+  border-radius: 23px;
+  background-color: #58a58136;
+  box-shadow: 0 0 10px #3c5f4f36;
+  margin-top: 2%;
+}
+.PageItem > a {
+  font-size: 20px;
+  text-decoration: none;
+  color: white;
+}
+
+.PageItem:hover {
+  border: #77eeb6;
+  background-color: #60b99036;
+  box-shadow: 0 0 15px #3c5f4f36;
+}
