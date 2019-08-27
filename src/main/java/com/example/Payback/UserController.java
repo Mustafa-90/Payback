@@ -39,4 +39,8 @@ public class UserController {
         }
         return "Added user";
     }
+
+    public void updateUser (User user) {
+        userRepository.save(user);
+    }
 }
