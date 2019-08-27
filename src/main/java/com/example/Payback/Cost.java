@@ -11,11 +11,11 @@ public class Cost {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany
-    private List<User> users;
+    @ManyToOne
+    private User user;
 
-    @ManyToMany
-    private List<Group> groups;
+    @ManyToOne
+    private PaybackGroup group;
 
     @OneToMany
     private List<Payment> payments;
@@ -25,7 +25,7 @@ public class Cost {
     private Image receipt;
     private Date time;
 
-    public Cost(List<User> users, List<Group> groups, List<Payment> payments, Double cost, String type, Image receipt) {
+    public Cost(List<User> users, List<PaybackGroup> groups, List<Payment> payments, Double cost, String type, Image receipt) {
         this.users = users;
         this.groups = groups;
         this.payments = payments;
@@ -54,11 +54,11 @@ public class Cost {
         this.users = users;
     }
 
-    public List<Group> getGroups() {
+    public List<PaybackGroup> getGroups() {
         return groups;
     }
 
-    public void setGroups(List<Group> groups) {
+    public void setGroups(List<PaybackGroup> groups) {
         this.groups = groups;
     }
 
