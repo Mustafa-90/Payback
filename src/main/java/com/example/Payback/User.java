@@ -1,17 +1,19 @@
 package com.example.Payback;
+
 import javax.persistence.*;
 
 @Entity
-@Table (name = "Paybackuser")
+@Table(name = "Paybackuser")
 public class User {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column (name = "Username")
     private String userName;
 
+    @Column (name = "Password")
     private String password;
 
     @Column (name = "Firstname")
@@ -20,12 +22,15 @@ public class User {
     @Column (name = "Lastname")
     private String lastName;
 
+    @Column (name = "Email")
     private String email;
 
     @Column (name = "Phonenr")
     private String phoneNr;
 
+
     public User() {
+
     }
 
     public User(String userName, String password, String firstName, String lastName, String email, String phoneNr) {
@@ -92,4 +97,5 @@ public class User {
     public void setPhoneNr(String phoneNr) {
         this.phoneNr = phoneNr;
     }
+
 }
