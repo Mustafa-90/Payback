@@ -1,6 +1,8 @@
 package com.example.Payback;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Paybackuser")
@@ -10,27 +12,29 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (name = "Username")
+    @Column(name = "Username")
     private String userName;
 
-    @Column (name = "Password")
+    @Column(name = "Password")
     private String password;
 
-    @Column (name = "Firstname")
+    @Column(name = "Firstname")
     private String firstName;
 
-    @Column (name = "Lastname")
+    @Column(name = "Lastname")
     private String lastName;
 
-    @Column (name = "Email")
+    @Column(name = "Email")
     private String email;
 
-    @Column (name = "Phonenr")
+    @Column(name = "Phonenr")
     private String phoneNr;
 
+    @OneToMany
+    @Column(name = "groupmember")
+    private List<GroupMember> groupMembers;
 
     public User() {
-
     }
 
     public User(String userName, String password, String firstName, String lastName, String email, String phoneNr) {
@@ -40,6 +44,7 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.phoneNr = phoneNr;
+        this.groupMembers = new ArrayList<>();
     }
 
     public Long getId() {
@@ -98,4 +103,15 @@ public class User {
         this.phoneNr = phoneNr;
     }
 
+    public List<GroupMember> getGroupMembers() {
+        return groupMembers;
+    }
+
+    public void setGroupMembers(List<GroupMember> groupMembers) {
+        this.groupMembers = groupMembers;
+    }
+
+    public void addGroupMember(GroupMember groupMember) {
+        this.groupMembers.add(groupMember);
+    }
 }

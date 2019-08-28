@@ -1,7 +1,7 @@
 package com.example.Payback;
 import javax.persistence.*;
-import java.awt.*;
-import java.util.Date;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,27 +12,27 @@ public class Cost {
     private Long id;
 
     @ManyToOne
-    private User user;
+    @JoinColumn (name = "groupmember_id")
+    private GroupMember groupMember;
 
-    @ManyToOne
-    private PaybackGroup group;
+    @OneToMany
+    private List<PaybackGroup> paybackGroups;
 
     @OneToMany
     private List<Payment> payments;
 
     private Double cost;
     private String type;
-    private String receiptUrl;
+    private String receipt;
     private Date time;
 
-    public Cost(User user, PaybackGroup group, List<Payment> payments, Double cost, String type, String receiptUrl) {
-        this.user = user;
-        this.group = group;
-        this.payments = payments;
+    public Cost(GroupMember groupMember, List<PaybackGroup> paybackGroups, Double cost, String type, String receipt) {
+        this.groupMember = groupMember;
+        this.paybackGroups = paybackGroups;
+        this.payments = new ArrayList<>();
         this.cost = cost;
         this.type = type;
-        this.receiptUrl = receiptUrl;
-        this.time = new Date(System.currentTimeMillis());
+        this.receipt = receipt;
     }
 
     public Cost() {
@@ -46,20 +46,24 @@ public class Cost {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public GroupMember getGroupMember() {
+        return groupMember;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setGroupMember(GroupMember groupMember) {
+        this.groupMember = groupMember;
     }
 
-    public PaybackGroup getGroup() {
-        return group;
+    public List<PaybackGroup> getPaybackGroups() {
+        return paybackGroups;
     }
 
-    public void setGroup(PaybackGroup group) {
-        this.group = group;
+    public void setPaybackGroups(List<PaybackGroup> paybackGroups) {
+        this.paybackGroups = paybackGroups;
+    }
+
+    public void addPaybackGroup(PaybackGroup paybackGroup) {
+        this.paybackGroups.add(paybackGroup);
     }
 
     public List<Payment> getPayments() {
@@ -68,6 +72,10 @@ public class Cost {
 
     public void setPayments(List<Payment> payments) {
         this.payments = payments;
+    }
+
+    public void addPayment(Payment payment) {
+        this.payments.add(payment);
     }
 
     public Double getCost() {
@@ -86,12 +94,12 @@ public class Cost {
         this.type = type;
     }
 
-    public String getReceiptUrl() {
-        return receiptUrl;
+    public String getReceipt() {
+        return receipt;
     }
 
-    public void setReceiptUrl(String receiptUrl) {
-        this.receiptUrl = receiptUrl;
+    public void setReceipt(String receipt) {
+        this.receipt = receipt;
     }
 
     public Date getTime() {

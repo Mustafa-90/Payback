@@ -17,7 +17,10 @@ public class PaybackApplicationTests {
     UserRepository userRepository;
 
     @Autowired
-    UserController uc;
+    UserController userController;
+
+    @Autowired
+	PaymentRepository paymentRepository;
 
 
     @Test
@@ -77,6 +80,12 @@ public class PaybackApplicationTests {
 		userRepository.delete(userRepository.findByUserName("Tommy").get());
 		Boolean userResult = userRepository.findByUserName("Tommy").isPresent();
 		Assert.assertEquals(false, userResult);
+	}
+
+	@Test
+	public void getAllPayments() {
+		List<Payment> result = (List) paymentRepository.findAll();
+		Assert.assertEquals(true, result.size() > 0);
 	}
 
 }

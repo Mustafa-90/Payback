@@ -1,5 +1,6 @@
 package com.example.Payback;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,7 +11,8 @@ public class PaybackGroup {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column (name = "creator")
+    @OneToOne
+    @JoinColumn (name = "creator")
     private User creator;
 
     @Column (name = "Groupname")
@@ -19,8 +21,8 @@ public class PaybackGroup {
     @Column (name = "Totalsum")
     private double totalSum;
 
-    @ManyToMany
-    private List<User> users;
+    @OneToMany
+    private List<GroupMember> groupMembers;
 
     PaybackGroup () {
     }
@@ -29,6 +31,7 @@ public class PaybackGroup {
         this.creator = creator;
         this.groupName = groupName;
         this.totalSum = totalSum;
+        this.groupMembers = new ArrayList<>();
     }
 
     public long getId() {
@@ -61,5 +64,17 @@ public class PaybackGroup {
 
     public void setTotalSum(double totalSum) {
         this.totalSum = totalSum;
+    }
+
+    public List<GroupMember> getGroupMembers() {
+        return groupMembers;
+    }
+
+    public void setGroupMembers(List<GroupMember> groupMembers) {
+        this.groupMembers = groupMembers;
+    }
+
+    public void addGroupMember(GroupMember groupMember) {
+        this.groupMembers.add(groupMember);
     }
 }
