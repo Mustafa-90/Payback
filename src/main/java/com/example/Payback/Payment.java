@@ -12,7 +12,10 @@ public class Payment {
     @ManyToOne
     private Cost cost;
 
+    @Column (name = "ispaybackd")
     private boolean isPaybackd;
+
+    @Column (name = "payerid")
     private Long payerId;
     private int sum;
 

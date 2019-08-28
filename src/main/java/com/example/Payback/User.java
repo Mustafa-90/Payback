@@ -1,6 +1,7 @@
 package com.example.Payback;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Paybackuser")
@@ -10,23 +11,29 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (name = "Username")
+    @Column(name = "Username")
     private String userName;
 
-    @Column (name = "Password")
+    @Column(name = "Password")
     private String password;
 
-    @Column (name = "Firstname")
+    @Column(name = "Firstname")
     private String firstName;
 
-    @Column (name = "Lastname")
+    @Column(name = "Lastname")
     private String lastName;
 
-    @Column (name = "Email")
+    @Column(name = "Email")
     private String email;
 
-    @Column (name = "Phonenr")
+    @Column(name = "Phonenr")
     private String phoneNr;
+
+    @ManyToMany
+    private List<PaybackGroup> paybackGroups;
+
+    @OneToMany
+    private List<Cost> costs;
 
 
     public User() {

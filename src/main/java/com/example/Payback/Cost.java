@@ -1,6 +1,6 @@
 package com.example.Payback;
+
 import javax.persistence.*;
-import java.awt.*;
 import java.util.Date;
 import java.util.List;
 
@@ -11,28 +11,29 @@ public class Cost {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany
-    private List<User> users;
+    @ManyToOne
+    private User user;
 
-    @ManyToMany
-    private List<Group> groups;
+    @ManyToOne
+    @JoinColumn (name = "groupmember_id")
+    private PaybackGroup group;
 
     @OneToMany
     private List<Payment> payments;
 
     private Double cost;
     private String type;
-    private Image receipt;
+    private String receipt;
     private Date time;
 
-    public Cost(List<User> users, List<Group> groups, List<Payment> payments, Double cost, String type, Image receipt) {
-        this.users = users;
-        this.groups = groups;
+    public Cost(User user, PaybackGroup group, List<Payment> payments, Double cost, String type, String receipt) {
+        this.user = user;
+        this.group = group;
         this.payments = payments;
         this.cost = cost;
         this.type = type;
         this.receipt = receipt;
-        this.time = new Date(System.currentTimeMillis());
+        //this.time = new Date(System.currentTimeMillis());
     }
 
     public Cost() {
@@ -46,20 +47,20 @@ public class Cost {
         this.id = id;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public List<Group> getGroups() {
-        return groups;
+    public PaybackGroup getGroup() {
+        return group;
     }
 
-    public void setGroups(List<Group> groups) {
-        this.groups = groups;
+    public void setGroup(PaybackGroup group) {
+        this.group = group;
     }
 
     public List<Payment> getPayments() {
@@ -86,11 +87,11 @@ public class Cost {
         this.type = type;
     }
 
-    public Image getReceipt() {
+    public String getReceipt() {
         return receipt;
     }
 
-    public void setReceipt(Image receipt) {
+    public void setReceipt(String receipt) {
         this.receipt = receipt;
     }
 

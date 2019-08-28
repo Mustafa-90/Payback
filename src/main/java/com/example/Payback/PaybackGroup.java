@@ -1,28 +1,30 @@
 package com.example.Payback;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table (name = "Paybackgroup")
+@Table(name = "Paybackgroup")
 public class PaybackGroup {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column (name = "creator")
+    //@Column(name = "creator")
+    @OneToOne
     private User creator;
 
-    @Column (name = "Groupname")
+    @Column(name = "Groupname")
     private String groupName;
 
-    @Column (name = "Totalsum")
+    @Column(name = "Totalsum")
     private double totalSum;
 
     @ManyToMany
     private List<User> users;
 
-    PaybackGroup () {
+    public PaybackGroup() {
     }
 
     public PaybackGroup(User creator, String groupName, double totalSum) {
