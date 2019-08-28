@@ -1,5 +1,7 @@
-package com.example.Payback;
+package com.example.Payback.Security;
 
+import com.example.Payback.Repository.UserRepository;
+import com.example.Payback.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

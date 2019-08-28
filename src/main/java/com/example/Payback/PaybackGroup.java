@@ -13,6 +13,10 @@ public class PaybackGroup {
     private long id;
 
     @OneToOne
+<<<<<<< HEAD
+=======
+    //@JoinColumn (name = "creator")
+>>>>>>> 8dc238fce23fd6cfa900d288e9c8fb2d1273ea6e
     private User creator;
 
     @Column(name = "Groupname")
