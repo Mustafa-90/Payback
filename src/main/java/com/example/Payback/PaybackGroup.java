@@ -12,7 +12,7 @@ public class PaybackGroup {
     private long id;
 
     @OneToOne
-    @JoinColumn (name = "creator")
+    //@JoinColumn (name = "creator")
     private User creator;
 
     @Column (name = "Groupname")
