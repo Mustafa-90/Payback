@@ -1,6 +1,7 @@
 package com.example.Payback;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,16 +29,17 @@ public class User {
 
     @Column(name = "Phonenr")
     private String phoneNr;
-
     @ManyToMany
     private List<PaybackGroup> paybackGroups;
 
     @OneToMany
     private List<Cost> costs;
 
+    @OneToMany
+    @Column(name = "groupmember")
+    private List<GroupMember> groupMembers;
 
     public User() {
-
     }
 
     public User(String userName, String password, String firstName, String lastName, String email, String phoneNr) {
@@ -47,6 +49,7 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.phoneNr = phoneNr;
+        this.groupMembers = new ArrayList<>();
     }
 
     public Long getId() {
@@ -105,4 +108,15 @@ public class User {
         this.phoneNr = phoneNr;
     }
 
+    public List<GroupMember> getGroupMembers() {
+        return groupMembers;
+    }
+
+    public void setGroupMembers(List<GroupMember> groupMembers) {
+        this.groupMembers = groupMembers;
+    }
+
+    public void addGroupMember(GroupMember groupMember) {
+        this.groupMembers.add(groupMember);
+    }
 }

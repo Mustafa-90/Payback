@@ -1,7 +1,7 @@
 package com.example.Payback;
-
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,11 +12,11 @@ public class Cost {
     private Long id;
 
     @ManyToOne
-    private User user;
-
-    @ManyToOne
     @JoinColumn (name = "groupmember_id")
-    private PaybackGroup group;
+    private GroupMember groupMember;
+
+    @OneToMany
+    private List<PaybackGroup> paybackGroups;
 
     @OneToMany
     private List<Payment> payments;
@@ -26,14 +26,13 @@ public class Cost {
     private String receipt;
     private Date time;
 
-    public Cost(User user, PaybackGroup group, List<Payment> payments, Double cost, String type, String receipt) {
-        this.user = user;
-        this.group = group;
-        this.payments = payments;
+    public Cost(GroupMember groupMember, List<PaybackGroup> paybackGroups, Double cost, String type, String receipt) {
+        this.groupMember = groupMember;
+        this.paybackGroups = paybackGroups;
+        this.payments = new ArrayList<>();
         this.cost = cost;
         this.type = type;
         this.receipt = receipt;
-        //this.time = new Date(System.currentTimeMillis());
     }
 
     public Cost() {
@@ -47,20 +46,24 @@ public class Cost {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public GroupMember getGroupMember() {
+        return groupMember;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setGroupMember(GroupMember groupMember) {
+        this.groupMember = groupMember;
     }
 
-    public PaybackGroup getGroup() {
-        return group;
+    public List<PaybackGroup> getPaybackGroups() {
+        return paybackGroups;
     }
 
-    public void setGroup(PaybackGroup group) {
-        this.group = group;
+    public void setPaybackGroups(List<PaybackGroup> paybackGroups) {
+        this.paybackGroups = paybackGroups;
+    }
+
+    public void addPaybackGroup(PaybackGroup paybackGroup) {
+        this.paybackGroups.add(paybackGroup);
     }
 
     public List<Payment> getPayments() {
@@ -69,6 +72,10 @@ public class Cost {
 
     public void setPayments(List<Payment> payments) {
         this.payments = payments;
+    }
+
+    public void addPayment(Payment payment) {
+        this.payments.add(payment);
     }
 
     public Double getCost() {

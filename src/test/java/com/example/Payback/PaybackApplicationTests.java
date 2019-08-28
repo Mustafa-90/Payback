@@ -60,4 +60,10 @@ public class PaybackApplicationTests {
         List<Payment> result = (List) paymentRepository.findAll();
         Assert.assertEquals(true, result.size() > 0);
     }
+
+    @Test
+    public void getAllUsers() {
+        List<User> result = (List) userRepository.findAll();
+        Assert.assertEquals(true, result.size() > 0);
+    }
 }
