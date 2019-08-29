@@ -1,0 +1,4 @@
+.BoxContainer {
+  display: inline-flex;
+  align-content: space-around;
+}
