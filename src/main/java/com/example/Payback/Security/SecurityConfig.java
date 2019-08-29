@@ -1,4 +1,4 @@
-package com.example.Payback;
+package com.example.Payback.Security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,9 +19,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-                .antMatchers("/", "/home", "/login").permitAll()
-                .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/inloggadAnvändare").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/", "/home", "/login", "/**/*.js", "/**/*.css", "/**/*.png").permitAll()
+                .antMatchers("/creatortest").hasRole("CREATOR")
+                .antMatchers("/groupTest", "/test").hasAnyRole("USER", "CREATOR")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().defaultSuccessUrl("/", true)
@@ -35,13 +35,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(authenticationProvider());
     }
 
-    @Bean
+/*    @Bean
     public UserDetailsService userDetailsService() {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
         manager.createUser(org.springframework.security.core.userdetails.User.withDefaultPasswordEncoder().username("user").password("123").roles("USER").build());
-        manager.createUser(org.springframework.security.core.userdetails.User.withDefaultPasswordEncoder().username("admin").password("123").roles("USER","ADMIN").build());
+        manager.createUser(org.springframework.security.core.userdetails.User.withDefaultPasswordEncoder().username("admin").password("123").roles("USER", "ADMIN").build());
         return manager;
-    }
+    }*/
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {

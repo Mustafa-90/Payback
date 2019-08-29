@@ -1,51 +1,69 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
     <title>Payback!</title>
-    <meta charset="utf.8" />
-    <link rel="stylesheet" type="text/css" href="normalize.css" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/dropdown.css"/>
 
-    <script src="PB.js"></script>
-  </head>
-  <body class="FrontPage">
-    <div class="Header">
-      <button id="hamburger">
-        <img src="burgermenu-icon.png" />
-      </button>
-      <div class="HeadNavigation">
-        <span class="MenuItem">
-          <a href="#">About</a>
-        </span>
-      </div>
-      <div class="HeadNavigation">
-        <span class="MenuItem">
-          <a href="#">Contact</a>
-        </span>
-      </div>
-      <div class="HeadNavigation">
-        <span class="MenuItem">
-          <a href="#">Policy</a>
-        </span>
-      </div>
-    </div>
 
-    <div class="PageContent">
-      <div class="PageNavigation">
-        <button class="PageItem">
-          <a href="#">Logga in</a>
+</head>
+
+<body class="FrontPage">
+<div class="Logo">
+    <img id="logo" src="logo.png"/>
+</div>
+<div class="Header">
+    <div class="dropdown">
+        <button id="hamburger">
+            <img src="burgermenu-icon.png"/>
         </button>
-      </div>
-      <div class="PageNavigation">
-        <button class="PageItem">
-          <a href="#">Om oss</a>
-        </button>
-      </div>
-      <div class="PageNavigation">
-        <button class="PageItem">
-          <a href="#">Hållbarhet</a>
-        </button>
-      </div>
+        <div class="dropdown-content">
+          <span class="MenuItem">
+            <a href="#">About</a>
+          </span>
+        </div>
+        <div class="dropdown-content">
+          <span class="MenuItem">
+            <a href="#">Contact</a>
+          </span>
+        </div>
+        <div class="dropdown-content">
+          <span class="MenuItem">
+            <a href="#">Policy</a>
+          </span>
+        </div>
     </div>
-  </body>
+</div>
+
+<div class="PageContent">
+    <div class="dropdown">
+        <button class="PageItem"><a href="#">Logga in</a></button>
+        <div class="dropdown-content">
+            <br/>
+            <form th:action="@{/login}" method="POST">
+                <input class="PageItemInput"
+                       type="text"
+                       placeholder="User name / Email"/>
+                <br/>
+                <input class="PageItemInput"
+                       type="password"
+                       placeholder="Password"/><br/>
+                <input class="PageItemInput" type="submit" value="Go!"/>
+            </form>
+        </div>
+    </div>
+    <div class="PageNavigation">
+        <button class="PageItem">
+            <a href="#">Om oss</a>
+        </button>
+    </div>
+    <div class="PageNavigation">
+        <button class="PageItem">
+            <a href="#">Hållbarhet</a>
+        </button>
+    </div>
+</div>
+</body>
 </html>

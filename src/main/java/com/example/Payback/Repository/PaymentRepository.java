@@ -1,5 +1,6 @@
-package com.example.Payback;
+package com.example.Payback.Repository;
 
+import com.example.Payback.Payment;
 import org.springframework.data.repository.CrudRepository;
 
 
