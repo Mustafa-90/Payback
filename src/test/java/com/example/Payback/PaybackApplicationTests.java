@@ -5,6 +5,7 @@ import com.example.Payback.Repository.GroupMemberRepository;
 import com.example.Payback.Repository.PaybackGroupRepository;
 import com.example.Payback.Repository.PaymentRepository;
 import com.example.Payback.Repository.UserRepository;
+import com.example.Payback.Service.UserService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,6 +34,9 @@ public class PaybackApplicationTests {
     @Autowired
 	GroupMemberRepository groupMemberRepository;
 
+    @Autowired
+	UserService userService;
+
     @Test
     public void contextLoads() {
     }
@@ -44,18 +48,18 @@ public class PaybackApplicationTests {
 		String result = userRepository.findByUserName("username").get().getUserName();
 		Assert.assertEquals("username", result);
 	}
-//
-//	@Test
-//	public void uniqueUser() {
-//		User user = new User("Tommy", "password", "Test2", "last name", "email", "phone number");
-//		String result = userController.addUser(user);
-//		Assert.assertEquals("Added user", result);
-//
-//		User user2 = new User("Mikaela", "password", "Test2", "last name", "email", "phone number");
-//		String result2 = userController.addUser(user2);
-//		Assert.assertEquals("username", result2);
-//	}
-//
+
+	@Test
+	public void uniqueUser() {
+		User user = new User("Tommy", "password", "Test2", "last name", "email", "phone number");
+		String result = userService.addUser(user);
+		Assert.assertEquals("Added user", result);
+
+		User user2 = new User("Mikaela", "password", "Test2", "last name", "email", "phone number");
+		String result2 = userService.addUser(user2);
+		Assert.assertEquals("username", result2);
+	}
+
 //	@Test
 //	public void deleteUser() {
 //		userRepository.delete(userRepository.findByUserName("Tommy").get());

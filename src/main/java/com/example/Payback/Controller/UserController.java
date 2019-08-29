@@ -11,20 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-@RestController
+@Controller
 public class UserController {
 
     @Autowired
     UserService userService;
 
-    @GetMapping ("/")
-    public String addUser () {
 
-        User user = new User("Tommy", "123", "Tommy", "Ågren", "t@a.se", "789");
-
-        String result = userService.addUser(user);
-
-        return result;
-    }
 
 }

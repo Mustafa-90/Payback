@@ -1,11 +1,7 @@
-package com.example.Payback;
+package com.example.Payback.Repository;
 
-import org.springframework.data.jpa.repository.Query;
+import com.example.Payback.PaybackGroup;
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
-
 public interface GroupRepository extends CrudRepository<PaybackGroup, Long> {
-
-
 }
