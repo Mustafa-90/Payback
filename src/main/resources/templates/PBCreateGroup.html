@@ -46,19 +46,20 @@
     <h2>Create group!</h2>
     <form action="/addgroup" method="post" th:object="${group}">
     <div class="PageNavigation">
-        <input class="InputField" type="text" placeholder="Group name" th:field="*{groupName}">
+        <input class="PageItem" type="text" placeholder="Group name" th:field="*{groupName}">
     </div>
     <p>Add members to your group:</p>
     <div class="PageNavigation">
-        <input class="InputField" type="text" placeholder="Username/Email/Phone number" name="identifier">
+        <input class="InputMember" type="text" placeholder="Ny gruppmedlem" name="identifier">
+        <input class="addMember" type="submit" value="+">
     </div>
 
     <div class="PageNavigation">
-        <button type="submit" class="InputField">Sim Sala Bim!</button>
+        <button type="submit" class="PageItem">Skapa grupp</button>
     </div>
     </form>
     <div class="PageNavigation">
-        <button type="button" class="InputField">Cancel</button>
+        <button type="button" class="PageItem">Cancel</button>
     </div>
 </div>
 </body>
