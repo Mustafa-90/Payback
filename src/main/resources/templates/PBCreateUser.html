@@ -39,6 +39,7 @@
                 <a href="#">Policy</a>
               </span>
         </div>
+<<<<<<< HEAD
     </div>
 
 </div>
@@ -95,6 +96,62 @@
                 <button type="button" class="InputField">Cancel</button>
             </div>
         </div>
+=======
+
+    <div class="PageContent">
+
+        <h2>Sign up!</h2>
+
+        <p>Please fill in this form to create an account.</p>
+
+      <div class="BoxContainer">
+
+      <form action="/adduser" method="POST" th:object="${user}">
+
+      <div class="PageNavigation">
+        <input class="InputField" th:field="*{userName}" type="text" placeholder="  User name" name="username" required/>
+      </div>
+
+      <div class="Box1">
+        <div class="PageNavigation">
+          <input class="InputField" th:field="*{firstName}" type="text" placeholder="  First name" name="First_name" required/>
+        </div>
+        <div class="PageNavigation">
+          <input class="InputField" th:field="*{lastName}" type="text" placeholder="  Last name" name="Last_name"/>
+        </div>
+      </div>
+
+      <div class="Box2">
+        <div class="PageNavigation">
+          <input class="InputField" th:field="*{email}" type="email" placeholder="  E-mail" name="E-mail" required/>
+        </div>
+        <div class="PageNavigation">
+          <input class="InputField" th:field="*{phoneNr}" type="text" placeholder="+46701231231" name="Phone_number"/>
+        </div>
+      </div>
+
+      <div class="Box3">
+        <div class="PageNavigation">
+          <input class="InputField" th:field="*{password}" type="password" placeholder="Enter password" name="password" required/>
+        </div>
+        <div class="PageNavigation">
+          <input class="InputField" th:value="${repPassword}" type="password" placeholder="Repeat password" name="repPassword" required/>
+        </div>
+      </div>
+
+      <div class="Box3">
+        <p>By creating an account you agree on our <a href="#">Terms & Privacy</a>.</p>
+        <div class="PageNavigation">
+          <input type="submit" class="InputField" value="Sign Up"/>
+        </div>
+      </div>
+      </form>
+      <div class="PageNavigation">
+        <button action="/" type="button" class="InputField">Cancel</button>
+      </div>
+      </div>
+      </div>
+>>>>>>> e6b549b774d2603c51b3fd9b6168b94fa617f7ff
     </div>
 </div>
 </body>
