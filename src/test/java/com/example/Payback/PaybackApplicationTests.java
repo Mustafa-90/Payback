@@ -105,7 +105,7 @@ public class PaybackApplicationTests {
 
 	@Test
 	public void getAllGroupsForOneMember() {
-		List<GroupMember> listOfGroups = groupMemberRepository.findByUserId(6L);
+		List<GroupMember> listOfGroups = groupMemberRepository.findByUserId(3L);
 
 		for (int i = 0; i < listOfGroups.size(); i++) {
 			System.out.println(listOfGroups.get(i).getUser().getFirstName() + ", " + listOfGroups.get(i).getPaybackGroup().getGroupName());

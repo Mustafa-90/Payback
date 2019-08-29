@@ -1,63 +1,125 @@
 .FrontPage {
-  background-color: #77eeb6;
+ background-color: #77eeb6;
 }
 
 .Header {
-  display: inline-block;
-  width: 80%;
-  margin: 0 auto;
-  align-content: space-around;
+ display: flex;
+ align-content: flex-start;
+ width: 80%;
+ position: absolute;
+
+ margin: 0;
+ align-content: space-around;
+}
+
+#logo {
+ display: flex;
+ align-content: space-around;
+ margin: 0vh 40vh;
 }
 
 .MenuItem {
-  margin-top: 2vh;
+ margin-top: 2vh;
 }
 
 .MenuItem > a {
-  text-decoration: none;
-  color: white;
+ text-decoration: none;
+ color: white;
 }
 
 #hamburger {
-  width: 5vh;
-  height: 5vh;
-  border: #77eeb6;
-  border-radius: 23px;
-  background-color: #58a58136;
-  box-shadow: 0 0 10px #3c5f4f36;
-  margin-left: 2vh;
+ width: 5vh;
+ height: 5vh;
+ border: #77eeb6;
+ border-radius: 23px;
+ background-color: #58a58136;
+ box-shadow: 0 0 10px #3c5f4f36;
+ margin-left: 2vh;
+ position: fixed;
+ top: 2%;
 }
 
 #hamburger:hover {
-  border: #77eeb6;
-  background-color: #60b99036;
-  box-shadow: 0 0 15px #3c5f4f36;
+ border: #77eeb6;
+ background-color: #60b99036;
+ box-shadow: 0 0 15px #3c5f4f36;
 }
 
 .PageContent {
-  display: block;
-  width: 100%;
-  margin: 25vh 78vh;
-  align-items: center;
+ display: block;
+ position: relative;
+ width: 100%;
+ margin: 3vh 78vh;
+ align-items: center;
+ color: white;
 }
 
 .PageItem {
-  width: 50vh;
-  height: 7vh;
-  border: #77eeb6;
-  border-radius: 23px;
-  background-color: #58a58136;
-  box-shadow: 0 0 10px #3c5f4f36;
-  margin-top: 2%;
+ width: 50vh;
+ height: 7vh;
+ border: #77eeb6;
+ border-radius: 23px;
+ background-color: #58a58136;
+ box-shadow: 0 0 10px #3c5f4f36;
+ margin-top: 2%;
 }
 .PageItem > a {
-  font-size: 20px;
-  text-decoration: none;
-  color: white;
+ font-size: 20px;
+ text-decoration: none;
+ color: white;
 }
 
 .PageItem:hover {
-  border: #77eeb6;
-  background-color: #60b99036;
-  box-shadow: 0 0 15px #3c5f4f36;
+ border: #77eeb6;
+ background-color: #60b99036;
+ box-shadow: 0 0 15px #3c5f4f36;
+}
+
+.PageItemLogin {
+ width: 50vh;
+ height: 7vh;
+ border: #77eeb6;
+ border-radius: 23px;
+ background-color: #58a58136;
+ box-shadow: 0 0 10px #3c5f4f36;
+ margin-top: 2%;
+}
+.PageItemLogin > a {
+ font-size: 20px;
+ text-decoration: none;
+ color: white;
+}
+
+.PageItemLogin:hover {
+ border: #77eeb6;
+ background-color: #60b99036;
+ box-shadow: 0 0 15px #3c5f4f36;
+}
+
+.dropdown:hover .dropdown-content {
+ display: block;
+}
+
+.InputField {
+ width: 30vh;
+ height: 7vh;
+ border: #77eeb6;
+ border-radius: 23px;
+ background-color: #58a58136;
+ box-shadow: 0 0 10px #3c5f4f36;
+ margin-top: 2%;
+ color: white;
+ text-align: center;
+}
+
+.InputField:hover {
+ border: #77eeb6;
+ background-color: #60b99036;
+ box-shadow: 0 0 15px #3c5f4f36;
+}
+
+@media only screen and (max-device-width: 768px) {
+}
+
+@media print {
 }

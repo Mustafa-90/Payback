@@ -12,7 +12,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "Username")
+    @Column(name = "Username", unique = true)
     private String userName;
 
     @Column(name = "Password")
@@ -24,10 +24,10 @@ public class User {
     @Column(name = "Lastname")
     private String lastName;
 
-    @Column(name = "Email")
+    @Column(name = "Email", unique = true)
     private String email;
 
-    @Column(name = "Phonenr")
+    @Column(name = "Phonenr", unique = true)
     private String phoneNr;
 
     @OneToMany

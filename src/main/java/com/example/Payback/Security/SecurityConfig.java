@@ -1,5 +1,6 @@
 package com.example.Payback.Security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -19,15 +20,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-                .antMatchers("/", "/home", "/login").permitAll()
-                .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/inloggadAnvändare").hasAnyRole("USER", "ADMIN")
-                .anyRequest().authenticated()
+                    .antMatchers("/", "/home", "/login", "/**/*.js", "/**/*.css", "/**/*.png", "/adduser").permitAll()
+//                    .antMatchers("/admin").hasRole("ADMIN")
+//                    .antMatchers("/groupsTest").hasAnyRole("USER", "ADMIN")
+                    .anyRequest().authenticated()
                 .and()
-                .formLogin().defaultSuccessUrl("/", true)
-                .loginPage("/login")
-                .permitAll();
+                .formLogin().defaultSuccessUrl("/payback", true)
+                    .loginPage("/login")
+                    .permitAll();
+        httpSecurity.csrf().disable();
     }
+
+    @Autowired
+    private SecurityUserDetailsService userDetailsService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
@@ -35,19 +40,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(authenticationProvider());
     }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-        manager.createUser(org.springframework.security.core.userdetails.User.withDefaultPasswordEncoder().username("user").password("123").roles("USER").build());
-        manager.createUser(org.springframework.security.core.userdetails.User.withDefaultPasswordEncoder().username("admin").password("123").roles("USER","ADMIN").build());
-        return manager;
-    }
+//    @Bean
+//    public UserDetailsService userDetailsService() {
+//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+//        manager.createUser(org.springframework.security.core.userdetails.User.withDefaultPasswordEncoder().username("user").password("123").roles("USER").build());
+//        manager.createUser(org.springframework.security.core.userdetails.User.withDefaultPasswordEncoder().username("admin").password("123").roles("USER","ADMIN").build());
+//        return manager;
+//    }
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider
                 = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(encoder());
         return authProvider;
     }
@@ -56,4 +61,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder(11);
     }
+
+
 }
