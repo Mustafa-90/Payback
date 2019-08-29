@@ -1,66 +1,57 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Payback!</title>
-    <meta charset="utf.8" />
-    <link rel="stylesheet" type="text/css" href="normalize.css" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <link rel="stylesheet" type="text/css" href="dropdown.css" />
-
-    <script src="PB.js"></script>
-  </head>
-  <body class="FrontPage">
-        <div class="Logo">
-                <img id="logo" src="logo.png" />
-        </div> 
-        <div class="Header">   
-          <div class="dropdown">
-            <button id="hamburger">
-              <img src="burgermenu-icon.png" />
-            </button>
-
-            <div class="dropdown-content">
-              <span class="MenuItem">
-                <a href="#">About</a>
-              </span>
-            
-            
-              <span class="MenuItem">
-                <a href="#">Contact</a>
-              </span>
-            
-            
-              <span class="MenuItem">
-                <a href="#">Policy</a>
-              </span>
-            </div>
-          </div>
-          
-        </div>
-
-    <div class="PageContent">
-        <h2>Create group!</h2>
-        <div class="PageNavigation">
-                <input class="InputField" type="text" placeholder="  Group name" name="User_name"></input>
-              </div>
-        <p>Add members to your group by either of thease fields.</p>
-      <div class="PageNavigation">
-        <input class="InputField" type="text" placeholder="  User name" name="User_name"></input>
-      </div>
-     
-      <div class="PageNavigation">
-        <input class="InputField" type="e-mail" placeholder="  E-mail" name="E-mail"></input>
-      </div>
-      <div class="PageNavigation">
-        <input class="InputField" type="numbers" placeholder="+46701231231" name="Phone_number"></input>
-      </div>
-
-        <div class="PageNavigation">
-            <button type="submit" class="InputField">Sim Sala Bim!</button>
-        </div>
-            <div class="PageNavigation">        
-            <button type="button" class="InputField">Cancel</button>   
-        </div>
-    </div>
-  </body>
+ <head>
+   <title>Payback!</title>
+   <meta charset="utf.8" />
+   <link rel="stylesheet" type="text/css" href="normalize.css" />
+   <link rel="stylesheet" type="text/css" href="style.css" />
+   <link rel="stylesheet" type="text/css" href="dropdown.css" />
+   <script src="PB.js"></script>
+ </head>
+ <body class="FrontPage">
+   <div class="Logo">
+     <img id="logo" src="logo.png" />
+   </div>
+   <div class="Header">
+     <div class="dropdown">
+       <button id="hamburger">
+         <img src="burgermenu-icon.png" />
+       </button>
+       <div class="dropdown-content">
+         <span class="MenuItem">
+           <a href="#">About</a>
+         </span>
+       </div>
+       <div class="dropdown-content">
+         <span class="MenuItem">
+           <a href="#">Contact</a>
+         </span>
+       </div>
+       <div class="dropdown-content">
+         <span class="MenuItem">
+           <a href="#">Policy</a>
+         </span>
+       </div>
+     </div>
+   </div>
+   <div class="PageContent">
+     <div class="PageNavigation">
+     </div>
+     <div class="PageNavigation">
+       <input class="PageItem" type="text" placeholder="  Gruppnamn" name="Group_name"></input>
+     </div>
+     <div class="PageNavigation">
+       <input class="InputMember" type="text" placeholder="Ny gruppmedlem" name="New_user"></input>
+       <input class="addMember" type="submit" value="+" />
+     </div>
+     <div class="PageNavigation">
+       <button class="PageItem">
+         <a href="#">Skapa grupp</a>
+       </button>
+     </div>
+   </div>
+ </body>
 </html>
+
+
+

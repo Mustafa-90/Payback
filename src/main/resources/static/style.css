@@ -63,6 +63,7 @@
   background-color: #58a58136;
   box-shadow: 0 0 10px #3c5f4f36;
   margin-top: 2%;
+  text-align: center;
 }
 .PageItem > a {
   font-size: 20px;
@@ -108,7 +109,7 @@
   border-radius: 23px;
   background-color: #58a58136;
   box-shadow: 0 0 10px #3c5f4f36;
-  margin-top: 2%;
+  margin-top: 10%;
   color: white;
   text-align: center;
 }
@@ -120,7 +121,19 @@
   border-radius: 23px;
   background-color: #58a58136;
   box-shadow: 0 0 10px #3c5f4f36;
-  margin-top: 2%;
+  margin-top: 0%;
+  color: white;
+  text-align: center;
+}
+
+.CancelButton {
+  width: 50vh;
+  height: 7vh;
+  border: #77eeb6;
+  border-radius: 23px;
+  background-color: #58a58136;
+  box-shadow: 0 0 10px #3c5f4f36;
+  margin-top: 1%;
   color: white;
   text-align: center;
 }
@@ -149,17 +162,6 @@
   box-shadow: 0 0 10px #3c5f4f36;
   margin-top: 2%;
   text-align: center;
-  /** width: 30vh;
-  height: 7vh;
-  border-top-left-radius: 23px;
-  border-bottom-left-radius: 23px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  background-color: #58a58136;
-  box-shadow: 0 0 10px #3c5f4f36;
-  margin-top: 2%;
-  color: white;
-  text-align: center;*/
 }
 
 .PassBox:hover {
@@ -180,17 +182,6 @@
   box-shadow: 0 0 10px #3c5f4f36;
   margin-top: 2%;
   text-align: center;
-  /**width: 30vh;
-  height: 7vh;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  background-color: #58a58136;
-  box-shadow: 0 0 10px #3c5f4f36;
-  margin-top: 2%;
-  color: white;
-  text-align: center;*/
 }
 
 .LoginButton {
@@ -206,8 +197,33 @@
   margin-top: 2%;
   text-align: center;
   color: white;
-  /**width: 30vh;
+}
+
+.LoginButton:hover {
+  border: solid #42705b;
+  background-color: #60b99036;
+  box-shadow: 0 0 15px #3c5f4f36;
+}
+
+.InputMember {
+  width: 53vh;
+  height: 7vh;
+  border: solid #42705b;
+  border-top-left-radius: 23px;
+  border-bottom-left-radius: 23px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  background-color: #58a58136;
+  box-shadow: 0 0 10px #3c5f4f36;
+  margin-top: 2%;
+  text-align: center;
+  color: white;
+}
+
+.addMember {
+  width: 10vh;
   height: 8vh;
+  border: solid #42705b;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   border-top-right-radius: 23px;
@@ -215,14 +231,9 @@
   background-color: #58a58136;
   box-shadow: 0 0 10px #3c5f4f36;
   margin-top: 2%;
+  text-align: center;
   color: white;
-  text-align: center;*/
-}
-
-.LoginButton:hover {
-  border: solid #42705b;
-  background-color: #60b99036;
-  box-shadow: 0 0 15px #3c5f4f36;
+  text-decoration: none;
 }
 
 @media only screen and (max-device-width: 768px) {
