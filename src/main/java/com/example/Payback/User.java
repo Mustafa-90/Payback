@@ -29,11 +29,6 @@ public class User {
 
     @Column(name = "Phonenr", unique = true)
     private String phoneNr;
-    @ManyToMany
-    private List<PaybackGroup> paybackGroups;
-
-    @OneToMany
-    private List<Cost> costs;
 
     @OneToMany
     @Column(name = "groupmember")

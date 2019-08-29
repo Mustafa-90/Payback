@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>Payback!</title>
     <meta charset="utf.8"/>
@@ -44,57 +44,35 @@
             <input class="LoginButton" type="submit" value="Login"/>
         </form>
     </div>
-    <!-- <div class="dropdown">
-      <button class="PageItem"><a href="#">Logga in</a></button>
-      <div class="dropdown-content">
-        <br />
+    <div class="PageNavigation">
         <form th:action="@{/login}" method="POST">
-          <input
-            class="PageItemInput"
-            type="text"
-            placeholder="User name / Email"
-          />
-          <br />
-          <input
-            class="PageItemInput"
-            type="password"
-            placeholder="Password"
-          /><br />
-          <input class="PageItemInput" type="submit" value="Go!" />
+            <input
+                    class="PageItemInput"
+                    type="text"
+                    name="username"
+                    placeholder="User name / Email"
+            />
+            <br/>
+            <input
+                    class="PageItemInput"
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+            /><br/>
+            <input class="PageItemInput" type="submit" value="Go!"/>
         </form>
-      </div>
-    </div>-->
-    <div class="PageNavigation">
-=======
-          <form th:action="@{/login}" method="POST">
-          <input
-            class="PageItemInput"
-            type="text"
-            name="username"
-            placeholder="User name / Email"
-          />
-          <br />
-          <input
-            class="PageItemInput"
-            type="password"
-            name="password"
-            placeholder="Password"
-          /><br />
-          <input class="PageItemInput" type="submit" value="Go!" />
-            </form>
-        </div>
-      </div>-->
-      <div class="PageNavigation">
->>>>>>> 64f8112ddfaee291259de7b7cd1df12df2e08700
-        <button class="PageItem">
-            <a href="#">Ny användare</a>
-        </button>
     </div>
-    <div class="PageNavigation">
-        <button class="PageItem">
-            <a href="#">Om oss</a>
-        </button>
-    </div>
+</div>
+<div class="PageNavigation">
+    <button class="PageItem">
+        <a href="newuser">Ny användare</a>
+    </button>
+</div>
+<div class="PageNavigation">
+    <button class="PageItem">
+        <a href="#">Om oss</a>
+    </button>
+</div>
 </div>
 </body>
 </html>
