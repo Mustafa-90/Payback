@@ -29,6 +29,8 @@
  background-color: #58a58136;
  box-shadow: 0 0 10px #3c5f4f36;
  margin-left: 2vh;
+ position: fixed;
+ top: 2%;
 }
 #hamburger:hover {
  border: #77eeb6;
@@ -62,6 +64,7 @@
  background-color: #60b99036;
  box-shadow: 0 0 15px #3c5f4f36;
 }
+
 .PageItemLogin {
  width: 50vh;
  height: 7vh;
@@ -76,14 +79,17 @@
  text-decoration: none;
  color: white;
 }
+
 .PageItemLogin:hover {
  border: #77eeb6;
  background-color: #60b99036;
  box-shadow: 0 0 15px #3c5f4f36;
 }
+
 .dropdown:hover .dropdown-content {
  display: block;
 }
+
 .InputField {
  width: 30vh;
  height: 7vh;
@@ -95,12 +101,15 @@
  color: white;
  text-align: center;
 }
+
 .InputField:hover {
  border: #77eeb6;
  background-color: #60b99036;
  box-shadow: 0 0 15px #3c5f4f36;
 }
+
 @media only screen and (max-device-width: 768px) {
 }
+
 @media print {
 }

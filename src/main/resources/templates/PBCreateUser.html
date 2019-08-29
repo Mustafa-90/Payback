@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
   <head>
     <title>Payback!</title>
     <meta charset="utf.8" />
@@ -28,61 +28,64 @@
               <span class="MenuItem">
                 <a href="#">About</a>
               </span>
-            
-            
+            </div>
+            <div class="dropdown-content">
               <span class="MenuItem">
                 <a href="#">Contact</a>
               </span>
-            
-            
+            </div>
+            <div class="dropdown-content">
               <span class="MenuItem">
                 <a href="#">Policy</a>
               </span>
             </div>
           </div>
-          
+          <div class="Logo">
+                <img id="logo" src="logo.png" />
+        </div> 
         </div>
 
     <div class="PageContent">
         <h2>Sign up!</h2>
         <p>Please fill in this form to create an account.</p>
-        <div class="BoxContainer">
+      <form action="/adduser" method="POST" th:object="${user}">
       <div class="PageNavigation">
-        <input class="InputField" type="text" placeholder="  User name" name="User_name"></input>
+        <input class="InputField" th:field="*{userName}" type="text" placeholder="  User name" name="username" required th:if="${wrongInput}"/>
       </div>
       <div class="Box1">
       <div class="PageNavigation">
-        <input class="InputField" type="text" placeholder="  First name" name="First_name" required>
+        <input class="InputField" th:field="*{firstName}" type="text" placeholder="  First name" name="First_name" required/>
       </div>
       <div class="PageNavigation">
-        <input class="InputField" type="text" placeholder="  Last name" name="Last_name"></input>
+        <input class="InputField" th:field="*{lastName}" type="text" placeholder="  Last name" name="Last_name"/>
       </div>
     </div>
     <div class="Box2">
       <div class="PageNavigation">
-        <input class="InputField" type="e-mail" placeholder="  E-mail" name="E-mail"></input>
+        <input class="InputField" th:field="*{email}" type="email" placeholder="  E-mail" name="E-mail" required/>
       </div>
       <div class="PageNavigation">
-        <input class="InputField" type="numbers" placeholder="+46701231231" name="Phone_number"></input>
+        <input class="InputField" th:field="*{phoneNr}" type="text" placeholder="+46701231231" name="Phone_number"/>
       </div>
     </div>
     <div class="Box3">
       <div class="PageNavigation">
-        <input class="InputField" type="password" placeholder="Enter password" name="password" required></input>
+        <input class="InputField" th:field="*{password}" type="password" placeholder="Enter password" name="password" required/>
       </div>
       <div class="PageNavigation">
-        <input class="InputField" type="password" placeholder="Repeat password" name="Rep-pass" required></input>
+        <input class="InputField" th:value="${repPassword}" type="password" placeholder="Repeat password" name="repPassword" required/>
         </div>
       </div>
       
-      <div class="Box3">
+      <div class="Box4">
         <p>By creating an account you agree on our <a href="#">Terms & Privacy</a>.</p>
         
         <div class="PageNavigation">
-            <button type="submit" class="InputField">Sign Up</button>
+            <input type="submit" class="InputField" value="Sign Up"/>
         </div>
+      </form>
             <div class="PageNavigation">        
-            <button type="button" class="InputField">Cancel</button>   
+            <button action="/" type="button" class="InputField">Cancel</button>
         </div>
       </div>
       </div>
