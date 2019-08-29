@@ -1,10 +1,8 @@
 package com.example.Payback.Controller;
 
-import com.example.Payback.Repository.*;
 import com.example.Payback.Service.UserService;
 import com.example.Payback.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,16 +12,16 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
-    @GetMapping ("/adduser")
-    public String createUser (Model model) {
+    @GetMapping("/adduser")
+    public String createUser(Model model) {
         model.addAttribute("user", new User());
         return "PBCreateUser";
     }
 
-    @PostMapping ("/adduser")
-    public String addUser (@ModelAttribute User user, Model model, @RequestParam String repPassword) {
+    @PostMapping("/adduser")
+    public String addUser(@ModelAttribute User user, Model model, @RequestParam String repPassword) {
 
         if (repPassword.equals(user.getPassword())) {
             String result = userService.addUser(user);
@@ -34,11 +32,6 @@ public class UserController {
                 return "PBCreateUser";
             }
         }
-        else {
-            model.addAttribute("repPassword", "Wrong");
-            return "PBCreateUser";
-        }
+        return "PBCreateUser";
     }
-
-
 }

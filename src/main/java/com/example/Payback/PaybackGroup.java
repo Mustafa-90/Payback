@@ -24,7 +24,7 @@ public class PaybackGroup {
     @OneToMany
     private List<GroupMember> groupMembers;
 
-    PaybackGroup () {
+    public PaybackGroup () {
     }
 
     public PaybackGroup(User creator, String groupName, double totalSum) {

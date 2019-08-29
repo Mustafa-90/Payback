@@ -38,15 +38,15 @@
 
     <div class="PageContent">
       <div class="PageNavigation">
-        <form method="POST" action="/login">
-          <input class="LoginBox" type="text" placeholder="User name" />
-          <input class="PassBox" type="password" placeholder="Password" />
+        <form method="POST" th:action="@{/login}">
+          <input class="LoginBox" name="username" type="text" placeholder="User name" />
+          <input class="PassBox" name="password" type="password" placeholder="Password" />
           <input class="LoginButton" type="submit" value="Login" />
         </form>
       </div>
       <div class="PageNavigation">
         <button class="PageItem">
-          <a href="#">Ny användare</a>
+          <a href="/adduser">Ny användare</a>
         </button>
       </div>
       <div class="PageNavigation">

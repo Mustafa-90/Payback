@@ -5,6 +5,7 @@ import com.example.Payback.Repository.GroupMemberRepository;
 import com.example.Payback.Repository.PaybackGroupRepository;
 import com.example.Payback.Repository.PaymentRepository;
 import com.example.Payback.Repository.UserRepository;
+import com.example.Payback.Service.GroupService;
 import com.example.Payback.Service.UserService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -36,6 +37,9 @@ public class PaybackApplicationTests {
 
     @Autowired
 	UserService userService;
+
+    @Autowired
+	GroupService groupService;
 
     @Test
     public void contextLoads() {
@@ -120,5 +124,16 @@ public class PaybackApplicationTests {
 	public void findByUsername(){
     	User user = userRepository.findByUserName("Mustafa").get();
 	}
+
+	@Test
+	public void addGroupMember() {
+//    	User user = new User("J", "pw", "J", "S", "J@S.se", "112");
+//    	userService.addUser(user);
+		User user = userRepository.findByUserName("Tommy").get();
+    	PaybackGroup group = new PaybackGroup(user, "Namn", 0);
+    	paybackGroupRepository.save(group);
+    	groupService.addGroupMember(user, group);
+	}
+
 
 }

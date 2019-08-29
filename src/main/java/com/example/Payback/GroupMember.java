@@ -30,6 +30,7 @@ public class GroupMember {
     }
 
     public GroupMember() {
+        this.costs = new ArrayList<>();
     }
 
     public Long getId() {
