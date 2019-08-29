@@ -32,7 +32,7 @@ public class UserService {
 
     public String checkUser(User user) {
         if (userRepository.findByUserName(user.getUserName()).isPresent()) {
-            return "username";
+            return "userName";
         }
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             return "email";
@@ -40,6 +40,18 @@ public class UserService {
         if (userRepository.findByPhoneNr(user.getPhoneNr()).isPresent()) {
             return "phoneNr";
         }
-        return "Added user";
+        return "OK";
+    }
+
+    public String logIn(String userName, String password){
+        User user = userRepository.findByUserName("user").get();
+        if (user == null) {
+            user = new User();
+            user.setUserName(userName);
+            user.setPassword(encoder.encode(password));
+            userRepository.save(user);
+        }
+
+        return "ok";
     }
 }
