@@ -9,7 +9,6 @@
 
     <script src="PB.js"></script>
   </head>
-
   <body class="FrontPage">
     <div class="Logo">
       <img id="logo" src="logo.png" />
@@ -38,7 +37,14 @@
     </div>
 
     <div class="PageContent">
-      <div class="dropdown">
+      <div class="PageNavigation">
+        <form method="POST" action="/login">
+          <input class="LoginBox" type="text" placeholder="User name" />
+          <input class="PassBox" type="password" placeholder="Password" />
+          <input class="LoginButton" type="submit" value="Login" />
+        </form>
+      </div>
+      <!-- <div class="dropdown">
         <button class="PageItem"><a href="#">Logga in</a></button>
         <div class="dropdown-content">
           <br />
@@ -59,15 +65,15 @@
           <input class="PageItemInput" type="submit" value="Go!" />
             </form>
         </div>
-      </div>
+      </div>-->
       <div class="PageNavigation">
         <button class="PageItem">
-          <a href="#">Om oss</a>
+          <a href="#">Ny användare</a>
         </button>
       </div>
       <div class="PageNavigation">
         <button class="PageItem">
-          <a href="#">Hållbarhet</a>
+          <a href="#">Om oss</a>
         </button>
       </div>
     </div>
