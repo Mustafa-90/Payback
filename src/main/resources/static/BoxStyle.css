@@ -1,4 +1,12 @@
 .BoxContainer {
-  display: inline-flex;
-  align-content: space-around;
+ display: inline-flex;
+ align-content: space-around;
+}
+.Box1 {
+ margin-left: 10%;
+ margin-right: 10%;
+}
+.Box3 {
+ display: inline-flex;
+ align-content: space-around;
 }

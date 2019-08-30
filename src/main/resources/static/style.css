@@ -18,10 +18,10 @@
   margin-top: 2vh;
 }
 .MenuItem > a {
- display: grid;
- text-decoration: none;
- color: white;
- padding-bottom: 20%;
+  display: grid;
+  text-decoration: none;
+  color: white;
+  padding-bottom: 20%;
 }
 #hamburger {
   width: 5vh;

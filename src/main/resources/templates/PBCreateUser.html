@@ -36,7 +36,7 @@
     <p>Please fill in this form to create an account.</p>
     <form action="/adduser" method="POST" th:object="${user}">
         <div class="PageNavigation">
-            <input class="InputField" th:field="*{userName}" type="text" placeholder="User name" name="username"
+            <input class="InputFieldUser" th:field="*{userName}" type="text" placeholder="User name" name="username"
                    required/>
         </div>
         <div class="BoxContainer">
