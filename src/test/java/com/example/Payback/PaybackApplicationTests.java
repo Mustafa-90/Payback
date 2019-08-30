@@ -130,9 +130,9 @@ public class PaybackApplicationTests {
 //    	User user = new User("J", "pw", "J", "S", "J@S.se", "112");
 //    	userService.addUser(user);
 		User user = userRepository.findByUserName("Tommy").get();
-    	PaybackGroup group = new PaybackGroup(user, "Namn", 0);
+    	PaybackGroup group = new PaybackGroup("Namn");
     	paybackGroupRepository.save(group);
-    	groupService.addGroupMember(user, group);
+    	//groupService.addGroupMember(user, group);
 	}
 
 

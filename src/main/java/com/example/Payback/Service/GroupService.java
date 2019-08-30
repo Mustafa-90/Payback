@@ -36,7 +36,22 @@ public class GroupService {
         return "Error";
     }
 
-    public void addGroupMember(User user, PaybackGroup group) {
+    public void addGroupMember(PaybackGroup group, String identifier) {
+        User user;
+        String foundUser = checkGroupMember(identifier);
+        switch(foundUser) {
+            case "userName":
+                user = userRepository.findByUserName(identifier).get();
+                break;
+            case "email":
+                user = (User)userRepository.findByEmail(identifier).get();
+                break;
+            case "phoneNr":
+                user = (User)userRepository.findByPhoneNr(identifier).get();
+                break;
+            default:
+                return;
+        }
         GroupMember groupMember = new GroupMember(user, group);
         groupMemberRepository.save(groupMember);
     }

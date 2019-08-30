@@ -41,7 +41,7 @@
     <div class="PageContent">
       <div class="PageNavigation">
         <button class="PageItem">
-          <a href="#">Starta grupp</a>
+          <a href="/addgroup">Starta grupp</a>
         </button>
       </div>
       <div class="PageNavigation">
@@ -55,12 +55,5 @@
         </button>
       </div>
     </div>
-
-    <div class="Logout" sec:authorize="isAuthenticated()">
-      <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Log out"/>
-      </form>
-    </div>
-
   </body>
 </html>

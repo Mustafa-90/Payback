@@ -1,12 +1,15 @@
 .dropdown-content {
- display: none;
- border: #77eeb6;
- border-radius: 23px;
- background-color: #77eeb6;
- padding: 12px 16px;
- z-index: 1;
- border: #4a8f6f77;
+display: none;
+border: #77eeb6;
+padding: 12px 16px;
+z-index: 1;
+border: #4a8f6f77;
+position: fixed;
+top: 7%;
+left: 1%;
+font-size: 169%;
 }
+​
 li {
  list-style-type: none;
  overflow: hidden;
@@ -14,6 +17,7 @@ li {
 li {
  float: left;
 }
+​
 .PageItemInput {
  width: 35vh;
  height: 7vh;
@@ -25,11 +29,13 @@ li {
  font-size: 15px;
  text-align: center;
 }
+​
 .dropdown > a {
  font-size: 20px;
  text-decoration: none;
  color: white;
 }
+​
 .PageItem:hover {
  border: #77eeb6;
  background-color: #60b99036;

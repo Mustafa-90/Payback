@@ -49,10 +49,12 @@
         <input class="PageItem" type="text" placeholder="Group name" th:field="*{groupName}">
     </div>
     <p>Add members to your group:</p>
+        <form action="/addgroupmember">
     <div class="PageNavigation">
         <input class="InputMember" type="text" placeholder="Ny gruppmedlem" name="identifier">
         <input class="addMember" type="submit" value="+">
     </div>
+        </form>
 
     <div class="PageNavigation">
         <button type="submit" class="PageItem">Skapa grupp</button>

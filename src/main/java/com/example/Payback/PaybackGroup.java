@@ -27,10 +27,9 @@ public class PaybackGroup {
     public PaybackGroup () {
     }
 
-    public PaybackGroup(User creator, String groupName, double totalSum) {
-        this.creator = creator;
+    public PaybackGroup(String groupName) {
         this.groupName = groupName;
-        this.totalSum = totalSum;
+        this.totalSum = 0;
         this.groupMembers = new ArrayList<>();
     }
 
