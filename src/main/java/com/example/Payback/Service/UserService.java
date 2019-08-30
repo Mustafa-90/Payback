@@ -1,5 +1,6 @@
 package com.example.Payback.Service;
 
+import com.example.Payback.GroupMember;
 import com.example.Payback.Repository.UserRepository;
 import com.example.Payback.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +11,9 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
     @Autowired
-    PasswordEncoder encoder;
+    private PasswordEncoder encoder;
 
 
     public String addUser(User user) {
@@ -26,7 +27,7 @@ public class UserService {
         }
     }
 
-    public void updateUser (User user) {
+    public void updateUser(User user) {
         userRepository.save(user);
     }
 
@@ -43,15 +44,36 @@ public class UserService {
         return "OK";
     }
 
-    public String logIn(String userName, String password){
-        User user = userRepository.findByUserName("user").get();
-        if (user == null) {
-            user = new User();
-            user.setUserName(userName);
-            user.setPassword(encoder.encode(password));
-            userRepository.save(user);
+    public String checkUser(String identifier) {
+        if (userRepository.findByUserName(identifier).isPresent()) {
+            return "userName";
         }
+        if (userRepository.findByEmail(identifier).isPresent()) {
+            return "email";
+        }
+        if (userRepository.findByPhoneNr(identifier).isPresent()) {
+            return "phoneNr";
+        }
+        return "Error";
+    }
 
-        return "ok";
+    public User getUserByIdentifier(String identifier) {
+        User user;
+        String foundUser = checkUser(identifier);
+        switch (foundUser) {
+            case "userName":
+                user = userRepository.findByUserName(identifier).get();
+                break;
+            case "email":
+                user = (User) userRepository.findByEmail(identifier).get();
+                break;
+            case "phoneNr":
+                user = (User) userRepository.findByPhoneNr(identifier).get();
+                break;
+                //OBS! Kan detta lösas på annat sätt? Kolla om user är null och i så fall skriva ut att användaren inte existerar
+            default:
+                return new User();
+        }
+        return user;
     }
 }

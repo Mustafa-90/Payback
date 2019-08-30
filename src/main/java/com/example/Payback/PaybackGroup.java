@@ -73,7 +73,4 @@ public class PaybackGroup {
         this.groupMembers = groupMembers;
     }
 
-    public void addGroupMember(GroupMember groupMember) {
-        this.groupMembers.add(groupMember);
-    }
 }

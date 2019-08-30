@@ -41,31 +41,7 @@
         </div>
     </div>
 </div>
-
-<div class="PageContent">
-    <h2>Create group!</h2>
-    <p>Add members to your group:</p>
-    <form action="/addgroupmember" method="post">
-        <div class="PageNavigation">
-            <input class="InputMember" type="text" placeholder="Ny gruppmedlem" name="identifier">
-            <input class="addMember" type="submit" value="+">
-        </div>
-    </form>
-    <div class="AddedGroupMembers">
-        <p th:each="user : ${session.userList}" th:text="${user.userName} + ' added to group'"></p>
-    </div>
-    <form action="/addgroup" method="post">
-        <div class="PageNavigation">
-            <input class="PageItem" type="text" placeholder="Group name" name="groupName">
-        </div>
-        <div class="PageNavigation">
-            <button type="submit" class="PageItem">Skapa grupp</button>
-        </div>
-    </form>
-    <div class="PageNavigation">
-        <button type="button" class="PageItem"><a href="home">Cancel</a></button>
-    </div>
-</div>
+<h1>HEJ!!!!!</h1>
 </body>
 </html>
 

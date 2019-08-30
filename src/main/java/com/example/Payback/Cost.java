@@ -18,7 +18,7 @@ public class Cost {
     @OneToMany
     private List<PaybackGroup> paybackGroups;
 
-    @OneToMany
+    @OneToMany(mappedBy = "cost")
     private List<Payment> payments;
 
     private Double cost;
