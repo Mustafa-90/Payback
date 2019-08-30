@@ -1,10 +1,7 @@
 package com.example.Payback;
 
 import com.example.Payback.Controller.UserController;
-import com.example.Payback.Repository.GroupMemberRepository;
-import com.example.Payback.Repository.PaybackGroupRepository;
-import com.example.Payback.Repository.PaymentRepository;
-import com.example.Payback.Repository.UserRepository;
+import com.example.Payback.Repository.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,6 +29,9 @@ public class PaybackApplicationTests {
 
     @Autowired
 	GroupMemberRepository groupMemberRepository;
+
+    @Autowired
+	CostRepository costRepository;
 
     @Test
     public void contextLoads() {
@@ -116,5 +116,12 @@ public class PaybackApplicationTests {
 	public void findByUsername(){
     	User user = userRepository.findByUserName("Mustafa").get();
 	}
+
+	@Test
+	public void sumsGroupsCosts() {
+    	List<GroupMember> listOfCosts = groupMemberRepository.findByPaybackGroupId(2L);
+
+		System.out.println(listOfCosts.get(0).getCosts().size());
+    }
 
 }

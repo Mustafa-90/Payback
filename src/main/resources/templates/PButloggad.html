@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
   <head>
     <title>Payback!</title>
     <meta charset="utf.8" />
@@ -38,9 +38,9 @@
 
     <div class="PageContent">
       <div class="PageNavigation">
-        <form method="POST" action="/login">
-          <input class="LoginBox" type="text" placeholder="User name" />
-          <input class="PassBox" type="password" placeholder="Password" />
+        <form method="POST" th:action="@{/login}">
+          <input class="LoginBox" type="text" placeholder="User name" name="username"/>
+          <input class="PassBox" type="password" placeholder="Password" name="password" />
           <input class="LoginButton" type="submit" value="Login" />
         </form>
       </div>
