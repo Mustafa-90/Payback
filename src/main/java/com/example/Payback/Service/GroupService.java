@@ -52,7 +52,7 @@ public class GroupService {
             default:
                 return;
         }
-        GroupMember groupMember = new GroupMember(user, group);
-        groupMemberRepository.save(groupMember);
+//        GroupMember groupMember = new GroupMember(user, group);
+//        groupMemberRepository.save(groupMember);
     }
 }

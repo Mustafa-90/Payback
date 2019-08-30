@@ -55,7 +55,7 @@ public class PaybackApplicationTests {
 
 	@Test
 	public void uniqueUser() {
-		User user = new User("Tommy", "password", "Test2", "last name", "email", "phone number");
+		User user = new User("Tommy12", "password", "Test2", "last name", "email12", "23124324");
 		String result = userService.addUser(user);
 		Assert.assertEquals("Added user", result);
 
@@ -134,6 +134,17 @@ public class PaybackApplicationTests {
     	paybackGroupRepository.save(group);
     	//groupService.addGroupMember(user, group);
 	}
+
+	@Test
+	public void addCostsForGroup() {
+		List<GroupMember> listOfCosts = groupMemberRepository.findByPaybackGroupId(2L);
+		System.out.println(listOfCosts.get(0).getPaybackGroup().getGroupName());
+		System.out.println(listOfCosts.get(0).getUser().getFirstName());
+		System.out.println(listOfCosts.get(0).getCosts().get(0));
+
+	}
+
+	@Test
 
 
 }

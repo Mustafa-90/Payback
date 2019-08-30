@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table
 public class Cost {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn (name = "groupmember_id")
     private GroupMember groupMember;
 

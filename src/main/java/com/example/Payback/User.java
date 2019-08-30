@@ -44,7 +44,6 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.phoneNr = phoneNr;
-        this.groupMembers = new ArrayList<>();
     }
 
     public Long getId() {
