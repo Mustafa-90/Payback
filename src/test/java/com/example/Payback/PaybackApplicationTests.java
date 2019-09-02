@@ -1,12 +1,16 @@
 package com.example.Payback;
 
 import com.example.Payback.Controller.UserController;
+<<<<<<< HEAD
 import com.example.Payback.Repository.GroupMemberRepository;
 import com.example.Payback.Repository.PaybackGroupRepository;
 import com.example.Payback.Repository.PaymentRepository;
 import com.example.Payback.Repository.UserRepository;
 import com.example.Payback.Service.GroupService;
 import com.example.Payback.Service.UserService;
+=======
+import com.example.Payback.Repository.*;
+>>>>>>> 63d42ee1251e69ec9cd5b7352846992101fe5898
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,6 +46,9 @@ public class PaybackApplicationTests {
 
     @Autowired
 	GroupService groupService;
+
+    @Autowired
+	CostRepository costRepository;
 
     @Test
     public void contextLoads() {
@@ -187,5 +194,14 @@ public class PaybackApplicationTests {
     	//groupService.addGroupMember(user, group);
 	}
 
+<<<<<<< HEAD
+=======
+	@Test
+	public void sumsGroupsCosts() {
+    	List<GroupMember> listOfCosts = groupMemberRepository.findByPaybackGroupId(2L);
+
+		System.out.println(listOfCosts.get(0).getCosts().size());
+    }
+>>>>>>> 63d42ee1251e69ec9cd5b7352846992101fe5898
 
 }

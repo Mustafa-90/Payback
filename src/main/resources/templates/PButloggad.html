@@ -1,6 +1,11 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html>
 <head>
+=======
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+  <head>
+>>>>>>> 63d42ee1251e69ec9cd5b7352846992101fe5898
     <title>Payback!</title>
     <meta charset="utf.8"/>
     <link rel="stylesheet" type="text/css" href="normalize.css"/>
@@ -36,6 +41,7 @@
     </div>
 </div>
 
+<<<<<<< HEAD
 <div class="PageContent">
     <div class="PageNavigation">
 <<<<<<< HEAD
@@ -46,6 +52,14 @@
             <input class="LoginBox" name="username" type="text" placeholder="User name"/>
             <input class="PassBox" name="password" type="password" placeholder="Password"/>
             <input class="LoginButton" type="submit" value="Login"/>
+=======
+    <div class="PageContent">
+      <div class="PageNavigation">
+        <form method="POST" th:action="@{/login}">
+          <input class="LoginBox" type="text" placeholder="User name" name="username"/>
+          <input class="PassBox" type="password" placeholder="Password" name="password" />
+          <input class="LoginButton" type="submit" value="Login" />
+>>>>>>> 63d42ee1251e69ec9cd5b7352846992101fe5898
         </form>
     </div>
 <<<<<<< HEAD
