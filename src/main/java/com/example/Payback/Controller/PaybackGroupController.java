@@ -1,6 +1,5 @@
 package com.example.Payback.Controller;
 
-<<<<<<< HEAD
 import com.example.Payback.PaybackGroup;
 import com.example.Payback.User;
 import com.example.Payback.Service.CostService;
@@ -9,28 +8,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-=======
 import com.example.Payback.GroupMember;
-import com.example.Payback.PaybackGroup;
 import com.example.Payback.Service.GroupService;
 import com.example.Payback.Service.UserService;
-import com.example.Payback.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
->>>>>>> 3e486979b213c32426b733aa134304db44acd68d
 
 @Controller
 public class PaybackGroupController {
 
     @Autowired
-<<<<<<< HEAD
     CostService costService;
 
     @GetMapping("/creategroup")
@@ -48,7 +38,6 @@ public class PaybackGroupController {
     public void addCostToGroup(int cost, @ModelAttribute PaybackGroup paybackGroup, @ModelAttribute User user) {
         //costService.addCostToGroup(cost, paybackGroup);
     }
-=======
     private GroupService groupService;
     @Autowired
     private UserService userService;
@@ -94,5 +83,4 @@ public class PaybackGroupController {
         return "redirect:/addgroup";
     }
     //Om man trycker på cancel: ta bort hela gruppen i databasen (+cascade???)
->>>>>>> 3e486979b213c32426b733aa134304db44acd68d
 }

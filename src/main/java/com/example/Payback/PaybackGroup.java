@@ -24,11 +24,7 @@ public class PaybackGroup {
     @OneToMany
     private List<GroupMember> groupMembers;
 
-<<<<<<< HEAD
     public PaybackGroup() {
-=======
-    public PaybackGroup () {
->>>>>>> 3e486979b213c32426b733aa134304db44acd68d
     }
 
     public PaybackGroup(String groupName) {

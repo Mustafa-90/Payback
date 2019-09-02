@@ -23,21 +23,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-<<<<<<< HEAD
                 .antMatchers("/", "/home", "/login", "/**/*.js", "/**/*.css", "/**/*.png", "/adduser").permitAll()
 //                    .antMatchers("/admin").hasRole("ADMIN")
 //                    .antMatchers("/groupsTest").hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().defaultSuccessUrl("/payback", true)
-=======
-                .antMatchers("/", "/start", "/login", "/adduser", "/**/*.js", "/**/*.css", "/**/*.png").permitAll()
 //                .antMatchers("/creatorTest").hasRole("CREATOR")
 //                .antMatchers("/groupsTest", "/home").hasAnyRole("USER", "CREATOR")
-                .anyRequest().authenticated()
                 .and()
                 .formLogin().defaultSuccessUrl("/home", true)
->>>>>>> 3e486979b213c32426b733aa134304db44acd68d
                 .loginPage("/login")
                 .permitAll();
         httpSecurity.csrf().disable();

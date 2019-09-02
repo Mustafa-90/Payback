@@ -1,15 +1,12 @@
 package com.example.Payback.Service;
 
-<<<<<<< HEAD
 import com.example.Payback.Cost;
 import com.example.Payback.GroupMember;
 import com.example.Payback.PaybackGroup;
 import com.example.Payback.User;
 import com.example.Payback.Repository.*;
-=======
 import com.example.Payback.Repository.CostRepository;
 import com.example.Payback.Repository.PaymentRepository;
->>>>>>> 3e486979b213c32426b733aa134304db44acd68d
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +16,6 @@ import java.util.List;
 public class CostService {
 
     @Autowired
-<<<<<<< HEAD
     CostRepository costRepository;
     @Autowired
     GroupMemberRepository groupMemberRepository;
@@ -45,11 +41,4 @@ public class CostService {
         Cost newCost = new Cost();
         return "hej";
     }
-=======
-    PaymentRepository paymentRepository;
-    @Autowired
-    CostRepository costRepository;
-
-
->>>>>>> 3e486979b213c32426b733aa134304db44acd68d
 }
