@@ -6,6 +6,11 @@
     <link rel="stylesheet" type="text/css" href="normalize.css"/>
     <link rel="stylesheet" type="text/css" href="style.css"/>
     <link rel="stylesheet" type="text/css" href="dropdown.css"/>
+<<<<<<< HEAD
+=======
+    <link rel="stylesheet" type="text/css" href="BoxStyle.css"/>
+
+>>>>>>> 3e486979b213c32426b733aa134304db44acd68d
     <script src="PB.js"></script>
 </head>
 <body class="FrontPage">
@@ -17,6 +22,7 @@
         <button id="hamburger">
             <img src="burgermenu-icon.png"/>
         </button>
+<<<<<<< HEAD
         <div class="dropdown-content">
          <span class="MenuItem">
            <a href="#">About</a>
@@ -53,8 +59,60 @@
             </button>
         </div>
     </form>
+=======
+
+        <div class="dropdown-content">
+                <span class="MenuItem">
+                    <a href="/logout">Log out</a>
+                  </span>
+
+            <span class="MenuItem">
+                <a href="#">About</a>
+              </span>
+        </div>
+        <div class="dropdown-content">
+              <span class="MenuItem">
+                <a href="#">Contact</a>
+              </span>
+        </div>
+        <div class="dropdown-content">
+              <span class="MenuItem">
+                <a href="#">Policy</a>
+              </span>
+        </div>
+    </div>
+</div>
+
+<div class="PageContent">
+    <h2>Create group!</h2>
+    <p>Add members to your group:</p>
+    <form action="/addgroupmember" method="post">
+        <div class="PageNavigation">
+            <input class="InputMember" type="text" placeholder="Ny gruppmedlem" name="identifier">
+            <input class="addMember" type="submit" value="+">
+        </div>
+    </form>
+    <div class="AddedGroupMembers">
+        <p th:each="user : ${session.userList}" th:text="${user.userName} + ' added to group'"></p>
+    </div>
+    <form action="/addgroup" method="post">
+        <div class="PageNavigation">
+            <input class="PageItem" type="text" placeholder="Group name" name="groupName">
+        </div>
+        <div class="PageNavigation">
+            <button type="submit" class="PageItem">Skapa grupp</button>
+        </div>
+    </form>
+    <div class="PageNavigation">
+        <button type="button" class="PageItem"><a href="home">Cancel</a></button>
+    </div>
+>>>>>>> 3e486979b213c32426b733aa134304db44acd68d
 </div>
 </body>
 </html>
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3e486979b213c32426b733aa134304db44acd68d

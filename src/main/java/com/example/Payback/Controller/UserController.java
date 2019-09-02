@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @GetMapping("/adduser")
     public String createUser(Model model) {
@@ -20,11 +20,14 @@ public class UserController {
         return "PBCreateUser";
     }
 
+<<<<<<< HEAD
     @GetMapping("/")
     public String init() {
         return "PButloggad";
     }
 
+=======
+>>>>>>> 3e486979b213c32426b733aa134304db44acd68d
     @PostMapping("/adduser")
     public String addUser(@ModelAttribute User user, Model model, @RequestParam String repPassword) {
 
@@ -36,6 +39,7 @@ public class UserController {
                 model.addAttribute("user", user);
                 return "PBCreateUser";
             }
+<<<<<<< HEAD
         } else {
             model.addAttribute("repPassword", "Wrong");
             return "PBCreateUser";
@@ -44,3 +48,9 @@ public class UserController {
 
 
 }
+=======
+        }
+        return "PBCreateUser";
+    }
+}
+>>>>>>> 3e486979b213c32426b733aa134304db44acd68d

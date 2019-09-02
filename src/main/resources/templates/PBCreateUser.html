@@ -7,7 +7,10 @@
     <link rel="stylesheet" type="text/css" href="style.css"/>
     <link rel="stylesheet" type="text/css" href="dropdown.css"/>
     <link rel="stylesheet" type="text/css" href="BoxStyle.css"/>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3e486979b213c32426b733aa134304db44acd68d
     <script src="PB.js"></script>
 </head>
 <body class="FrontPage">
@@ -19,6 +22,7 @@
         <button id="hamburger">
             <img src="burgermenu-icon.png"/>
         </button>
+<<<<<<< HEAD
 
         <div class="dropdown-content">
                 <span class="MenuItem">
@@ -42,11 +46,27 @@
     </div>
 </div>
 
+=======
+        <div class="dropdown-content">
+            <span class="MenuItem">
+            <a href="#">About</a>
+          </span>
+            <span class="MenuItem">
+            <a href="#">Contact</a>
+          </span>
+            <span class="MenuItem">
+            <a href="#">Policy</a>
+          </span>
+        </div>
+    </div>
+</div>
+>>>>>>> 3e486979b213c32426b733aa134304db44acd68d
 <div class="PageContent">
     <h2>Sign up!</h2>
     <p>Please fill in this form to create an account.</p>
     <form action="/adduser" method="POST" th:object="${user}">
         <div class="PageNavigation">
+<<<<<<< HEAD
             <input class="InputField" th:field="*{userName}" type="text" placeholder="User name" name="username"
                    required th:if="${wrongInput}"/>
         </div>
@@ -54,6 +74,17 @@
             <div class="PageNavigation">
                 <input class="InputField" th:field="*{firstName}" type="text" placeholder="First name"
                        name="First_name" required/>
+=======
+            <input class="InputFieldUser" th:field="*{userName}" type="text" placeholder="User name" name="username"
+                   required/>
+        </div>
+        <div class="BoxContainer">
+            <div class="Box1">
+                <div class="PageNavigation">
+                    <input class="InputField" th:field="*{firstName}" type="text" placeholder="First name"
+                           name="First_name" required/>
+                </div>
+>>>>>>> 3e486979b213c32426b733aa134304db44acd68d
                 <div class="PageNavigation">
                     <input class="InputField" th:field="*{email}" type="email" placeholder="E-mail" name="E-mail"
                            required/>
@@ -63,6 +94,7 @@
                            name="password" required/>
                 </div>
             </div>
+<<<<<<< HEAD
         </div>
         <div class="Box2">
             <div class="PageNavigation">
@@ -86,8 +118,35 @@
             <div class="PageNavigation">
                 <button action="/" type="button" class="InputField">Cancel</button>
             </div>
+=======
+            <div class="Box2">
+                <div class="PageNavigation">
+                    <input class="InputField" th:field="*{lastName}" type="text" placeholder="Last name"
+                           name="Last_name"/>
+                </div>
+                <div class="PageNavigation">
+                    <input class="InputField" th:field="*{phoneNr}" type="text" placeholder="+46701231231"
+                           name="Phone_number"/>
+                </div>
+                <div class="PageNavigation">
+                    <input class="InputField" th:value="${repPassword}" type="password" placeholder="Repeat password"
+                           name="repPassword" required/>
+                </div>
+            </div>
+        </div>
+        <p>By creating an account you agree on our <a href="#">Terms & Privacy</a>.</p>
+        <div class="PageNavigation">
+            <input type="submit" class="InputFieldUser" value="Sign Up"/>
+        </div>
+        <div class="PageNavigation">
+            <button action="/" type="button" class="CancelButton">Cancel</button>
+>>>>>>> 3e486979b213c32426b733aa134304db44acd68d
         </div>
     </form>
 </div>
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> 3e486979b213c32426b733aa134304db44acd68d

@@ -24,13 +24,16 @@ public class PaybackGroup {
     @OneToMany
     private List<GroupMember> groupMembers;
 
+<<<<<<< HEAD
     public PaybackGroup() {
+=======
+    public PaybackGroup () {
+>>>>>>> 3e486979b213c32426b733aa134304db44acd68d
     }
 
-    public PaybackGroup(User creator, String groupName, double totalSum) {
-        this.creator = creator;
+    public PaybackGroup(String groupName) {
         this.groupName = groupName;
-        this.totalSum = totalSum;
+        this.totalSum = 0;
         this.groupMembers = new ArrayList<>();
     }
 
@@ -74,7 +77,4 @@ public class PaybackGroup {
         this.groupMembers = groupMembers;
     }
 
-    public void addGroupMember(GroupMember groupMember) {
-        this.groupMembers.add(groupMember);
-    }
 }

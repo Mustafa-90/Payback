@@ -9,7 +9,7 @@ top: 7%;
 left: 1%;
 font-size: 169%;
 }
-
+​
 li {
  list-style-type: none;
  overflow: hidden;
@@ -17,7 +17,7 @@ li {
 li {
  float: left;
 }
-
+​
 .PageItemInput {
  width: 35vh;
  height: 7vh;
@@ -29,13 +29,13 @@ li {
  font-size: 15px;
  text-align: center;
 }
-
+​
 .dropdown > a {
  font-size: 20px;
  text-decoration: none;
  color: white;
 }
-
+​
 .PageItem:hover {
  border: #77eeb6;
  background-color: #60b99036;

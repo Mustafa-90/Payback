@@ -17,36 +17,37 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private SecurityUserDetailsService userDetailsService;
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
+<<<<<<< HEAD
                 .antMatchers("/", "/home", "/login", "/**/*.js", "/**/*.css", "/**/*.png", "/adduser").permitAll()
 //                    .antMatchers("/admin").hasRole("ADMIN")
 //                    .antMatchers("/groupsTest").hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().defaultSuccessUrl("/payback", true)
+=======
+                .antMatchers("/", "/start", "/login", "/adduser", "/**/*.js", "/**/*.css", "/**/*.png").permitAll()
+//                .antMatchers("/creatorTest").hasRole("CREATOR")
+//                .antMatchers("/groupsTest", "/home").hasAnyRole("USER", "CREATOR")
+                .anyRequest().authenticated()
+                .and()
+                .formLogin().defaultSuccessUrl("/home", true)
+>>>>>>> 3e486979b213c32426b733aa134304db44acd68d
                 .loginPage("/login")
                 .permitAll();
         httpSecurity.csrf().disable();
     }
-
-    @Autowired
-    private SecurityUserDetailsService userDetailsService;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
         auth.authenticationProvider(authenticationProvider());
     }
-
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-//        manager.createUser(org.springframework.security.core.userdetails.User.withDefaultPasswordEncoder().username("user").password("123").roles("USER").build());
-//        manager.createUser(org.springframework.security.core.userdetails.User.withDefaultPasswordEncoder().username("admin").password("123").roles("USER","ADMIN").build());
-//        return manager;
-//    }
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
