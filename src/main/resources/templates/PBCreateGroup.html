@@ -26,17 +26,17 @@
                   </span>
 
             <span class="MenuItem">
-                <a href="#">About</a>
+                <a href="/about">About</a>
               </span>
         </div>
         <div class="dropdown-content">
               <span class="MenuItem">
-                <a href="#">Contact</a>
+                <a href="/contact">Contact</a>
               </span>
         </div>
         <div class="dropdown-content">
               <span class="MenuItem">
-                <a href="#">Policy</a>
+                <a href="/policy">Policy</a>
               </span>
         </div>
     </div>
@@ -45,6 +45,7 @@
 <div class="PageContent">
     <h2>Create group!</h2>
     <p>Add members to your group:</p>
+    <p th:if="${session.result}" th:text="${session.result}"></p>
     <form action="/addgroupmember" method="post">
         <div class="PageNavigation">
             <input class="InputMember" type="text" placeholder="Ny gruppmedlem" name="identifier">
@@ -63,7 +64,9 @@
         </div>
     </form>
     <div class="PageNavigation">
-        <button type="button" class="PageItem"><a href="home">Cancel</a></button>
+        <form action="/removeGroup">
+            <button type="submit" class="PageItem">Cancel</button>
+        </form>
     </div>
 </div>
 </body>

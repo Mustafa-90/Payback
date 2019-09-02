@@ -15,4 +15,19 @@ public class SecurityController {
     public String login () {
         return "PButloggad";
     }
+
+    @GetMapping("/contact")
+    public String contact() {
+        return "PBcontact";
+    }
+
+    @GetMapping("/policy")
+    public String policy() {
+        return "PBpolicy";
+    }
+
+    @GetMapping("/about")
+    public String about() {
+        return "PBabout";
+    }
 }

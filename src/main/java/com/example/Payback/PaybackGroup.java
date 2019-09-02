@@ -1,10 +1,13 @@
 package com.example.Payback;
+
+import org.springframework.stereotype.Controller;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table (name = "Paybackgroup")
+@Table(name = "Paybackgroup")
 public class PaybackGroup {
 
     @Id
@@ -15,16 +18,17 @@ public class PaybackGroup {
     //@JoinColumn (name = "creator")
     private User creator;
 
-    @Column (name = "Groupname")
+    @Column(name = "Groupname")
     private String groupName;
 
-    @Column (name = "Totalsum")
+    @Column(name = "Totalsum")
     private double totalSum;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "paybackGroup")
+    @Column(name = "groupmember")
     private List<GroupMember> groupMembers;
 
-    public PaybackGroup () {
+    public PaybackGroup() {
     }
 
     public PaybackGroup(String groupName) {

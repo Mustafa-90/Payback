@@ -40,22 +40,30 @@ public class GroupService {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String userName;
         if (principal instanceof UserDetails) {
-            userName = ((UserDetails)principal).getUsername();
+            userName = ((UserDetails) principal).getUsername();
         } else {
             userName = principal.toString();
         }
         return userService.getUserByIdentifier(userName);
     }
 
+    public Long getLoggedinUserId() throws Exception {
+        return getLoggedinUser().getId();
+    }
+
     public List<User> getOrCreateUserListWithCreator(HttpSession httpSession) throws Exception {
-        List<User> uList = (List)httpSession.getAttribute("userList");
-        PaybackGroup group = (PaybackGroup)httpSession.getAttribute("group");
-        if(uList == null) {
+        List<User> uList = (List) httpSession.getAttribute("userList");
+        PaybackGroup group = (PaybackGroup) httpSession.getAttribute("group");
+        if (uList == null) {
             List<User> users = new ArrayList<>();
             users.add(getLoggedinUser());
             httpSession.setAttribute("userList", users);
-            uList = (List)httpSession.getAttribute("userList");
+            uList = (List) httpSession.getAttribute("userList");
         }
         return uList;
+    }
+
+    public void cancelGroup(PaybackGroup group) {
+        groupRepository.delete(group);
     }
 }
