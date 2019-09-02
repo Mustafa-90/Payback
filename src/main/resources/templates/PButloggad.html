@@ -1,18 +1,13 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
-<html xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-=======
 <html>
-  <head>
->>>>>>> e6b549b774d2603c51b3fd9b6168b94fa617f7ff
+<head>
     <title>Payback!</title>
     <meta charset="utf.8"/>
     <link rel="stylesheet" type="text/css" href="normalize.css"/>
     <link rel="stylesheet" type="text/css" href="style.css"/>
     <link rel="stylesheet" type="text/css" href="dropdown.css"/>
 
-    <script src="PB.js"></script>
+    <!--<script src="PB.js"></script>-->
 </head>
 <body class="FrontPage">
 <div class="Logo">
@@ -44,55 +39,22 @@
 <div class="PageContent">
     <div class="PageNavigation">
         <form method="POST" action="/login">
-            <input class="LoginBox" type="text" placeholder="User name"/>
-            <input class="PassBox" type="password" placeholder="Password"/>
+            <input class="LoginBox" name="username" type="text" placeholder="User name"/>
+            <input class="PassBox" name="password" type="password" placeholder="Password"/>
             <input class="LoginButton" type="submit" value="Login"/>
         </form>
     </div>
-    <div class="PageNavigation">
-        <form th:action="@{/login}" method="POST">
-            <input
-                    class="PageItemInput"
-                    type="text"
-                    name="username"
-                    placeholder="User name / Email"
-            />
-            <br/>
-            <input
-                    class="PageItemInput"
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-            /><br/>
-            <input class="PageItemInput" type="submit" value="Go!"/>
-        </form>
-<<<<<<< HEAD
-=======
-      </div>
 
-      <div class="PageNavigation">
+    <div class="PageNavigation">
         <button class="PageItem">
-          <a href="#">Ny användare</a>
+            <a href="/adduser">Ny användare</a>
         </button>
-      </div>
-      <div class="PageNavigation">
-        <button class="PageItem">
-          <a href="#">Om oss</a>
-        </button>
-      </div>
->>>>>>> e6b549b774d2603c51b3fd9b6168b94fa617f7ff
     </div>
-</div>
-<div class="PageNavigation">
-    <button class="PageItem">
-        <a href="newuser">Ny användare</a>
-    </button>
-</div>
-<div class="PageNavigation">
-    <button class="PageItem">
-        <a href="#">Om oss</a>
-    </button>
-</div>
+    <div class="PageNavigation">
+        <button class="PageItem">
+            <a href="#">Om oss</a>
+        </button>
+    </div>
 </div>
 </body>
 </html>

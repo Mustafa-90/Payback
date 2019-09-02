@@ -1,4 +1,5 @@
 package com.example.Payback;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.ArrayList;
@@ -12,13 +13,13 @@ public class Cost {
     private Long id;
 
     @ManyToOne
-    @JoinColumn (name = "groupmember_id")
+    @JoinColumn(name = "groupmember_id")
     private GroupMember groupMember;
 
     @OneToMany
     private List<PaybackGroup> paybackGroups;
 
-    @OneToMany
+    @OneToMany(mappedBy = "cost")
     private List<Payment> payments;
 
     private Double cost;

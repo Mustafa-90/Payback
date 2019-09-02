@@ -3,12 +3,6 @@
 }
 
 .Header {
-<<<<<<< HEAD
-  display: inline-block;
-  width: 80%;
-  margin: 0 auto;
-  align-content: space-around;
-=======
   display: flex;
   align-content: flex-start;
   width: 80%;
@@ -22,21 +16,19 @@
   display: flex;
   align-content: space-around;
   margin: 0vh 40vh;
->>>>>>> e6b549b774d2603c51b3fd9b6168b94fa617f7ff
 }
 
 .MenuItem {
   margin-top: 2vh;
 }
-
 .MenuItem > a {
-<<<<<<< HEAD
-=======
-  display: inline-grid;
->>>>>>> e6b549b774d2603c51b3fd9b6168b94fa617f7ff
-  text-decoration: none;
-  color: white;
+ display: grid;
+ text-decoration: none;
+ color: white;
+ padding-bottom: 20%;
 }
+
+
 
 #hamburger {
   width: 5vh;
@@ -46,11 +38,8 @@
   background-color: #58a58136;
   box-shadow: 0 0 10px #3c5f4f36;
   margin-left: 2vh;
-<<<<<<< HEAD
-=======
   position: fixed;
   top: 2%;
->>>>>>> e6b549b774d2603c51b3fd9b6168b94fa617f7ff
 }
 
 #hamburger:hover {
@@ -61,15 +50,6 @@
 
 .PageContent {
   display: block;
-<<<<<<< HEAD
-  width: 100%;
-  margin: 25vh 78vh;
-  align-items: center;
-}
-
-.PageItem {
-  width: 50vh;
-=======
   position: relative;
   width: 100%;
   margin: 3vh 78vh;
@@ -79,13 +59,13 @@
 
 .PageItem {
   width: 65vh;
->>>>>>> e6b549b774d2603c51b3fd9b6168b94fa617f7ff
   height: 7vh;
   border: #77eeb6;
   border-radius: 23px;
   background-color: #58a58136;
   box-shadow: 0 0 10px #3c5f4f36;
   margin-top: 2%;
+  text-align: center;
 }
 .PageItem > a {
   font-size: 20px;
@@ -97,9 +77,6 @@
   border: #77eeb6;
   background-color: #60b99036;
   box-shadow: 0 0 15px #3c5f4f36;
-<<<<<<< HEAD
-}
-=======
 }
 
 .PageItemLogin {
@@ -134,7 +111,7 @@
   border-radius: 23px;
   background-color: #58a58136;
   box-shadow: 0 0 10px #3c5f4f36;
-  margin-top: 2%;
+  margin-top: 10%;
   color: white;
   text-align: center;
 }
@@ -146,7 +123,19 @@
   border-radius: 23px;
   background-color: #58a58136;
   box-shadow: 0 0 10px #3c5f4f36;
-  margin-top: 2%;
+  margin-top: 0%;
+  color: white;
+  text-align: center;
+}
+
+.CancelButton {
+  width: 50vh;
+  height: 7vh;
+  border: #77eeb6;
+  border-radius: 23px;
+  background-color: #58a58136;
+  box-shadow: 0 0 10px #3c5f4f36;
+  margin-top: 1%;
   color: white;
   text-align: center;
 }
@@ -175,17 +164,6 @@
   box-shadow: 0 0 10px #3c5f4f36;
   margin-top: 2%;
   text-align: center;
-  /** width: 30vh;
-  height: 7vh;
-  border-top-left-radius: 23px;
-  border-bottom-left-radius: 23px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  background-color: #58a58136;
-  box-shadow: 0 0 10px #3c5f4f36;
-  margin-top: 2%;
-  color: white;
-  text-align: center;*/
 }
 
 .PassBox:hover {
@@ -206,17 +184,6 @@
   box-shadow: 0 0 10px #3c5f4f36;
   margin-top: 2%;
   text-align: center;
-  /**width: 30vh;
-  height: 7vh;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  background-color: #58a58136;
-  box-shadow: 0 0 10px #3c5f4f36;
-  margin-top: 2%;
-  color: white;
-  text-align: center;*/
 }
 
 .LoginButton {
@@ -232,17 +199,6 @@
   margin-top: 2%;
   text-align: center;
   color: white;
-  /**width: 30vh;
-  height: 8vh;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  border-top-right-radius: 23px;
-  border-bottom-right-radius: 23px;
-  background-color: #58a58136;
-  box-shadow: 0 0 10px #3c5f4f36;
-  margin-top: 2%;
-  color: white;
-  text-align: center;*/
 }
 
 .LoginButton:hover {
@@ -251,9 +207,39 @@
   box-shadow: 0 0 15px #3c5f4f36;
 }
 
+.InputMember {
+  width: 53vh;
+  height: 7vh;
+  border: solid #42705b;
+  border-top-left-radius: 23px;
+  border-bottom-left-radius: 23px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  background-color: #58a58136;
+  box-shadow: 0 0 10px #3c5f4f36;
+  margin-top: 2%;
+  text-align: center;
+  color: white;
+}
+
+.addMember {
+  width: 10vh;
+  height: 8vh;
+  border: solid #42705b;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 23px;
+  border-bottom-right-radius: 23px;
+  background-color: #58a58136;
+  box-shadow: 0 0 10px #3c5f4f36;
+  margin-top: 2%;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+}
+
 @media only screen and (max-device-width: 768px) {
 }
 
 @media print {
 }
->>>>>>> e6b549b774d2603c51b3fd9b6168b94fa617f7ff

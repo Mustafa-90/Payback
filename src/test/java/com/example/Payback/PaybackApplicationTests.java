@@ -12,10 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class PaybackApplicationTests {
 
     @Autowired
@@ -101,6 +103,9 @@ public class PaybackApplicationTests {
     @Test
     public void getAllGroupMembers() {
         List<GroupMember> members = groupMemberRepository.findByPaybackGroupId(2L);
+        for (int i = 0; i < members.size(); i++) {
+            System.out.println(members.get(i).getUser().getId() + ", " + members.get(i).getUser().getFirstName());
+        }
     }
 
     @Test
@@ -115,6 +120,31 @@ public class PaybackApplicationTests {
     @Test
     public void findByUsername() {
         User user = userRepository.findByUserName("Mustafa").get();
+    }
+
+    @Test
+    public void getTotalSumByGroupId() {
+        PaybackGroup pbg = paybackGroupRepository.findById(2L).get();
+        System.out.println(pbg.getTotalSum());
+    }
+
+    @Test
+    public void testX() {
+        List<GroupMember> members = groupMemberRepository.findByPaybackGroupId(2L);
+        Double totalSum = paybackGroupRepository.findById(2L).get().getTotalSum();
+        Double calculatedCost = totalSum / members.size();
+
+        PaybackGroup pbg = members.get(0).getPaybackGroup();
+        paybackGroupRepository.save(pbg);
+    }
+
+    @Test
+    public void addCostsForGroup() {
+        List<GroupMember> listOfCosts = groupMemberRepository.findByPaybackGroupId(2L);
+        System.out.println(listOfCosts.get(1).getPaybackGroup().getGroupName());
+        System.out.println(listOfCosts.get(1).getUser().getFirstName());
+        System.out.println(listOfCosts.get(1).getCosts().get(0).getCost());
+        System.out.println(listOfCosts.get(1).getCosts().get(0).getPayments().get(0));
     }
 
 }

@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface PaybackGroupRepository extends CrudRepository <PaybackGroup, Long > {
+public interface PaybackGroupRepository extends CrudRepository<PaybackGroup, Long> {
 
+    Double findTotalSumById(long l);
 }
