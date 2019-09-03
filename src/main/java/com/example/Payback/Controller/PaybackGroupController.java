@@ -10,8 +10,10 @@ import com.example.Payback.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -45,11 +47,18 @@ public class PaybackGroupController {
         List<User> uList = groupService.getOrCreateUserListWithCreator(httpSession);
         List<GroupMember> gmList = groupMemberService.saveUsersAsGroupMembers(uList, group);
         group.setGroupMembers(gmList);
-        groupService.addGroup(group);
+        Long id = groupService.addGroup(group);
         httpSession.removeAttribute("group");
         httpSession.removeAttribute("userList");
         httpSession.removeAttribute("result");
-        return "redirect:/home";
+        return "redirect:/group/" + id;
+    }
+
+    @GetMapping("/group/{id}")
+    public String groupInfo(@PathVariable Long id, HttpSession httpSession) {
+        List<GroupMember> groupMembers = groupService.getGroupMembers(id);
+        httpSession.setAttribute("groupMembers", groupMembers);
+        return "PBOneGroup";
     }
 
     @PostMapping("/addgroupmember")

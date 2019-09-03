@@ -30,8 +30,9 @@ public class GroupService {
     @Autowired
     private PaybackGroupRepository paybackGroupRepository;
 
-    public void addGroup(PaybackGroup group) {
-        groupRepository.save(group);
+    public Long addGroup(PaybackGroup group) {
+        PaybackGroup result = groupRepository.save(group);
+        return result.getId();
     }
 
     public void addGroupMember(PaybackGroup group, String identifier) {
@@ -53,6 +54,10 @@ public class GroupService {
 
     public Long getLoggedinUserId() throws Exception {
         return getLoggedinUser().getId();
+    }
+
+    public List<GroupMember> getGroupMembers(Long id){
+        return groupMemberRepository.findByPaybackGroupId(id);
     }
 
     public List<User> getOrCreateUserListWithCreator(HttpSession httpSession) throws Exception {

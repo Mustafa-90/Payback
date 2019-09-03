@@ -1,36 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
   <head>
     <title>Payback!</title>
     <meta charset="utf.8" />
-    <link rel="stylesheet" type="text/css" href="normalize.css" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <link rel="stylesheet" type="text/css" href="dropdown.css" />
-    <link rel="stylesheet" type="text/css" href="BoxStyle.css" />
+    <link rel="stylesheet" type="text/css" href="/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="stylesheet" type="text/css" href="/dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="/BoxStyle.css" />
     <script src="PB.js"></script>
   </head>
   <body class="FrontPage">
     <div class="Logo">
-      <img id="logo" src="logo.png" />
+      <img id="logo" src="/logo.png" />
     </div>
     <div class="Header">
       <div class="dropdown">
         <button id="hamburger">
-          <img src="burgermenu-icon.png" />
+          <img src="/burgermenu-icon.png" />
         </button>
         <div class="dropdown-content">
           <span class="MenuItem">
-            <a href="#">About</a>
+            <a href="/about">About</a>
           </span>
         </div>
         <div class="dropdown-content">
           <span class="MenuItem">
-            <a href="#">Contact</a>
+            <a href="/contact">Contact</a>
           </span>
         </div>
         <div class="dropdown-content">
           <span class="MenuItem">
-            <a href="#">Policy</a>
+            <a href="/policy">Policy</a>
           </span>
         </div>
       </div>
@@ -40,23 +40,8 @@
         <div class="BoxAddCost">
           <h4>Group members</h4>
           <ul>
-            <li>
-              Mikaela
-              <span style="color: red">200 sek</span>
-            </li>
-
-            <li>
-              Johanna
-              <span style="color: red">200 sek</span>
-            </li>
-            <li>
-              Tommy
-              <span style="color: green">0 sek</span>
-            </li>
-            <li>
-              Mustafa
-              <span style="color: green">400 sek</span>
-            </li>
+            <li th:each="member : ${session.groupMembers}" th:text="${member.user.userName} + ': ' + ${member.user.id} + ' kr'">
+            </li><br>
           </ul>
         </div>
         <div class="BoxAddCost">
