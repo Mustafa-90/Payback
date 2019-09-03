@@ -14,9 +14,12 @@ public class PaybackGroup {
 
     @OneToOne
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     //@JoinColumn (name = "creator")
 >>>>>>> 8dc238fce23fd6cfa900d288e9c8fb2d1273ea6e
+=======
+>>>>>>> 64edc1300c8f3a82f02e58c7ce8a3f714e30dca8
     private User creator;
 
     @Column(name = "Groupname")
@@ -25,17 +28,30 @@ public class PaybackGroup {
     @Column(name = "Totalsum")
     private double totalSum;
 
-    @OneToMany
+    @OneToMany (fetch = FetchType.LAZY, mappedBy = "paybackGroup")
+    @Column(name = "groupmember")
     private List<GroupMember> groupMembers;
 
     public PaybackGroup() {
     }
 
-    public PaybackGroup(User creator, String groupName, double totalSum) {
+    public PaybackGroup(String groupName) {
+        this.groupName = groupName;
+        this.totalSum = 0;
+        this.groupMembers = new ArrayList<>();
+    }
+
+    public PaybackGroup(long id, User creator, String groupName, double totalSum) {
+        this.id = id;
         this.creator = creator;
         this.groupName = groupName;
         this.totalSum = totalSum;
-        this.groupMembers = new ArrayList<>();
+    }
+
+    public PaybackGroup(long id, String groupName, double totalSum) {
+        this.id = id;
+        this.groupName = groupName;
+        this.totalSum = totalSum;
     }
 
     public long getId() {
@@ -78,7 +94,4 @@ public class PaybackGroup {
         this.groupMembers = groupMembers;
     }
 
-    public void addGroupMember(GroupMember groupMember) {
-        this.groupMembers.add(groupMember);
-    }
 }

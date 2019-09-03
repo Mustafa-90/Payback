@@ -1,0 +1,108 @@
+.BoxContainer {
+  display: inline-flex;
+  align-content: space-around;
+}
+
+.Box1 {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.Box3 {
+  display: inline-flex;
+  align-content: space-around;
+}
+
+.ProfileView {
+  display: inline-flex;
+  align-content: space-around;
+  margin-left: 20%;
+}
+
+.GroupView {
+  display: inline-flex;
+  align-content: center;
+  margin-left: 20%;
+}
+
+.Whatever {
+  display: block;
+  align-content: center;
+  margin-left: 20%;
+  margin-bottom: 0;
+}
+
+.GroupBox {
+  align-content: center;
+  border-radius: 25px;
+  width: 400px;
+  height: 400px;
+  background-color: #58a58136;
+  box-shadow: 0 0 10px #3c5f4f36;
+  margin: 50px;
+  color: white;
+  border: 2px solid black;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.ShowCostBox {
+  align-content: center;
+  border-radius: 25px;
+  width: 500px;
+  height: 550px;
+  background-color: #58a58136;
+  box-shadow: 0 0 10px #3c5f4f36;
+  margin: 50px;
+  color: white;
+  border: 2px solid black;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.CostBox {
+  height: 30vh;
+  width: 30vh;
+  background-color: white;
+  margin: 2%;
+}
+
+.BoxProfil {
+  align-content: center;
+  border-radius: 25px;
+  width: 200px;
+  height: 400px;
+  background-color: #58a58136;
+  box-shadow: 0 0 10px #3c5f4f36;
+  margin: 50px;
+  color: white;
+  border: 2px solid black;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.BoxAddCost {
+  align-content: center;
+  border-radius: 25px;
+  width: 200px;
+  height: 250px;
+  background-color: #58a58136;
+  box-shadow: 0 0 10px #3c5f4f36;
+  margin: 50px;
+  color: white;
+  border: 2px solid black;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.AddCostButton {
+  width: 20vh;
+  height: 7vh;
+  border: solid #42705b;
+  border-radius: 23px;
+  background-color: #287752;
+  box-shadow: 0 0 10px #3c5f4f36;
+  margin-top: 10%;
+  color: white;
+  text-align: center;
+}

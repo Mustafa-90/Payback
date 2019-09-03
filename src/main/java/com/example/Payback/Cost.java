@@ -5,20 +5,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table
 public class Cost {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "groupmember_id")
     private GroupMember groupMember;
 
     @OneToMany
     private List<PaybackGroup> paybackGroups;
 
-    @OneToMany
+    @OneToMany (fetch = FetchType.LAZY, mappedBy = "cost")
     private List<Payment> payments;
 
     private Double cost;
@@ -26,16 +27,15 @@ public class Cost {
     private String receipt;
     private Date time;
 
-    public Cost(GroupMember groupMember, List<PaybackGroup> paybackGroups, Double cost, String type, String receipt) {
+    public Cost() {
+    }
+
+    public Cost(GroupMember groupMember, Double cost, String type, String receipt) {
         this.groupMember = groupMember;
-        this.paybackGroups = paybackGroups;
         this.payments = new ArrayList<>();
         this.cost = cost;
         this.type = type;
         this.receipt = receipt;
-    }
-
-    public Cost() {
     }
 
     public Long getId() {
