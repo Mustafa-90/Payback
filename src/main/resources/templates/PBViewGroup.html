@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="normalize.css" />
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" type="text/css" href="dropdown.css" />
-
+    <link rel="stylesheet" type="text/css" href="BoxStyle.css" />
     <script src="PB.js"></script>
   </head>
   <body class="FrontPage">
@@ -22,43 +22,27 @@
           <span class="MenuItem">
             <a href="#">About</a>
           </span>
+        </div>
+        <div class="dropdown-content">
           <span class="MenuItem">
             <a href="#">Contact</a>
           </span>
+        </div>
+        <div class="dropdown-content">
           <span class="MenuItem">
             <a href="#">Policy</a>
           </span>
         </div>
       </div>
     </div>
+    <div class="GroupView">
+      <div class="GroupBox">
+        <h4>Mina grupper</h4>
 
-    <div class="PageContent">
-      <div class="PageNavigation">
-        <form method="POST" th:action="@{/login}">
-          <input
-            class="LoginBox"
-            name="username"
-            type="text"
-            placeholder="User name"
-          />
-          <input
-            class="PassBox"
-            name="password"
-            type="password"
-            placeholder="Password"
-          />
-          <input class="LoginButton" type="submit" value="Login" />
-        </form>
+        <p>Fest hos mange!</p>
       </div>
-      <div class="PageNavigation">
-        <button class="PageItem">
-          <a href="/adduser">Ny användare</a>
-        </button>
-      </div>
-      <div class="PageNavigation">
-        <button class="PageItem">
-          <a href="#">Om oss</a>
-        </button>
+      <div class="GroupBox">
+        <h4>Annan info</h4>
       </div>
     </div>
   </body>

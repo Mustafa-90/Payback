@@ -1,28 +1,34 @@
 .FrontPage {
   background-color: #77eeb6;
 }
+
 .Header {
   display: flex;
   align-content: flex-start;
   width: 80%;
   position: absolute;
+
   margin: 0;
   align-content: space-around;
 }
+
 #logo {
   display: flex;
   align-content: space-around;
   margin: 0vh 40vh;
 }
+
 .MenuItem {
   margin-top: 2vh;
 }
+
 .MenuItem > a {
   display: grid;
   text-decoration: none;
   color: white;
   padding-bottom: 20%;
 }
+
 #hamburger {
   width: 5vh;
   height: 5vh;
@@ -34,11 +40,13 @@
   position: fixed;
   top: 2%;
 }
+
 #hamburger:hover {
   border: #77eeb6;
   background-color: #60b99036;
   box-shadow: 0 0 15px #3c5f4f36;
 }
+
 .PageContent {
   display: block;
   position: relative;
@@ -47,6 +55,7 @@
   align-items: center;
   color: white;
 }
+
 .PageItem {
   width: 65vh;
   height: 7vh;
@@ -62,11 +71,13 @@
   text-decoration: none;
   color: white;
 }
+
 .PageItem:hover {
   border: #77eeb6;
   background-color: #60b99036;
   box-shadow: 0 0 15px #3c5f4f36;
 }
+
 .PageItemLogin {
   width: 50vh;
   height: 7vh;
@@ -81,36 +92,41 @@
   text-decoration: none;
   color: white;
 }
+
 .PageItemLogin:hover {
   border: #77eeb6;
   background-color: #60b99036;
   box-shadow: 0 0 15px #3c5f4f36;
 }
+
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
 .InputField {
   width: 20vh;
   height: 7vh;
-  border: #77eeb6;
+  border: solid #42705b;
   border-radius: 23px;
-  background-color: #58a58136;
+  background-color: antiquewhite;
   box-shadow: 0 0 10px #3c5f4f36;
   margin-top: 10%;
-  color: white;
+  color: black;
   text-align: center;
 }
+
 .InputFieldUser {
   width: 50vh;
   height: 7vh;
-  border: #77eeb6;
+  border: solid #42705b;
   border-radius: 23px;
-  background-color: #58a58136;
+  background-color: antiquewhite;
   box-shadow: 0 0 10px #3c5f4f36;
   margin-top: 0%;
-  color: white;
+  color: black;
   text-align: center;
 }
+
 .CancelButton {
   width: 50vh;
   height: 7vh;
@@ -122,16 +138,19 @@
   color: white;
   text-align: center;
 }
+
 .InputField:hover {
   border: #77eeb6;
-  background-color: #60b99036;
+  background-color: rgba(250, 235, 215, 0.774);
   box-shadow: 0 0 15px #3c5f4f36;
 }
+
 .LoginBox:hover {
   border: solid #42705b;
-  background-color: #60b99036;
+  background-color: rgba(250, 235, 215, 0.774);
   box-shadow: 0 0 15px #3c5f4f36;
 }
+
 .LoginBox {
   width: 27vh;
   height: 7vh;
@@ -140,16 +159,18 @@
   border-bottom-left-radius: 23px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
-  background-color: #58a58136;
+  background-color: antiquewhite;
   box-shadow: 0 0 10px #3c5f4f36;
   margin-top: 2%;
   text-align: center;
 }
+
 .PassBox:hover {
   border: solid #42705b;
-  background-color: #60b99036;
+  background-color: rgba(250, 235, 215, 0.774);
   box-shadow: 0 0 15px #3c5f4f36;
 }
+
 .PassBox {
   width: 23vh;
   height: 7vh;
@@ -158,11 +179,12 @@
   border-bottom-left-radius: 0;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
-  background-color: #58a58136;
+  background-color: antiquewhite;
   box-shadow: 0 0 10px #3c5f4f36;
   margin-top: 2%;
   text-align: center;
 }
+
 .LoginButton {
   width: 10vh;
   height: 8vh;
@@ -171,17 +193,31 @@
   border-bottom-left-radius: 0;
   border-top-right-radius: 23px;
   border-bottom-right-radius: 23px;
-  background-color: #58a58136;
+  background-color: #287752;
   box-shadow: 0 0 10px #3c5f4f36;
   margin-top: 2%;
   text-align: center;
   color: white;
 }
+
 .LoginButton:hover {
   border: solid #42705b;
   background-color: #60b99036;
   box-shadow: 0 0 15px #3c5f4f36;
 }
+
+.InputGroupName {
+  width: 65vh;
+  height: 7vh;
+  border: solid #42705b;
+  border-radius: 23px;
+  background-color: antiquewhite;
+  box-shadow: 0 0 10px #3c5f4f36;
+  margin-top: 0%;
+  color: black;
+  text-align: center;
+}
+
 .InputMember {
   width: 53vh;
   height: 7vh;
@@ -190,12 +226,13 @@
   border-bottom-left-radius: 23px;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
-  background-color: #58a58136;
+  background-color: antiquewhite;
   box-shadow: 0 0 10px #3c5f4f36;
   margin-top: 2%;
   text-align: center;
-  color: white;
+  color: black;
 }
+
 .addMember {
   width: 10vh;
   height: 8vh;
@@ -204,14 +241,29 @@
   border-bottom-left-radius: 0;
   border-top-right-radius: 23px;
   border-bottom-right-radius: 23px;
-  background-color: #58a58136;
+  background-color: #287752;
   box-shadow: 0 0 10px #3c5f4f36;
   margin-top: 2%;
   text-align: center;
   color: white;
   text-decoration: none;
 }
+
+.GenerateGroup {
+  width: 65vh;
+  height: 7vh;
+  border: #77eeb6;
+  border-radius: 23px;
+  background-color: #58a58136;
+  box-shadow: 0 0 10px #3c5f4f36;
+  margin-top: 2%;
+  text-align: center;
+  color: white;
+  font-size: 20px;
+}
+
 @media only screen and (max-device-width: 768px) {
 }
+
 @media print {
 }
