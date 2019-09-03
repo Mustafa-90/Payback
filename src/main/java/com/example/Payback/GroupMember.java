@@ -21,12 +21,12 @@ public class GroupMember {
     private PaybackGroup paybackGroup;
 
     @OneToMany (fetch = FetchType.LAZY, mappedBy = "groupMember")
-    @Column(name = "groupmember")
     private List<Cost> costs;
 
     public GroupMember(User user, PaybackGroup paybackGroup) {
         this.user = user;
         this.paybackGroup = paybackGroup;
+        this.costs = new ArrayList<>();
     }
 
     public GroupMember() {

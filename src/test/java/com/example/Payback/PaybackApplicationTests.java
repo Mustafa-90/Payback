@@ -1,10 +1,7 @@
 package com.example.Payback;
 
 import com.example.Payback.Controller.UserController;
-import com.example.Payback.Repository.GroupMemberRepository;
-import com.example.Payback.Repository.PaybackGroupRepository;
-import com.example.Payback.Repository.PaymentRepository;
-import com.example.Payback.Repository.UserRepository;
+import com.example.Payback.Repository.*;
 import com.example.Payback.Service.GroupService;
 import com.example.Payback.Service.UserService;
 import org.junit.Assert;
@@ -12,12 +9,19 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.core.parameters.P;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.transaction.Transactional;
+import javax.validation.constraints.AssertTrue;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@Transactional
 public class PaybackApplicationTests {
 
     @Autowired
@@ -34,6 +38,9 @@ public class PaybackApplicationTests {
 
     @Autowired
 	GroupMemberRepository groupMemberRepository;
+
+    @Autowired
+	CostRepository costRepository;
 
     @Autowired
 	UserService userService;
@@ -135,16 +142,142 @@ public class PaybackApplicationTests {
     	//groupService.addGroupMember(user, group);
 	}
 
+//	@Test
+//	public void addCostsForGroup() {
+//		List<GroupMember> listOfCost = groupMemberRepository.findByPaybackGroupId(2L);
+//		double sum = 0;
+//		for (int i = 0; i < listOfCost.size(); i++) {
+//			for (int j = 0; j < listOfCost.get(i).getCosts().size(); j++) {
+//				sum = sum + listOfCost.get(i).getCosts().get(j).getCost();
+//			}
+//		}
+//		listOfCost.get(0).getPaybackGroup().setTotalSum(sum);
+//		paybackGroupRepository.save(listOfCost.get(0).getPaybackGroup());
+//	}
+
 	@Test
-	public void addCostsForGroup() {
-		List<GroupMember> listOfCosts = groupMemberRepository.findByPaybackGroupId(2L);
-		System.out.println(listOfCosts.get(0).getPaybackGroup().getGroupName());
-		System.out.println(listOfCosts.get(0).getUser().getFirstName());
-		System.out.println(listOfCosts.get(0).getCosts().get(0));
+	public void addMembersPayments() {
+    	List<Payment> membersPayment = paymentRepository.findByPayerId(4L);
+    	Assert.assertEquals(100, membersPayment.get(1).getSum());
+	}
+
+	@Test
+	public void getMembersPayments() {
+    	List<GroupMember> groupMemberPaymentList = groupMemberRepository.findByUserId(1L);
+
+		for (int i = 0; i < groupMemberPaymentList.size(); i++) {
+			System.out.println(groupMemberPaymentList.get(i).getUser().getFirstName());
+			for (int j = 0; j < groupMemberPaymentList.get(i).getCosts().get(0).getPayments().size(); j++) {
+				System.out.println(groupMemberPaymentList.get(i).getCosts().get(0).getPayments().get(j).getSum());
+			}
+		}
+		Assert.assertEquals(80, groupMemberPaymentList.get(0).getCosts().get(0).getPayments().get(1).getSum());
+	}
+
+	@Test
+	public void createCost() {
+    	GroupMember groupMember = groupMemberRepository.findById(2L).get();
+    	Cost cost = new Cost(groupMember, 1000.0, "Mat", null);
+    	costRepository.save(cost);
+	}
+
+	@Test
+	public void splitCost() {
+    	Cost cost = costRepository.findById(11L).get();
+    	for (int i = 0; i < cost.getGroupMember().getPaybackGroup().getGroupMembers().size(); i++) {
+			System.out.println(cost.getGroupMember().getPaybackGroup().getGroupMembers().get(i).getUser().getFirstName());
+		}
+		System.out.println(cost.getCost());
+    	double splitCost = cost.getCost() / cost.getGroupMember().getPaybackGroup().getGroupMembers().size();
+		System.out.println(splitCost);
+
+		for (int i = 0; i < cost.getGroupMember().getPaybackGroup().getGroupMembers().size(); i++) {
+			if (cost.getGroupMember().getUser().getId() != cost.getGroupMember().getPaybackGroup().getGroupMembers().get(i).getUser().getId()) {
+				paymentRepository.save(new Payment(cost, false, cost.getGroupMember().getPaybackGroup().getGroupMembers().get(i).getUser().getId(), splitCost));
+			}
+		}
+	}
+
+	@Test
+	public void splitEqualCosts() {
+    	List<GroupMember> listOfCostsByGroup = groupMemberRepository.findByPaybackGroupId(3);
+
+		for (int i = 0; i < listOfCostsByGroup.size(); i++) {
+			System.out.println(listOfCostsByGroup.get(i).getUser().getFirstName() + " is owed " + listOfCostsByGroup.get(i).getCosts().get(0).getPayments().get(0).getSum() + " by: " ); {
+				for (int j = 0; j < listOfCostsByGroup.get(i).getCosts().get(0).getPayments().size(); j++) {
+					User user = userRepository.findById(listOfCostsByGroup.get(i).getCosts().get(0).getPayments().get(j).getPayerId()).get();
+					System.out.println(user.getFirstName());
+				}
+			}
+		}
 
 	}
 
 	@Test
+	public void testingSplitCost() {
+		List<GroupMember> listOfCostsByGroup = groupMemberRepository.findByPaybackGroupId(3L);
+		double totalSum = 0;
+
+		for (int i = 0; i < listOfCostsByGroup.size(); i++) {
+			for (int j = 0; j < listOfCostsByGroup.get(i).getCosts().size(); j++) {
+				totalSum = totalSum + listOfCostsByGroup.get(i).getCosts().get(j).getCost();
+			}
+		}
+		double averageSum = totalSum / listOfCostsByGroup.get(0).getPaybackGroup().getGroupMembers().size();
+		LinkedHashMap<User, Double> costMapping = new LinkedHashMap<>();
 
 
+		for (int i = 0; i < listOfCostsByGroup.size(); i++) {
+			double owedMoney = 0;
+			double usersTotalCost = 0;
+			for (int j = 0; j < listOfCostsByGroup.get(i).getCosts().size(); j++) {
+				usersTotalCost += listOfCostsByGroup.get(i).getCosts().get(j).getCost();
+			}
+			owedMoney = usersTotalCost - averageSum;
+			costMapping.put(listOfCostsByGroup.get(i).getUser(), owedMoney);
+		}
+
+		for (int i = 0; i < costMapping.size(); i++) {
+			for (int j = i+1; j < costMapping.size(); j++) {
+				if (costMapping.get(listOfCostsByGroup.get(i).getUser()) + costMapping.get(listOfCostsByGroup.get(j).getUser()) == 0) {
+					System.out.println(costMapping.get(listOfCostsByGroup.get(i).getUser()));
+					if (costMapping.get(listOfCostsByGroup.get(i).getUser()) < 0) {
+						createPayment(listOfCostsByGroup.get(i).getCosts(), listOfCostsByGroup.get(i).getUser().getId(), costMapping.get(listOfCostsByGroup.get(j).getUser()));
+					}
+						costMapping.get(listOfCostsByGroup.get(i).getUser());
+				}
+			}
+		}
+	}
+
+	public void createPayment (List<Cost> cost, long payerId, double paymentSum) {
+
+    	Payment payment;
+    	boolean cont = false;
+
+    	for (int i = 0; i < cost.size(); i++) {
+			if (cost.get(i).getCost() >= paymentSum && !cont) {
+				payment = new Payment(cost.get(i), false, payerId, paymentSum);
+				cont = true;
+			}
+		}
+    	if (!cont) {
+    		for (int i = 0; i < cost.size(); i++) {
+    			if (cost.get(i).getCost() < paymentSum) {
+					double test = cost.get(i).getCost();
+					paymentSum = paymentSum - test;
+					payment = new Payment(cost.get(i), false, payerId, test);
+				} else if (cost.get(i).getCost() >= paymentSum && paymentSum != 0) {
+					payment = new Payment(cost.get(i), false, payerId, paymentSum);
+					paymentSum = 0;
+				}
+			}
+		}
+	}
 }
+
+//		1200 / 4 = 300
+//		A: 300 - 150 = -150
+//		B: 300 - 450 = 150
+//		C: 300 - 600 = 300
+//		D: 300 - 0 = -300

@@ -20,7 +20,8 @@ public class PaybackGroup {
     @Column (name = "Totalsum")
     private double totalSum;
 
-    @OneToMany
+    @OneToMany (fetch = FetchType.LAZY, mappedBy = "paybackGroup")
+    @Column(name = "groupmember")
     private List<GroupMember> groupMembers;
 
     public PaybackGroup () {
@@ -30,6 +31,19 @@ public class PaybackGroup {
         this.groupName = groupName;
         this.totalSum = 0;
         this.groupMembers = new ArrayList<>();
+    }
+
+    public PaybackGroup(long id, User creator, String groupName, double totalSum) {
+        this.id = id;
+        this.creator = creator;
+        this.groupName = groupName;
+        this.totalSum = totalSum;
+    }
+
+    public PaybackGroup(long id, String groupName, double totalSum) {
+        this.id = id;
+        this.groupName = groupName;
+        this.totalSum = totalSum;
     }
 
     public long getId() {
