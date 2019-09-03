@@ -20,11 +20,6 @@ public class UserController {
         return "PBCreateUser";
     }
 
-    @GetMapping("/")
-    public String init() {
-        return "PButloggad";
-    }
-
     @PostMapping("/adduser")
     public String addUser(@ModelAttribute User user, Model model, @RequestParam String repPassword) {
 

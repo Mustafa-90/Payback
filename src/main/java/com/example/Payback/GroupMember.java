@@ -20,7 +20,7 @@ public class GroupMember {
     @JoinColumn (name = "group_id")
     private PaybackGroup paybackGroup;
 
-    @OneToMany (mappedBy = "groupMember")
+    @OneToMany (mappedBy = "groupMember", fetch = FetchType.LAZY)
     private List<Cost> costs;
 
     public GroupMember(User user, PaybackGroup paybackGroup) {

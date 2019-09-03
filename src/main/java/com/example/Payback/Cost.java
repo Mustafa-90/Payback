@@ -27,9 +27,8 @@ public class Cost {
     private String receipt;
     private Date time;
 
-    public Cost(GroupMember groupMember, List<PaybackGroup> paybackGroups, Double cost, String type, String receipt) {
+    public Cost(GroupMember groupMember, Double cost, String type, String receipt) {
         this.groupMember = groupMember;
-        this.paybackGroups = paybackGroups;
         this.payments = new ArrayList<>();
         this.cost = cost;
         this.type = type;

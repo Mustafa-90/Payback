@@ -1,16 +1,13 @@
 package com.example.Payback;
 
 import com.example.Payback.Controller.UserController;
-<<<<<<< HEAD
 import com.example.Payback.Repository.GroupMemberRepository;
 import com.example.Payback.Repository.PaybackGroupRepository;
 import com.example.Payback.Repository.PaymentRepository;
 import com.example.Payback.Repository.UserRepository;
 import com.example.Payback.Service.GroupService;
 import com.example.Payback.Service.UserService;
-=======
 import com.example.Payback.Repository.*;
->>>>>>> 63d42ee1251e69ec9cd5b7352846992101fe5898
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,27 +39,27 @@ public class PaybackApplicationTests {
     GroupMemberRepository groupMemberRepository;
 
     @Autowired
-	UserService userService;
+    UserService userService;
 
     @Autowired
-	GroupService groupService;
+    GroupService groupService;
 
     @Autowired
-	CostRepository costRepository;
+    CostRepository costRepository;
 
     @Test
     public void contextLoads() {
     }
 
-<<<<<<< HEAD
-    @Test
+/*    @Test
     public void addUser() {
         User user = new User("username", "password", "first name", "last name", "email", "phone number");
         userRepository.save(user);
         String result = userRepository.findByUserName("username").get().getUserName();
         Assert.assertEquals("username", result);
-    }
-//
+    }*/
+
+    //
 //	@Test
 //	public void uniqueUser() {
 //		User user = new User("Tommy", "password", "Test2", "last name", "email", "phone number");
@@ -74,27 +71,25 @@ public class PaybackApplicationTests {
 //		Assert.assertEquals("username", result2);
 //	}
 //
-=======
-	@Test
-	public void addUser() {
-		User user = new User("username", "password", "first name", "last name", "email", "phone number");
-		userRepository.save(user);
-		String result = userRepository.findByUserName("username").get().getUserName();
-		Assert.assertEquals("username", result);
-	}
+    @Test
+    public void addUser() {
+        User user = new User("username", "password", "first name", "last name", "email", "phone number");
+        userRepository.save(user);
+        String result = userRepository.findByUserName("username").get().getUserName();
+        Assert.assertEquals("username", result);
+    }
 
-	@Test
-	public void uniqueUser() {
-		User user = new User("Tommy", "password", "Test2", "last name", "email", "phone number");
-		String result = userService.addUser(user);
-		Assert.assertEquals("Added user", result);
+    @Test
+    public void uniqueUser() {
+        User user = new User("Tommy", "password", "Test2", "last name", "email", "phone number");
+        String result = userService.addUser(user);
+        Assert.assertEquals("Added user", result);
 
-		User user2 = new User("Mikaela", "password", "Test2", "last name", "email", "phone number");
-		String result2 = userService.addUser(user2);
-		Assert.assertEquals("username", result2);
-	}
+        User user2 = new User("Mikaela", "password", "Test2", "last name", "email", "phone number");
+        String result2 = userService.addUser(user2);
+        Assert.assertEquals("username", result2);
+    }
 
->>>>>>> 3e486979b213c32426b733aa134304db44acd68d
 //	@Test
 //	public void deleteUser() {
 //		userRepository.delete(userRepository.findByUserName("Tommy").get());
@@ -138,6 +133,7 @@ public class PaybackApplicationTests {
 //	}
 
     @Test
+
     public void getAllGroupMembers() {
         List<GroupMember> members = groupMemberRepository.findByPaybackGroupId(2L);
         for (int i = 0; i < members.size(); i++) {
@@ -184,24 +180,27 @@ public class PaybackApplicationTests {
         System.out.println(listOfCosts.get(1).getCosts().get(0).getPayments().get(0));
     }
 
-	@Test
-	public void addGroupMember() {
+    @Test
+    public void addGroupMember() {
 //    	User user = new User("J", "pw", "J", "S", "J@S.se", "112");
 //    	userService.addUser(user);
-		User user = userRepository.findByUserName("Tommy").get();
-    	PaybackGroup group = new PaybackGroup("Namn");
-    	paybackGroupRepository.save(group);
-    	//groupService.addGroupMember(user, group);
-	}
-
-<<<<<<< HEAD
-=======
-	@Test
-	public void sumsGroupsCosts() {
-    	List<GroupMember> listOfCosts = groupMemberRepository.findByPaybackGroupId(2L);
-
-		System.out.println(listOfCosts.get(0).getCosts().size());
+        User user = userRepository.findByUserName("Tommy").get();
+        PaybackGroup group = new PaybackGroup("Namn");
+        paybackGroupRepository.save(group);
+        //groupService.addGroupMember(user, group);
     }
->>>>>>> 63d42ee1251e69ec9cd5b7352846992101fe5898
 
+    @Test
+    public void sumsGroupsCosts() {
+        List<GroupMember> listOfCosts = groupMemberRepository.findByPaybackGroupId(2L);
+
+        System.out.println(listOfCosts.get(0).getCosts().size());
+    }
+
+    @Test
+    public void createCost() {
+        GroupMember groupMember = groupMemberRepository.findById(2L).get();
+        Cost cost = new Cost();
+        costRepository.save(cost);
+    }
 }

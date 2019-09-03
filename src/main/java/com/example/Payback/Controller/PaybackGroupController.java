@@ -1,16 +1,15 @@
 package com.example.Payback.Controller;
 
+import com.example.Payback.GroupMember;
 import com.example.Payback.PaybackGroup;
+import com.example.Payback.Service.GroupMemberService;
+import com.example.Payback.Service.GroupService;
+import com.example.Payback.Service.UserService;
 import com.example.Payback.User;
-import com.example.Payback.Service.CostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import com.example.Payback.GroupMember;
-import com.example.Payback.Service.GroupService;
-import com.example.Payback.Service.UserService;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
@@ -21,26 +20,12 @@ import java.util.List;
 public class PaybackGroupController {
 
     @Autowired
-    CostService costService;
-
-    @GetMapping("/creategroup")
-    public String createGroup() {
-        return "pbcreategroup";
-    }
-
-    @PostMapping("/addgroup")
-    public String addGroup(@ModelAttribute PaybackGroup paybackGroup) {
-        return "PBGroup";
-    }
-
-
-    @PostMapping("/addCostToGroup")
-    public void addCostToGroup(int cost, @ModelAttribute PaybackGroup paybackGroup, @ModelAttribute User user) {
-        //costService.addCostToGroup(cost, paybackGroup);
-    }
     private GroupService groupService;
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private GroupMemberService groupMemberService;
 
     @GetMapping("/addgroup")
     public String createGroup(HttpSession httpSession) {
@@ -77,10 +62,17 @@ public class PaybackGroupController {
         groupService.getOrCreateUserListWithCreator(httpSession);
         PaybackGroup group = (PaybackGroup) httpSession.getAttribute("group");
         User user = userService.getUserByIdentifier(identifier);
-        List<User> users = (List)httpSession.getAttribute("userList");
+        List<User> users = (List) httpSession.getAttribute("userList");
         users.add(user);
         httpSession.setAttribute("userList", users);
         return "redirect:/addgroup";
     }
     //Om man trycker på cancel: ta bort hela gruppen i databasen (+cascade???)
+
+    @GetMapping("/removeGroup")
+    public String removeGroup(HttpSession httpSession) {
+        PaybackGroup group = (PaybackGroup) httpSession.getAttribute("group");
+        groupService.cancelGroup(group);
+        return "PBInloggad";
+    }
 }

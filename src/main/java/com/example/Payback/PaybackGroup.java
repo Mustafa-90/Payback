@@ -21,7 +21,8 @@ public class PaybackGroup {
     @Column(name = "Totalsum")
     private double totalSum;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "paybackGroup")
+    @Column(name = "groupmember")
     private List<GroupMember> groupMembers;
 
     public PaybackGroup() {

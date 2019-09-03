@@ -1,8 +1,4 @@
 .BoxContainer {
-<<<<<<< HEAD
-  display: inline-flex;
-  align-content: space-around;
-=======
  display: inline-flex;
  align-content: space-around;
 }
@@ -13,5 +9,4 @@
 .Box3 {
  display: inline-flex;
  align-content: space-around;
->>>>>>> 3e486979b213c32426b733aa134304db44acd68d
 }
