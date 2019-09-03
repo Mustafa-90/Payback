@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table
 public class Cost {
 
     @Id
@@ -13,13 +14,13 @@ public class Cost {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "groupmember_id")
+    @JoinColumn (name = "groupmember_id")
     private GroupMember groupMember;
 
     @OneToMany
     private List<PaybackGroup> paybackGroups;
 
-    @OneToMany(mappedBy = "cost")
+    @OneToMany (fetch = FetchType.LAZY, mappedBy = "cost")
     private List<Payment> payments;
 
     private Double cost;
@@ -27,7 +28,7 @@ public class Cost {
     private String receipt;
     private Date time;
 
-    public Cost(GroupMember groupMember, Double cost, String type, String receipt) {
+    public Cost(GroupMember groupMember, List<PaybackGroup> paybackGroups, Double cost, String type, String receipt) {
         this.groupMember = groupMember;
         this.payments = new ArrayList<>();
         this.cost = cost;

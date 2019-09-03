@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
+  <head>
     <title>Payback!</title>
-    <meta charset="utf.8"/>
-    <link rel="stylesheet" type="text/css" href="normalize.css"/>
-    <link rel="stylesheet" type="text/css" href="style.css"/>
-    <link rel="stylesheet" type="text/css" href="dropdown.css"/>
-    <link rel="stylesheet" type="text/css" href="BoxStyle.css"/>
+    <meta charset="utf.8" />
+    <link rel="stylesheet" type="text/css" href="normalize.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="dropdown.css" />
+    <link rel="stylesheet" type="text/css" href="BoxStyle.css" />
 
+<<<<<<< HEAD
 </head>
 <body class="FrontPage">
 <div class="Logo">
@@ -15,27 +16,46 @@
 </div>
 <div class="Header">
     <div class="dropdown">
+=======
+    <script src="PB.js"></script>
+  </head>
+  <body class="FrontPage">
+    <div class="Logo">
+      <img id="logo" src="logo.png" />
+    </div>
+    <div class="Header">
+      <div class="dropdown">
+>>>>>>> 64edc1300c8f3a82f02e58c7ce8a3f714e30dca8
         <button id="hamburger">
-            <img src="burgermenu-icon.png"/>
+          <img src="burgermenu-icon.png" />
         </button>
 
         <div class="dropdown-content">
-                <span class="MenuItem">
-                    <a href="/logout">Log out</a>
-                  </span>
+          <span class="MenuItem">
+            <a href="/logout">Log out</a>
+          </span>
 
             <span class="MenuItem">
-                <a href="#">About</a>
+                <a href="/about">About</a>
               </span>
             <span class="MenuItem">
+<<<<<<< HEAD
                 <a href="#">Contact</a>
               </span>
             <span class="MenuItem">
                 <a href="#">Policy</a>
+=======
+                <a href="/contact">Contact</a>
+              </span>
+            <span class="MenuItem">
+                <a href="/policy">Policy</a>
+>>>>>>> 64edc1300c8f3a82f02e58c7ce8a3f714e30dca8
               </span>
         </div>
+      </div>
     </div>
 
+<<<<<<< HEAD
     <div class="PageContent">
         <h2>Create group!</h2>
         <p>Add members to your group:</p>
@@ -47,6 +67,24 @@
         </form>
         <div class="AddedGroupMembers">
             <p th:each="user : ${session.userList}" th:text="${user.userName} + ' added to group'"></p>
+=======
+<div class="PageContent">
+    <h2>Create group!</h2>
+    <p>Add members to your group:</p>
+    <p th:if="${session.result}" th:text="${session.result}"></p>
+    <form action="/addgroupmember" method="post">
+        <div class="PageNavigation">
+            <input class="InputMember" type="text" placeholder="Ny gruppmedlem" name="identifier">
+            <input class="addMember" type="submit" value="+">
+        </div>
+    </form>
+    <div class="AddedGroupMembers">
+        <p th:each="user : ${session.userList}" th:text="${user.userName} + ' added to group'"></p>
+    </div>
+    <form action="/addgroup" method="post">
+        <div class="PageNavigation">
+            <input class="PageItem" type="text" placeholder="Group name" name="groupName">
+>>>>>>> 64edc1300c8f3a82f02e58c7ce8a3f714e30dca8
         </div>
         <form action="/addgroup" method="post">
             <div class="PageNavigation">
@@ -61,8 +99,19 @@
                 <button type="submit" class="PageItem">Cancel</button>
             </form>
         </div>
+<<<<<<< HEAD
+=======
+    </form>
+    <div class="PageNavigation">
+        <form action="/removeGroup">
+            <button type="submit" class="PageItem">Cancel</button>
+        </form>
+>>>>>>> 64edc1300c8f3a82f02e58c7ce8a3f714e30dca8
     </div>
 </body>
 </html>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 64edc1300c8f3a82f02e58c7ce8a3f714e30dca8

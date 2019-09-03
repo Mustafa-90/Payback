@@ -70,9 +70,12 @@ public class UserService {
             case "phoneNr":
                 user = (User) userRepository.findByPhoneNr(identifier).get();
                 break;
+<<<<<<< HEAD
             //OBS! Kan detta lösas på annat sätt? Kolla om user är null och i så fall skriva ut att användaren inte existerar
+=======
+>>>>>>> 64edc1300c8f3a82f02e58c7ce8a3f714e30dca8
             default:
-                return new User();
+                return null;
         }
         return user;
     }

@@ -34,6 +34,19 @@ public class PaybackGroup {
         this.groupMembers = new ArrayList<>();
     }
 
+    public PaybackGroup(long id, User creator, String groupName, double totalSum) {
+        this.id = id;
+        this.creator = creator;
+        this.groupName = groupName;
+        this.totalSum = totalSum;
+    }
+
+    public PaybackGroup(long id, String groupName, double totalSum) {
+        this.id = id;
+        this.groupName = groupName;
+        this.totalSum = totalSum;
+    }
+
     public long getId() {
         return id;
     }

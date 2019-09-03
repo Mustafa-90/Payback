@@ -2,6 +2,10 @@ package com.example.Payback.Controller;
 
 import com.example.Payback.GroupMember;
 import com.example.Payback.PaybackGroup;
+<<<<<<< HEAD
+=======
+import com.example.Payback.Repository.GroupMemberRepository;
+>>>>>>> 64edc1300c8f3a82f02e58c7ce8a3f714e30dca8
 import com.example.Payback.Service.GroupMemberService;
 import com.example.Payback.Service.GroupService;
 import com.example.Payback.Service.UserService;
@@ -23,6 +27,8 @@ public class PaybackGroupController {
     private GroupService groupService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private GroupMemberService groupMemberService;
 
     @Autowired
     private GroupMemberService groupMemberService;
@@ -43,31 +49,41 @@ public class PaybackGroupController {
         group.setCreator(groupService.getLoggedinUser());
         group.setGroupName(groupName);
         List<User> uList = groupService.getOrCreateUserListWithCreator(httpSession);
-        List<GroupMember> gmList = new ArrayList<>();
-        for (User user : uList) {
-            if (user != null) {
-                gmList.add(new GroupMember(user, group));
-            }
-        }
+        List<GroupMember> gmList = groupMemberService.saveUsersAsGroupMembers(uList, group);
         group.setGroupMembers(gmList);
         groupService.addGroup(group);
         httpSession.removeAttribute("group");
         httpSession.removeAttribute("userList");
-        return "PBCreateGroup";
+        httpSession.removeAttribute("result");
+        return "redirect:/home";
     }
 
     @PostMapping("/addgroupmember")
-    //kolla så inte group member redan är tillagd!!!
     public String postGroupMember(@RequestParam String identifier, HttpSession httpSession) throws Exception {
+        httpSession.removeAttribute("result");
         groupService.getOrCreateUserListWithCreator(httpSession);
         PaybackGroup group = (PaybackGroup) httpSession.getAttribute("group");
+        List<User> users = (List) httpSession.getAttribute("userList");
         User user = userService.getUserByIdentifier(identifier);
+<<<<<<< HEAD
         List<User> users = (List) httpSession.getAttribute("userList");
         users.add(user);
         httpSession.setAttribute("userList", users);
         return "redirect:/addgroup";
     }
     //Om man trycker på cancel: ta bort hela gruppen i databasen (+cascade???)
+=======
+        String result = groupMemberService.checkAddNewGroupMember(user, users);
+        if(!result.contains(groupMemberService.getSuccessfullyAdded())){
+            httpSession.setAttribute("result", result);
+        }
+        if(result.contains(groupMemberService.getSuccessfullyAdded())) {
+            users.add(user);
+        }
+        httpSession.setAttribute("userList", users);
+        return "redirect:/addgroup";
+    }
+>>>>>>> 64edc1300c8f3a82f02e58c7ce8a3f714e30dca8
 
     @GetMapping("/removeGroup")
     public String removeGroup(HttpSession httpSession) {
@@ -75,4 +91,8 @@ public class PaybackGroupController {
         groupService.cancelGroup(group);
         return "PBInloggad";
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 64edc1300c8f3a82f02e58c7ce8a3f714e30dca8

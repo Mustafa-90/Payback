@@ -23,12 +23,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
+<<<<<<< HEAD
                 .antMatchers("/", "/home", "/login", "/**/*.js", "/**/*.css", "/**/*.png", "/adduser").permitAll()
 //                    .antMatchers("/admin").hasRole("ADMIN")
 //                    .antMatchers("/groupsTest").hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().defaultSuccessUrl("/payback", true)
+=======
+                .antMatchers("/", "/start", "/login", "/adduser", "/policy", "/contact", "/**/*.js", "/**/*.css", "/**/*.png").permitAll()
+>>>>>>> 64edc1300c8f3a82f02e58c7ce8a3f714e30dca8
 //                .antMatchers("/creatorTest").hasRole("CREATOR")
 //                .antMatchers("/groupsTest", "/home").hasAnyRole("USER", "CREATOR")
                 .and()

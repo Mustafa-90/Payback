@@ -30,7 +30,7 @@ public class User {
     @Column(name = "Phonenr", unique = true)
     private String phoneNr;
 
-    @OneToMany
+    @OneToMany (fetch = FetchType.LAZY, mappedBy = "user")
     @Column(name = "groupmember")
     private List<GroupMember> groupMembers;
 
@@ -44,7 +44,6 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.phoneNr = phoneNr;
-        this.groupMembers = new ArrayList<>();
     }
 
     public Long getId() {
