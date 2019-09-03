@@ -76,4 +76,19 @@ public class PaybackGroupController {
         groupService.cancelGroup(group);
         return "PBInloggad";
     }
+
+    @GetMapping ("/groups")
+    public String showGroup() {
+        return "PBViewGroup";
+    }
+
+    @GetMapping ("/group")
+    public String showOneGroup() {
+        return "PBOneGroup";
+    }
+
+    @GetMapping ("/profile")
+    public String profile() {
+        return "PBUserProfiel";
+    }
 }

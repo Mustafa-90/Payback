@@ -15,7 +15,6 @@
 #logo {
   display: flex;
   align-content: space-around;
-  margin: 0vh 40vh;
 }
 
 .MenuItem {
@@ -49,11 +48,10 @@
 
 .PageContent {
   display: block;
-  position: relative;
   width: 100%;
-  margin: 3vh 78vh;
-  align-items: center;
   color: white;
+  text-align: center;
+  padding-bottom: 3%;
 }
 
 .PageItem {
