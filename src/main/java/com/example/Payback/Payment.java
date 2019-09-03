@@ -9,19 +9,20 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn (name = "Cost_id")
     private Cost cost;
 
     @Column (name = "Ispaybackd")
     private boolean isPaybackd;
     @Column (name = "Payerid")
     private Long payerId;
-    private int sum;
+    private double sum;
 
     public Payment() {
     }
 
-    public Payment(Cost cost, boolean isPaybackd, Long payerId, int sum) {
+    public Payment(Cost cost, boolean isPaybackd, long payerId, double sum) {
         this.cost = cost;
         this.isPaybackd = isPaybackd;
         this.payerId = payerId;
@@ -60,11 +61,11 @@ public class Payment {
         this.payerId = payerId;
     }
 
-    public int getSum() {
+    public double getSum() {
         return sum;
     }
 
-    public void setSum(int sum) {
+    public void setSum(double sum) {
         this.sum = sum;
     }
 }

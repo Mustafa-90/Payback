@@ -1,7 +1,4 @@
 package com.example.Payback;
-
-import org.springframework.stereotype.Controller;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +12,6 @@ public class PaybackGroup {
     private long id;
 
     @OneToOne
-    //@JoinColumn (name = "creator")
     private User creator;
 
     @Column(name = "Groupname")
@@ -24,7 +20,7 @@ public class PaybackGroup {
     @Column(name = "Totalsum")
     private double totalSum;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "paybackGroup")
+    @OneToMany (fetch = FetchType.LAZY, mappedBy = "paybackGroup")
     @Column(name = "groupmember")
     private List<GroupMember> groupMembers;
 
@@ -35,6 +31,19 @@ public class PaybackGroup {
         this.groupName = groupName;
         this.totalSum = 0;
         this.groupMembers = new ArrayList<>();
+    }
+
+    public PaybackGroup(long id, User creator, String groupName, double totalSum) {
+        this.id = id;
+        this.creator = creator;
+        this.groupName = groupName;
+        this.totalSum = totalSum;
+    }
+
+    public PaybackGroup(long id, String groupName, double totalSum) {
+        this.id = id;
+        this.groupName = groupName;
+        this.totalSum = totalSum;
     }
 
     public long getId() {
