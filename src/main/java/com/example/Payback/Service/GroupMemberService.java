@@ -57,4 +57,8 @@ public class GroupMemberService {
         }
         return user.getUserName() + successfullyAdded;
     }
+
+    public GroupMember getGroupMember(User user, PaybackGroup group){
+        return groupMemberRepository.findByUserIdAndPaybackGroupId(user.getId(), group.getId());
+    }
 }

@@ -22,15 +22,15 @@
           <span class="MenuItem">
             <a href="/logout">Log out</a>
           </span>
-          <span class="MenuItem">
+            <span class="MenuItem">
             <a href="/about">About</a>
           </span>
 
-          <span class="MenuItem">
+            <span class="MenuItem">
             <a href="/contact">Contact</a>
           </span>
 
-          <span class="MenuItem">
+            <span class="MenuItem">
             <a href="/policy">Policy</a>
           </span>
         </div>
@@ -38,12 +38,11 @@
 </div>
 <div class="GroupView">
     <div class="GroupBox">
-        <h4>Mina grupper</h4>
-        <a th:href="'/group/' + ${group.id}" th:each="group : ${session.groups}" th:utext="${group.groupName} + '<br/>'"></a>
-    </div>
-    <div class="GroupBox">
-        <h4>Annan info</h4>
+        <h4>My groups</h4>
+        <a th:href="'/group/' + ${group.id}" th:each="group : ${session.groups}"
+           th:utext="${group.groupName} + '<br/>'"></a>
     </div>
 </div>
+<div class="footer">Copyright © 2019 Payback</div>
 </body>
 </html>

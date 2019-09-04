@@ -27,7 +27,15 @@ public class Cost {
     private String receipt;
     private Date time;
 
-    public Cost() {
+    public Cost(GroupMember groupMember, Double cost, String type) {
+        this.groupMember=groupMember;
+        this.cost=cost;
+        this.type=type;
+        this.payments=new ArrayList<>();
+    }
+
+    public Cost(){
+
     }
 
     public Cost(GroupMember groupMember, Double cost, String type, String receipt) {

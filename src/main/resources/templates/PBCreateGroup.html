@@ -44,7 +44,7 @@
     <p th:if="${session.result}" th:text="${session.result}"></p>
     <form action="/addgroupmember" method="post">
         <div class="PageNavigation">
-            <input class="InputMember" type="text" placeholder="Ny gruppmedlem" name="identifier">
+            <input class="InputMember" type="text" placeholder="New Group Member" name="identifier">
             <input class="addMember" type="submit" value="+">
         </div>
     </form>
@@ -56,7 +56,7 @@
             <input class="InputGroupName" type="text" placeholder="Group name" name="groupName">
         </div>
         <div class="PageNavigation">
-            <button type="submit" class="PageItem">Skapa grupp</button>
+            <button type="submit" class="PageItem">Create Group</button>
         </div>
     </form>
     <div class="PageNavigation">
@@ -65,5 +65,6 @@
         </form>
     </div>
 </div>
-</body>
+    <div class="footer">Copyright © 2019 Payback</div>
+  </body>
 </html>
