@@ -1,6 +1,7 @@
 package com.example.Payback.Repository;
 
 import com.example.Payback.GroupMember;
+import com.example.Payback.PaybackGroup;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Payback!</title>
+    <meta charset="utf.8"/>
+    <link rel="stylesheet" type="text/css" href="/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/dropdown.css"/>
+    <link rel="stylesheet" type="text/css" href="/BoxStyle.css"/>
+    <script src="/PB.js"></script>
+</head>
+<body class="FrontPage">
+<div class="Logo">
+    <img id="logo" src="/logo.png"/>
+</div>
+<div class="Header">
+    <div class="dropdown">
+        <button id="hamburger">
+            <img src="/burgermenu-icon.png"/>
+        </button>
+        <div class="dropdown-content">
+          <span class="MenuItem">
+            <a href="/logout">Log out</a>
+          </span>
+          <span class="MenuItem">
+            <a href="/about">About</a>
+          </span>
+
+          <span class="MenuItem">
+            <a href="/contact">Contact</a>
+          </span>
+
+          <span class="MenuItem">
+            <a href="/policy">Policy</a>
+          </span>
+        </div>
+    </div>
+</div>
+<div class="GroupView">
+    <div class="GroupBox">
+        <h4>Mina grupper</h4>
+        <a th:href="'/group/' + ${group.id}" th:each="group : ${session.groups}" th:utext="${group.groupName} + '<br/>'"></a>
+    </div>
+    <div class="GroupBox">
+        <h4>Annan info</h4>
+    </div>
+</div>
+</body>
+</html>
