@@ -40,11 +40,19 @@ public class PaymentService {
         return costMapping;
     }
 
-    public Double getMemberBalancePerMember(Long groupId, Long userId) {
-        List<GroupMember> listOfCostsByGroup = groupService.getGroupMembers(groupId);
-        double totalSum = calcTotalSumForGroup(listOfCostsByGroup);
-        LinkedHashMap<User, Double> map = calcMembersBalance(totalSum, listOfCostsByGroup);
-        User user = userService.getUserById(userId);
-        return map.get(user);
+    public LinkedHashMap<User, Integer> memberBalanceToInt(LinkedHashMap<User, Double> map){
+        LinkedHashMap<User, Integer> map2 = new LinkedHashMap<>();
+        for(User key : map.keySet()) {
+            map2.put(key, map.get(key).intValue());
+        }
+        return map2;
     }
+
+//    public int getMemberBalancePerMember(Long groupId, Long userId) {
+//        List<GroupMember> listOfCostsByGroup = groupService.getGroupMembers(groupId);
+//        double totalSum = calcTotalSumForGroup(listOfCostsByGroup);
+//        LinkedHashMap<User, Double> map = calcMembersBalance(totalSum, listOfCostsByGroup);
+//        User user = userService.getUserById(userId);
+//        return map.get(user).intValue();
+//    }
 }

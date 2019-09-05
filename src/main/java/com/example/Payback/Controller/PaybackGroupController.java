@@ -60,7 +60,8 @@ public class PaybackGroupController {
         String groupName = groupService.getGroupById(id).getGroupName();
         List<String> costs = costService.getCostDescriptionsForGroup(id);
         double totalCost = paymentService.calcTotalSumForGroup(groupMembers);
-        LinkedHashMap<User, Double> memberBalances = paymentService.calcMembersBalance(totalCost, groupMembers);
+        LinkedHashMap<User, Double> tempMemberBalances = paymentService.calcMembersBalance(totalCost, groupMembers);
+        LinkedHashMap<User, Integer> memberBalances = paymentService.memberBalanceToInt(tempMemberBalances);
         httpSession.setAttribute("groupMembers", groupMembers);
         httpSession.setAttribute("groupName", groupName);
         httpSession.setAttribute("groupId", id);

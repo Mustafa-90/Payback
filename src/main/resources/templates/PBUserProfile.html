@@ -44,7 +44,7 @@
         <p><span>Email: </span><span th:text="${session.loggedinUser.email}"></span></p>
     </div>
     <div class="BoxProfil">
-        <h4>My Groups:</h4><br>
+        <h4>My Groups:</h4>
         <a th:href="'/group/' + ${group.id}" th:each="group : ${session.groups}"
            th:utext="${group.groupName} + '<br/>'"></a>
     </div>
