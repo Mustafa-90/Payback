@@ -6,6 +6,7 @@ import com.example.Payback.PaybackGroup;
 import com.example.Payback.Service.CostService;
 import com.example.Payback.Service.GroupMemberService;
 import com.example.Payback.Service.GroupService;
+import com.example.Payback.Service.PaymentService;
 import com.example.Payback.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class CostController {
@@ -24,6 +26,8 @@ public class CostController {
     private GroupService groupService;
     @Autowired
     private GroupMemberService groupMemberService;
+    @Autowired
+    private PaymentService paymentService;
 
     @PostMapping("/addCost")
     public String addCost(HttpSession httpSession, @RequestParam Double cost, @RequestParam String type) throws Exception {
@@ -32,6 +36,8 @@ public class CostController {
         User user = groupService.getLoggedinUser();
         GroupMember creator = costService.getGroupMember(user.getId(), group.getId());
         costService.saveCost(new Cost(creator, cost, type));
+        List<String> groupPayments = paymentService.getPaymentDescriptionsForGroup(id);
+        httpSession.setAttribute("groupPayments", groupPayments);
         httpSession.setAttribute("creator", creator);
         return "redirect:/group/" + id;
     }

@@ -86,9 +86,8 @@
         <div class="payments">
             <h4>Payments</h4>
             <ul>
-                <p>Här ska alla payments dyka upp</p>
-                <li th:each="costD : ${session.costDescriptions}"
-                    th:utext="${costD} + '<br/>'">
+                <li th:each="payment : ${session.groupPayments}"
+                    th:utext="${payment} + '<br/>'">
                 </li>
             </ul>
         </div>
