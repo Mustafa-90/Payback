@@ -47,4 +47,13 @@ public class CostService {
         costRepository.save(cost);
     }
 
+    public List<Cost> getCostsForGroupMembersByGroupId(long groupId){
+        List<GroupMember> groupMembers = groupService.getGroupMembers(groupId);
+        List<Cost> groupCosts = new ArrayList<>();
+        for(GroupMember groupMember : groupMembers) {
+            groupCosts.addAll(costRepository.findByGroupMemberId(groupMember.getId()));
+        }
+        return groupCosts;
+    }
+
 }

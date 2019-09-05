@@ -2,6 +2,7 @@ package com.example.Payback.Controller;
 
 import com.example.Payback.GroupMember;
 import com.example.Payback.PaybackGroup;
+import com.example.Payback.Payment;
 import com.example.Payback.Service.*;
 import com.example.Payback.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,18 +57,21 @@ public class PaybackGroupController {
 
     @GetMapping("/group/{id}")
     public String groupInfo(@PathVariable Long id, HttpSession httpSession) {
+        paymentService.createPaymentsForAGroup(id);
         List<GroupMember> groupMembers = groupService.getGroupMembers(id);
         String groupName = groupService.getGroupById(id).getGroupName();
         List<String> costs = costService.getCostDescriptionsForGroup(id);
         double totalCost = paymentService.calcTotalSumForGroup(groupMembers);
         LinkedHashMap<User, Double> tempMemberBalances = paymentService.calcMembersBalance(totalCost, groupMembers);
         LinkedHashMap<User, Integer> memberBalances = paymentService.memberBalanceToInt(tempMemberBalances);
+        List<String> groupPayments = paymentService.getPaymentDescriptionsForGroup(id);
         httpSession.setAttribute("groupMembers", groupMembers);
         httpSession.setAttribute("groupName", groupName);
         httpSession.setAttribute("groupId", id);
         httpSession.setAttribute("costDescriptions", costs);
         httpSession.setAttribute("totalCost", totalCost);
         httpSession.setAttribute("memberBalances", memberBalances);
+        httpSession.setAttribute("groupPayments", groupPayments);
         return "PBOneGroup";
     }
 

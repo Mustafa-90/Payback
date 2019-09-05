@@ -17,15 +17,16 @@ public class PaymentService {
 
     @Autowired
     private PaybackGroupRepository paybackGroupRepository;
-
     @Autowired
     private GroupMemberRepository groupMemberRepository;
-
     @Autowired
     private PaymentRepository paymentRepository;
-
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private CostService costService;
+    @Autowired
+    private GroupMemberService groupMemberService;
 
     public void createPaymentsForAGroup(long id) {
         List<GroupMember> listOfCostsByGroup = groupMemberRepository.findByPaybackGroupId(id);
@@ -33,7 +34,7 @@ public class PaymentService {
         for (int i = 0; i < listOfCostsByGroup.size(); i++) {
             for (int j = 0; j < listOfCostsByGroup.get(i).getCosts().size(); j++) {
                 for (int k = 0; k < listOfCostsByGroup.get(i).getCosts().get(j).getPayments().size(); k++) {
-                    if (!listOfCostsByGroup.get(i).getCosts().get(j).getPayments().get(k).isPaybackd()){
+                    if (!listOfCostsByGroup.get(i).getCosts().get(j).getPayments().get(k).isPaybackd()) {
                         paymentRepository.deleteById(listOfCostsByGroup.get(i).getCosts().get(j).getPayments().get(k).getId());
                     }
                 }
@@ -48,7 +49,7 @@ public class PaymentService {
         LinkedHashMap<User, Double> costMapping = calcMembersBalance(totalSum, listOfCostsByGroup);
 
         for (int i = 0; i < costMapping.size(); i++) {
-            for (int j = i+1; j < costMapping.size(); j++) {
+            for (int j = i + 1; j < costMapping.size(); j++) {
                 if (costMapping.containsKey(listOfCostsByGroup.get(i).getUser())) {
                     if (costMapping.get(listOfCostsByGroup.get(i).getUser()) + costMapping.get(listOfCostsByGroup.get(j).getUser()) == 0) {
                         if (costMapping.get(listOfCostsByGroup.get(i).getUser()) < 0) {
@@ -71,6 +72,26 @@ public class PaymentService {
         }
     }
 
+    public List<Payment> getPaymentsForAGroup(Long groupId) {
+        List<Cost> costs = costService.getCostsForGroupMembersByGroupId(groupId);
+        List<Payment> payments = new ArrayList<>();
+        for (Cost cost : costs) {
+            payments.addAll(cost.getPayments());
+        }
+        return payments;
+    }
+
+    public List<String> getPaymentDescriptionsForGroup(Long groupId) {
+        List<String> paymentDescriptions = new ArrayList<>();
+        List<Payment> payments = getPaymentsForAGroup(groupId);
+        for(Payment payment : payments) {
+            User userFrom = userRepository.findById(payment.getPayerId()).get();
+            User userTo = payment.getCost().getGroupMember().getUser();
+            paymentDescriptions.add(payment.getSum() + " kr from " + userFrom.getUserName() + " to " + userTo.getUserName());
+        }
+        return paymentDescriptions;
+    }
+
     public double calcTotalSumForGroup(List<GroupMember> listOfCostsByGroup) {
         double totalSum = 0;
 
@@ -82,7 +103,7 @@ public class PaymentService {
         return totalSum;
     }
 
-    public LinkedHashMap<User, Double>  calcMembersBalance (double totalSum, List<GroupMember> listOfCostsByGroup) {
+    public LinkedHashMap<User, Double> calcMembersBalance(double totalSum, List<GroupMember> listOfCostsByGroup) {
 
         double averageSum = totalSum / listOfCostsByGroup.get(0).getPaybackGroup().getGroupMembers().size();
         LinkedHashMap<User, Double> costMapping = new LinkedHashMap<>();
@@ -102,7 +123,7 @@ public class PaymentService {
         for (int i = 0; i < listOfCostsByGroup.size(); i++) {
             for (int j = 0; j < listOfCostsByGroup.get(i).getCosts().size(); j++) {
                 for (int k = 0; k < listOfCostsByGroup.get(i).getCosts().get(j).getPayments().size(); k++) {
-                    if (listOfCostsByGroup.get(i).getCosts().get(j).getPayments().get(k).isPaybackd()){
+                    if (listOfCostsByGroup.get(i).getCosts().get(j).getPayments().get(k).isPaybackd()) {
                         User user = userRepository.findById(listOfCostsByGroup.get(i).getCosts().get(j).getPayments().get(k).getPayerId()).get();
                         listOfPaidCosts.put(user, listOfCostsByGroup.get(i).getCosts().get(j).getPayments().get(k).getSum());
                     }
@@ -111,16 +132,16 @@ public class PaymentService {
         }
 
         for (int i = 0; i < costMapping.size(); i++) {
-                if (listOfPaidCosts.get(listOfCostsByGroup.get(i).getUser()) != null) {
-                    double sum1 = costMapping.get(listOfCostsByGroup.get(i).getUser());
-                    double sum2 = listOfPaidCosts.get(listOfCostsByGroup.get(i).getUser());
-                    double totalPayerSum = sum1 + sum2;
-                    if (totalPayerSum == 0) {
-                        costMapping.remove(listOfCostsByGroup.get(i).getUser());
-                    } else {
-                        costMapping.put(listOfCostsByGroup.get(i).getUser(), totalPayerSum);
-                    }
+            if (listOfPaidCosts.get(listOfCostsByGroup.get(i).getUser()) != null) {
+                double sum1 = costMapping.get(listOfCostsByGroup.get(i).getUser());
+                double sum2 = listOfPaidCosts.get(listOfCostsByGroup.get(i).getUser());
+                double totalPayerSum = sum1 + sum2;
+                if (totalPayerSum == 0) {
+                    costMapping.remove(listOfCostsByGroup.get(i).getUser());
+                } else {
+                    costMapping.put(listOfCostsByGroup.get(i).getUser(), totalPayerSum);
                 }
+            }
         }
 
         return costMapping;
@@ -137,14 +158,14 @@ public class PaymentService {
                 if (entryList.size() > 1) {
                     paymentSum = entryList.get(j).getValue() + entryList.get(i).getValue();
                     if (paymentSum > 0) {
-                        List <Cost> cost = getOneMembersListOfCostsForCreatingPayments(entryList.get(j).getKey(), listOfCostsByGroup, counter);
+                        List<Cost> cost = getOneMembersListOfCostsForCreatingPayments(entryList.get(j).getKey(), listOfCostsByGroup, counter);
                         double negCostToPos = Math.abs(entryList.get(i).getValue());
                         paymentRepository.save(new Payment(cost.get(0), false, entryList.get(i).getKey().getId(), negCostToPos));
                         entryList.get(j).setValue(paymentSum);
                         entryList.remove(i);
 
                     } else if (paymentSum <= 0) {
-                        List <Cost> cost = getOneMembersListOfCostsForCreatingPayments(entryList.get(j).getKey(), listOfCostsByGroup, counter);
+                        List<Cost> cost = getOneMembersListOfCostsForCreatingPayments(entryList.get(j).getKey(), listOfCostsByGroup, counter);
                         paymentRepository.save(new Payment(cost.get(0), false, entryList.get(i).getKey().getId(), entryList.get(j).getValue()));
                         entryList.get(i).setValue(paymentSum);
                         entryList.remove(j);
@@ -167,7 +188,7 @@ public class PaymentService {
         return cost;
     }
 
-    private static List<Map.Entry<User, Double>> findLastEntryWithArrayListMethod(LinkedHashMap <User, Double> costMapping) {
+    private static List<Map.Entry<User, Double>> findLastEntryWithArrayListMethod(LinkedHashMap<User, Double> costMapping) {
         List<Map.Entry<User, Double>> entryList = new ArrayList<Map.Entry<User, Double>>(costMapping.entrySet());
         return entryList;
     }
@@ -201,9 +222,9 @@ public class PaymentService {
         Collections.sort(entries, new Comparator<Map.Entry<User, Double>>() {
             @Override
             public int compare(Map.Entry<User, Double> lhs, Map.Entry<User, Double> rhs) {
-                if (((double)lhs.getValue()) > ((double)rhs.getValue())) {
+                if (((double) lhs.getValue()) > ((double) rhs.getValue())) {
                     return 1;
-                } else if ((((double)lhs.getValue()) == ((double)rhs.getValue()))) {
+                } else if ((((double) lhs.getValue()) == ((double) rhs.getValue()))) {
                     return 0;
                 } else {
                     return -1;
@@ -211,14 +232,14 @@ public class PaymentService {
             }
         });
         costMap.clear();
-        for(Map.Entry<User, Double> e : entries) {
+        for (Map.Entry<User, Double> e : entries) {
             costMap.put(e.getKey(), e.getValue());
         }
     }
 
-    public LinkedHashMap<User, Integer> memberBalanceToInt(LinkedHashMap<User, Double> map){
+    public LinkedHashMap<User, Integer> memberBalanceToInt(LinkedHashMap<User, Double> map) {
         LinkedHashMap<User, Integer> map2 = new LinkedHashMap<>();
-        for(User key : map.keySet()) {
+        for (User key : map.keySet()) {
             map2.put(key, map.get(key).intValue());
         }
         return map2;
