@@ -2,19 +2,17 @@ package com.example.Payback.Controller;
 
 import com.example.Payback.GroupMember;
 import com.example.Payback.PaybackGroup;
-import com.example.Payback.Repository.GroupMemberRepository;
-import com.example.Payback.Service.GroupMemberService;
-import com.example.Payback.Service.GroupService;
-import com.example.Payback.Service.UserService;
+import com.example.Payback.Service.*;
 import com.example.Payback.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 @Controller
@@ -26,6 +24,10 @@ public class PaybackGroupController {
     private UserService userService;
     @Autowired
     private GroupMemberService groupMemberService;
+    @Autowired
+    private CostService costService;
+    @Autowired
+    private PaymentService paymentService;
 
     @GetMapping("/addgroup")
     public String createGroup(HttpSession httpSession) {
@@ -45,11 +47,36 @@ public class PaybackGroupController {
         List<User> uList = groupService.getOrCreateUserListWithCreator(httpSession);
         List<GroupMember> gmList = groupMemberService.saveUsersAsGroupMembers(uList, group);
         group.setGroupMembers(gmList);
-        groupService.addGroup(group);
+        Long id = groupService.addGroup(group);
         httpSession.removeAttribute("group");
         httpSession.removeAttribute("userList");
         httpSession.removeAttribute("result");
-        return "redirect:/home";
+        return "redirect:/group/" + id;
+    }
+
+    @GetMapping("/group/{id}")
+    public String groupInfo(@PathVariable Long id, HttpSession httpSession) {
+        List<GroupMember> groupMembers = groupService.getGroupMembers(id);
+        String groupName = groupService.getGroupById(id).getGroupName();
+        List<String> costs = costService.getCostDescriptionsForGroup(id);
+        double totalCost = paymentService.calcTotalSumForGroup(groupMembers);
+        LinkedHashMap<User, Double> tempMemberBalances = paymentService.calcMembersBalance(totalCost, groupMembers);
+        LinkedHashMap<User, Integer> memberBalances = paymentService.memberBalanceToInt(tempMemberBalances);
+        httpSession.setAttribute("groupMembers", groupMembers);
+        httpSession.setAttribute("groupName", groupName);
+        httpSession.setAttribute("groupId", id);
+        httpSession.setAttribute("costDescriptions", costs);
+        httpSession.setAttribute("totalCost", totalCost);
+        httpSession.setAttribute("memberBalances", memberBalances);
+        return "PBOneGroup";
+    }
+
+    @GetMapping("/groups")
+    public String groupsPage(HttpSession httpSession) throws Exception{
+        Long id = groupService.getLoggedinUserId();
+        List<PaybackGroup> groups = groupService.getGroupListByUserId(id);
+        httpSession.setAttribute("groups", groups);
+        return "PBViewGroups";
     }
 
     @PostMapping("/addgroupmember")
@@ -75,11 +102,6 @@ public class PaybackGroupController {
         PaybackGroup group = (PaybackGroup) httpSession.getAttribute("group");
         groupService.cancelGroup(group);
         return "PBInloggad";
-    }
-
-    @GetMapping ("/groups")
-    public String showGroup() {
-        return "PBViewGroup";
     }
 
     @GetMapping ("/group")

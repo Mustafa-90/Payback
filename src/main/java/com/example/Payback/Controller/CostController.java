@@ -1,22 +1,40 @@
 package com.example.Payback.Controller;
 
-import com.example.Payback.Repository.*;
+import com.example.Payback.Cost;
+import com.example.Payback.GroupMember;
+import com.example.Payback.PaybackGroup;
+import com.example.Payback.Service.CostService;
+import com.example.Payback.Service.GroupMemberService;
+import com.example.Payback.Service.GroupService;
+import com.example.Payback.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class CostController {
 
-        @Autowired
-        CostRepository costRepository;
-        @Autowired
-        GroupMemberRepository groupMemberRepository;
-        @Autowired
-        PaybackGroupRepository paybackGroupRepository;
-        @Autowired
-        PaymentRepository paymentRepository;
-        @Autowired
-        UserRepository userRepository;
+    @Autowired
+    private CostService costService;
+    @Autowired
+    private GroupService groupService;
+    @Autowired
+    private GroupMemberService groupMemberService;
+
+    @PostMapping("/addCost")
+    public String addCost(HttpSession httpSession, @RequestParam Double cost, @RequestParam String type) throws Exception {
+        Long id = (Long) httpSession.getAttribute("groupId");
+        PaybackGroup group = groupService.getGroupById(id);
+        User user = groupService.getLoggedinUser();
+        GroupMember creator = costService.getGroupMember(user.getId(), group.getId());
+        costService.saveCost(new Cost(creator, cost, type));
+        httpSession.setAttribute("creator", creator);
+        return "redirect:/group/" + id;
+    }
 
 
 }

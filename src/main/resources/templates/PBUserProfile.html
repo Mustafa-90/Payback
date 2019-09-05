@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payback!</title>
+    <meta charset="utf.8"/>
+    <link rel="stylesheet" type="text/css" href="normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link rel="stylesheet" type="text/css" href="dropdown.css"/>
+    <link rel="stylesheet" type="text/css" href="BoxStyle.css"/>
+    <script src="PB.js"></script>
+</head>
+<body class="FrontPage">
+<div class="Logo">
+    <img id="logo" src="logo.png"/>
+</div>
+<div class="Header">
+    <div class="dropdown">
+        <button id="hamburger">
+            <img src="burgermenu-icon.png"/>
+        </button>
+        <div class="dropdown-content">
+           <span class="MenuItem">
+            <a href="/logout">Log out</a>
+          </span>
+            <span class="MenuItem">
+           <a href="/about">About</a>
+         </span>
+
+            <span class="MenuItem">
+           <a href="/contact">Contact</a>
+         </span>
+
+            <span class="MenuItem">
+           <a href="/policy">Policy</a>
+         </span>
+        </div>
+    </div>
+</div>
+<div class="ProfileView">
+    <div class="BoxProfil">
+        <h4>Profile info</h4>
+        <p><span>User name: </span><span th:text="${session.loggedinUser.userName}"></span></p>
+        <p><span>Phone number: </span><span th:text="${session.loggedinUser.phoneNr}"></span></p>
+        <p><span>Email: </span><span th:text="${session.loggedinUser.email}"></span></p>
+    </div>
+    <div class="BoxProfil">
+        <h4>My Groups:</h4>
+        <a th:href="'/group/' + ${group.id}" th:each="group : ${session.groups}"
+           th:utext="${group.groupName} + '<br/>'"></a>
+    </div>
+    <div class="BoxProfil">
+        <h4>Payments</h4>
+        <p>List of my costs and payments</p>
+    </div>
+</div>
+</body>
+</html>
+</div>
+<div class="footer">Copyright © 2019 Payback</div>
+</body>
+</html>
