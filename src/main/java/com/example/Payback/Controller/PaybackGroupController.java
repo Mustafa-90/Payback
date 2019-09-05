@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 @Controller
+@Transactional
 public class PaybackGroupController {
 
     @Autowired
@@ -56,22 +58,24 @@ public class PaybackGroupController {
     }
 
     @GetMapping("/group/{id}")
-    public String groupInfo(@PathVariable Long id, HttpSession httpSession) {
-        paymentService.createPaymentsForAGroup(id);
+    public String groupInfo(@PathVariable Long id, HttpSession httpSession) throws Exception{
         List<GroupMember> groupMembers = groupService.getGroupMembers(id);
         String groupName = groupService.getGroupById(id).getGroupName();
         List<String> costs = costService.getCostDescriptionsForGroup(id);
+        if(costs.size() > 0) {
+            List<Payment> payments = paymentService.createPaymentsForAGroup(id);
+            List<String> groupPayments = paymentService.getPaymentDescriptionsForGroup2(payments);
+            httpSession.setAttribute("groupPayments", groupPayments);
+        }
         double totalCost = paymentService.calcTotalSumForGroup(groupMembers);
         LinkedHashMap<User, Double> tempMemberBalances = paymentService.calcMembersBalance(totalCost, groupMembers);
         LinkedHashMap<User, Integer> memberBalances = paymentService.memberBalanceToInt(tempMemberBalances);
-        List<String> groupPayments = paymentService.getPaymentDescriptionsForGroup(id);
         httpSession.setAttribute("groupMembers", groupMembers);
         httpSession.setAttribute("groupName", groupName);
         httpSession.setAttribute("groupId", id);
         httpSession.setAttribute("costDescriptions", costs);
         httpSession.setAttribute("totalCost", totalCost);
         httpSession.setAttribute("memberBalances", memberBalances);
-        httpSession.setAttribute("groupPayments", groupPayments);
         return "PBOneGroup";
     }
 

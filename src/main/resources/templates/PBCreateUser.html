@@ -3,33 +3,34 @@
 <head>
     <title>Payback!</title>
     <meta charset="utf.8"/>
-    <link rel="stylesheet" type="text/css" href="normalize.css"/>
-    <link rel="stylesheet" type="text/css" href="style.css"/>
-    <link rel="stylesheet" type="text/css" href="dropdown.css"/>
-    <link rel="stylesheet" type="text/css" href="BoxStyle.css"/>
-    <script src="PB.js"></script>
+    <link rel="stylesheet" type="text/css" href="/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/dropdown.css"/>
+    <link rel="stylesheet" type="text/css" href="/BoxStyle.css"/>
+    <script src="/PB.js"></script>
 </head>
 <body class="FrontPage">
 <div class="Logo">
-    <img id="logo" src="logo.png"/>
-</div>
+    <a href="/home">
+        <img id="logo" src="/logo.png"/>
+    </a></div>
 <div class="Header">
     <div class="dropdown">
         <button id="hamburger">
-            <img src="burgermenu-icon.png"/>
+            <img src="/burgermenu-icon.png"/>
         </button>
         <div class="dropdown-content">
           <span class="MenuItem">
             <a href="/logout">Log out</a>
           </span>
             <span class="MenuItem">
-            <a href="#">About</a>
+            <a href="/about">About</a>
           </span>
             <span class="MenuItem">
-            <a href="#">Contact</a>
+            <a href="/contact">Contact</a>
           </span>
             <span class="MenuItem">
-            <a href="#">Policy</a>
+            <a href="/policy">Policy</a>
           </span>
         </div>
     </div>
@@ -37,6 +38,11 @@
 <div class="PageContent">
     <h2>Sign up!</h2>
     <p>Please fill in this form to create an account.</p>
+    <div id="error" th:switch="${session.result}">
+        <p th:case="'userName'">Username is taken. Please choose another username.</p>
+        <p th:case="'email'">This email has already been used, please try another email.</p>
+        <p th:case="'phoneNr'">This phonenumber has already been used, please try another phonenumber.</p>
+    </div>
     <form action="/adduser" method="POST" th:object="${user}">
         <div class="PageNavigation">
             <input

@@ -28,7 +28,7 @@ public class PaymentService {
     @Autowired
     private GroupMemberService groupMemberService;
 
-    public void createPaymentsForAGroup(long id) {
+    public List<Payment> createPaymentsForAGroup(long id) {
         List<GroupMember> listOfCostsByGroup = groupMemberRepository.findByPaybackGroupId(id);
 
         for (int i = 0; i < listOfCostsByGroup.size(); i++) {
@@ -70,6 +70,8 @@ public class PaymentService {
         if (costMapping.size() > 0) {
             createDividedPayment(costMapping, listOfCostsByGroup);
         }
+
+        return getPaymentsForAGroup(id);
     }
 
     public List<Payment> getPaymentsForAGroup(Long groupId) {
@@ -84,6 +86,16 @@ public class PaymentService {
     public List<String> getPaymentDescriptionsForGroup(Long groupId) {
         List<String> paymentDescriptions = new ArrayList<>();
         List<Payment> payments = getPaymentsForAGroup(groupId);
+        for(Payment payment : payments) {
+            User userFrom = userRepository.findById(payment.getPayerId()).get();
+            User userTo = payment.getCost().getGroupMember().getUser();
+            paymentDescriptions.add(payment.getSum() + " kr from " + userFrom.getUserName() + " to " + userTo.getUserName());
+        }
+        return paymentDescriptions;
+    }
+
+    public List<String> getPaymentDescriptionsForGroup2(List<Payment> payments) {
+        List<String> paymentDescriptions = new ArrayList<>();
         for(Payment payment : payments) {
             User userFrom = userRepository.findById(payment.getPayerId()).get();
             User userTo = payment.getCost().getGroupMember().getUser();

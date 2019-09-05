@@ -1,6 +1,8 @@
 package com.example.Payback.Controller;
 
+import com.example.Payback.Cost;
 import com.example.Payback.PaybackGroup;
+import com.example.Payback.Payment;
 import com.example.Payback.Service.GroupService;
 import com.example.Payback.Service.UserService;
 import com.example.Payback.User;
@@ -28,13 +30,16 @@ public class UserController {
     }
 
     @PostMapping("/adduser")
-    public String addUser(@ModelAttribute User user, Model model, @RequestParam String repPassword) {
+    public String addUser(@ModelAttribute User user, Model model, @RequestParam String repPassword, HttpSession httpSession) {
 
         if (repPassword.equals(user.getPassword())) {
             String result = userService.addUser(user);
+            httpSession.setAttribute("result", result);
             if (result.equals("OK")) {
                 return "redirect:/login";
             } else {
+                result = "password";
+                httpSession.setAttribute("result", result);
                 model.addAttribute("user", user);
                 return "PBCreateUser";
             }
@@ -47,8 +52,12 @@ public class UserController {
         User user = groupService.getLoggedinUser();
         Long id = user.getId();
         List<PaybackGroup> groups = groupService.getGroupListByUserId(id);
+        List<Cost> costs = userService.getAllLoggedInUsersCosts();
+        List<String> payments = userService.getAllLoggedInUsersPayments();
         httpSession.setAttribute("groups", groups);
         httpSession.setAttribute("loggedinUser", user);
+        httpSession.setAttribute("costs", costs);
+        httpSession.setAttribute("payments", payments);
         return "PBUserProfile";
     }
 }

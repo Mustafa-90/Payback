@@ -1,27 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>Payback!</title>
     <meta charset="utf.8"/>
-    <link rel="stylesheet" type="text/css" href="normalize.css"/>
-    <link rel="stylesheet" type="text/css" href="style.css"/>
-    <link rel="stylesheet" type="text/css" href="dropdown.css"/>
-    <link rel="stylesheet" type="text/css" href="BoxStyle.css"/>
-    <script src="PB.js"></script>
+    <link rel="stylesheet" type="text/css" href="/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/dropdown.css"/>
+    <link rel="stylesheet" type="text/css" href="/BoxStyle.css"/>
+    <script src="/PB.js"></script>
 </head>
 <body class="FrontPage">
 <div class="Logo">
-    <img id="logo" src="logo.png"/>
-</div>
+    <a href="/home">
+        <img id="logo" src="/logo.png"/>
+    </a></div>
 <div class="Header">
     <div class="dropdown">
         <button id="hamburger">
-            <img src="burgermenu-icon.png"/>
+            <img src="/burgermenu-icon.png"/>
         </button>
         <div class="dropdown-content">
-           <span class="MenuItem">
-            <a href="/logout">Log out</a>
-          </span>
             <span class="MenuItem">
            <a href="/about">About</a>
          </span>
@@ -33,6 +31,10 @@
             <span class="MenuItem">
            <a href="/policy">Policy</a>
          </span>
+
+            <span class="MenuItem">
+            <a href="/logout">Log out</a>
+          </span>
         </div>
     </div>
 </div>
@@ -49,8 +51,13 @@
            th:utext="${group.groupName} + '<br/>'"></a>
     </div>
     <div class="BoxProfil">
+        <h4>Costs</h4>
+        <p th:each="cost : ${session.costs}"
+           th:text="${cost.cost} + ', for ' + ${cost.type}"></p>
+        <p></p>
         <h4>Payments</h4>
-        <p>List of my costs and payments</p>
+        <p th:each="payment : ${session.payments}"
+           th:text="${payment}"></p>
     </div>
 </div>
 </body>
