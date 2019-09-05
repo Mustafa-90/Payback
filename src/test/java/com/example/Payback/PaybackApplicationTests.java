@@ -142,18 +142,18 @@ public class PaybackApplicationTests {
     	//groupService.addGroupMember(user, group);
 	}
 
-//	@Test
-//	public void addCostsForGroup() {
-//		List<GroupMember> listOfCost = groupMemberRepository.findByPaybackGroupId(2L);
-//		double sum = 0;
-//		for (int i = 0; i < listOfCost.size(); i++) {
-//			for (int j = 0; j < listOfCost.get(i).getCosts().size(); j++) {
-//				sum = sum + listOfCost.get(i).getCosts().get(j).getCost();
-//			}
-//		}
-//		listOfCost.get(0).getPaybackGroup().setTotalSum(sum);
-//		paybackGroupRepository.save(listOfCost.get(0).getPaybackGroup());
-//	}
+	@Test
+	public void addCostsForGroup() {
+		List<GroupMember> listOfCost = groupMemberRepository.findByPaybackGroupId(2L);
+		double sum = 0;
+		for (int i = 0; i < listOfCost.size(); i++) {
+			for (int j = 0; j < listOfCost.get(i).getCosts().size(); j++) {
+				sum = sum + listOfCost.get(i).getCosts().get(j).getCost();
+			}
+		}
+		listOfCost.get(0).getPaybackGroup().setTotalSum(sum);
+		paybackGroupRepository.save(listOfCost.get(0).getPaybackGroup());
+	}
 
 	@Test
 	public void addMembersPayments() {
@@ -237,27 +237,39 @@ public class PaybackApplicationTests {
 			costMapping.put(listOfCostsByGroup.get(i).getUser(), owedMoney);
 		}
 
-		for (int i = 0; i < costMapping.size(); i++) {
-			for (int j = i+1; j < costMapping.size(); j++) {
-				if (costMapping.get(listOfCostsByGroup.get(i).getUser()) + costMapping.get(listOfCostsByGroup.get(j).getUser()) == 0) {
-					System.out.println(costMapping.get(listOfCostsByGroup.get(i).getUser()));
-					if (costMapping.get(listOfCostsByGroup.get(i).getUser()) < 0) {
-						createPayment(listOfCostsByGroup.get(i).getCosts(), listOfCostsByGroup.get(i).getUser().getId(), costMapping.get(listOfCostsByGroup.get(j).getUser()));
-					}
-						costMapping.get(listOfCostsByGroup.get(i).getUser());
+
+		for (int i = 0; i < listOfCostsByGroup.size(); i++) {
+			for (int j = i+1; j < listOfCostsByGroup.size(); j++) {
+				if (costMapping.containsKey(listOfCostsByGroup.get(i).getUser())) {
+					if (costMapping.get(listOfCostsByGroup.get(i).getUser()) + costMapping.get(listOfCostsByGroup.get(j).getUser()) == 0) {
+							if (costMapping.get(listOfCostsByGroup.get(i).getUser()) < 0) {
+								createPayment(listOfCostsByGroup.get(j).getCosts(), listOfCostsByGroup.get(i).getUser().getId(), costMapping.get(listOfCostsByGroup.get(j).getUser()));
+								costMapping.remove(listOfCostsByGroup.get(i).getUser());
+								costMapping.remove(listOfCostsByGroup.get(j).getUser());
+							} else {
+								createPayment(listOfCostsByGroup.get(i).getCosts(), listOfCostsByGroup.get(i).getUser().getId(), costMapping.get(listOfCostsByGroup.get(i).getUser()));
+								costMapping.remove(listOfCostsByGroup.get(i).getUser());
+								costMapping.remove(listOfCostsByGroup.get(j).getUser());
+							}
+						}
 				}
 			}
 		}
+
+		System.out.println(costMapping.size());
+		Payment payment1 = paymentRepository.findById(2L).get();
+		System.out.println(payment1.getSum() + " " + payment1.getCost().getGroupMember().getUser().getFirstName());
+		Payment payment2 = paymentRepository.findById(35L).get();
+		System.out.println(payment2.getSum() + " " + payment2.getCost().getGroupMember().getUser().getFirstName());
+
 	}
 
 	public void createPayment (List<Cost> cost, long payerId, double paymentSum) {
-
-    	Payment payment;
     	boolean cont = false;
 
     	for (int i = 0; i < cost.size(); i++) {
 			if (cost.get(i).getCost() >= paymentSum && !cont) {
-				payment = new Payment(cost.get(i), false, payerId, paymentSum);
+				paymentRepository.save(new Payment(cost.get(i), false, payerId, paymentSum));
 				cont = true;
 			}
 		}
@@ -266,9 +278,9 @@ public class PaybackApplicationTests {
     			if (cost.get(i).getCost() < paymentSum) {
 					double test = cost.get(i).getCost();
 					paymentSum = paymentSum - test;
-					payment = new Payment(cost.get(i), false, payerId, test);
+					paymentRepository.save(new Payment(cost.get(i), false, payerId,test));
 				} else if (cost.get(i).getCost() >= paymentSum && paymentSum != 0) {
-					payment = new Payment(cost.get(i), false, payerId, paymentSum);
+					paymentRepository.save(new Payment(cost.get(i), false, payerId, paymentSum));
 					paymentSum = 0;
 				}
 			}
