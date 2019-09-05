@@ -215,4 +215,13 @@ public class PaymentService {
             costMap.put(e.getKey(), e.getValue());
         }
     }
+
+    public LinkedHashMap<User, Integer> memberBalanceToInt(LinkedHashMap<User, Double> map){
+        LinkedHashMap<User, Integer> map2 = new LinkedHashMap<>();
+        for(User key : map.keySet()) {
+            map2.put(key, map.get(key).intValue());
+        }
+        return map2;
+    }
+
 }
