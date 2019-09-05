@@ -105,6 +105,10 @@ public class PaymentService {
                     if (listOfCostsByGroup.get(i).getCosts().get(j).getPayments().get(k).isPaybackd()){
                         User user = userRepository.findById(listOfCostsByGroup.get(i).getCosts().get(j).getPayments().get(k).getPayerId()).get();
                         listOfPaidCosts.put(user, listOfCostsByGroup.get(i).getCosts().get(j).getPayments().get(k).getSum());
+                        double sum1 = costMapping.get(listOfCostsByGroup.get(i).getUser());
+                        double sum2 = listOfCostsByGroup.get(i).getCosts().get(j).getPayments().get(k).getSum();
+                        double totalPayerSum = sum1 - sum2;
+                        costMapping.put(listOfCostsByGroup.get(i).getUser(), totalPayerSum);
                     }
                 }
             }
@@ -141,14 +145,12 @@ public class PaymentService {
                         double negCostToPos = Math.abs(entryList.get(i).getValue());
                         paymentRepository.save(new Payment(cost.get(0), false, entryList.get(i).getKey().getId(), negCostToPos));
                         entryList.get(j).setValue(paymentSum);
-                        entryList.remove(i);
-
+                        entryList.remove(i); 
                     } else if (paymentSum <= 0) {
                         List <Cost> cost = getOneMembersListOfCostsForCreatingPayments(entryList.get(j).getKey(), listOfCostsByGroup, counter);
                         paymentRepository.save(new Payment(cost.get(0), false, entryList.get(i).getKey().getId(), entryList.get(j).getValue()));
                         entryList.get(i).setValue(paymentSum);
                         entryList.remove(j);
-
                     }
                 }
             }

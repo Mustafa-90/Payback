@@ -286,6 +286,20 @@ public class PaybackApplicationTests {
 			}
 		}
 	}
+
+	@Test
+	public void membersPayments() {
+		List<GroupMember> groupMemberPaymentList = groupMemberRepository.findByPaybackGroupId(6L);
+
+		for (int i = 0; i < groupMemberPaymentList.size(); i++) {
+			for (int j = 0; j < groupMemberPaymentList.get(i).getCosts().size(); j++) {
+				for (int k = 0; k < groupMemberPaymentList.get(i).getCosts().get(j).getPayments().size(); k++) {
+					User user = userRepository.findById(groupMemberPaymentList.get(i).getCosts().get(j).getPayments().get(k).getPayerId()).get();
+					System.out.println(groupMemberPaymentList.get(i).getCosts().get(j).getPayments().get(k).getSum() + " from " + user.getUserName() + " to " + groupMemberPaymentList.get(i).getCosts().get(j).getGroupMember().getUser().getUserName());
+				}
+			}
+		}
+	}
 }
 
 //		1200 / 4 = 300
