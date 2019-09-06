@@ -14,11 +14,21 @@
     <a href="/home"><img id="logo" src="/logo.png"/></a>
 </div>
 <div class="Header">
+    <a href="/groups">
+    <button id="back">
+        <img src="/back.png" />
+    </button>
+    </a>
     <div class="dropdown">
         <button id="hamburger">
             <img src="/burgermenu-icon.png"/>
         </button>
         <div class="dropdown-content">
+
+            <span class="MenuItem">
+            <a href="/logout">Log out</a>
+          </span>
+
           <span class="MenuItem">
             <a href="/about">About</a>
           </span>
@@ -33,20 +43,19 @@
         </div>
     </div>
 </div>
-<h2 class="GroupName" th:text="${session.groupName}"></h2>
 <div class="GroupView">
     <div class="Whatever">
-        <div class="BoxAddCost">
+        <div class="BoxAddCost" id="MembersBox">
             <h4>Group members</h4>
             <ul>
-                <li th:each="object : ${session.memberBalances}"><span
+                <li th:each="object : ${session.memberBalances}" class="MembersBalance"><span
                         th:utext="${object.key.userName} + ': '"></span><span
                         th:classappend="${object.value >= 0} ? positiveNumber : negativeNumber"
                         th:utext="${object.value} + ' kr<br/>'"></span>
                 </li>
             </ul>
         </div>
-        <div class="BoxAddCost">
+        <div class="BoxAddCost" id="CostBox">
             <form method="post" action="/addCost">
                 <input type="hidden" id="groupMember" name="groupMember" th:value="${creator}">
                 <input
@@ -70,24 +79,23 @@
     </div>
     <div class="ShowCostBox">
         <div class="costs">
-            <h4>Costs</h4>
+            <h4 class="GroupName" th:text="${session.groupName}"></h4>
             <ul>
                 <li th:each="costD : ${session.costDescriptions}"
-                    th:utext="${costD} + '<br/>'">
+                    th:utext="${costD} + '<br/>'" class="MembersBalance">
                 </li>
             </ul>
-            <br><br>
+            <br>
             <p th:text="'Total sum: ' + ${session.totalCost}"></p>
         </div>
         <div>
-            <br>
             <p>----------------------</p>
         </div>
         <div class="payments">
             <h4>Payments</h4>
             <ul>
-                <li th:each="payment : ${session.groupPayments}"
-                    th:utext="${payment} + '<br/>'">
+                <li th:each="payment : ${session.paymentList}">
+                    <th th:text="${payment.value}"></th>
                 </li>
             </ul>
         </div>

@@ -13,8 +13,11 @@
 }
 
 #logo {
-  display: flex;
-  align-content: space-around;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 21%;
+    padding-top: 1%;
 }
 
 .MenuItem {
@@ -54,9 +57,19 @@
   padding-bottom: 3%;
 }
 
+<<<<<<< HEAD
 #error
 {
 color: red;
+=======
+.MembersBalance {
+    text-align: left;
+    float: unset;
+}
+
+#error {
+    color: red solid 2px;
+>>>>>>> a40a256198174ddb473d9fffb17dbb5df609bc95
 }
 
 .PageItem {
@@ -209,6 +222,13 @@ color: red;
   box-shadow: 0 0 15px #3c5f4f36;
 }
 
+.GroupName {
+    text-align: center;
+    font-size: 333%;
+    margin: 0;
+    color: #42705b;
+}
+
 .InputGroupName {
   width: 65vh;
   height: 7vh;
@@ -281,6 +301,49 @@ color: red;}
   color: white;
   text-align: center;
   padding: 1%;
+  margin-top: 1%;
+}
+
+#hamburger {
+ width: 5vh;
+ height: 5vh;
+ border: #77eeb6;
+ border-radius: 23px;
+ background-color: #77eeb6;
+ box-shadow: 0 0 10px #77eeb6;
+ margin-left: 2vh;
+ position: fixed;
+ top: 2%;
+}
+
+#hamburger:hover {
+ border: #77eeb6;
+ background-color: #77eeb6;
+ box-shadow: 0 0 15px #77eeb6;
+}
+
+#back {
+ width: 5vh;
+ height: 5vh;
+ border: #77eeb6;
+ border-radius: 23px;
+ background-color: #77eeb6;
+ box-shadow: 0 0 10px #77eeb6;
+ margin-left: 12vh;
+ position: fixed;
+ top: 2%;
+}
+
+#back:hover {
+ border: #77eeb6;
+ background-color: #77eeb6;
+ box-shadow: 0 0 15px #77eeb6;
+}
+
+.CreateUserField {
+ display: grid;
+ align-content: center;
+ margin-right: 10%;
 }
 
 @media only screen and (max-device-width: 768px) {

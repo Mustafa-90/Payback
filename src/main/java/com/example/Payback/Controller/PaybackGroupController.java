@@ -5,18 +5,20 @@ import com.example.Payback.PaybackGroup;
 import com.example.Payback.Payment;
 import com.example.Payback.Service.*;
 import com.example.Payback.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 @Controller
+@Transactional
 public class PaybackGroupController {
 
     @Autowired
@@ -55,8 +57,11 @@ public class PaybackGroupController {
         return "redirect:/group/" + id;
     }
 
+
     @GetMapping("/group/{id}")
     public String groupInfo(@PathVariable Long id, HttpSession httpSession) {
+        List<String> groupPayments = paymentService.getPaymentDescriptionsForGroup(id);
+        httpSession.setAttribute("groupPayments", groupPayments);
         paymentService.createPaymentsForAGroup(id);
         List<GroupMember> groupMembers = groupService.getGroupMembers(id);
         String groupName = groupService.getGroupById(id).getGroupName();
@@ -64,14 +69,16 @@ public class PaybackGroupController {
         double totalCost = paymentService.calcTotalSumForGroup(groupMembers);
         LinkedHashMap<User, Double> tempMemberBalances = paymentService.calcMembersBalance(totalCost, groupMembers);
         LinkedHashMap<User, Integer> memberBalances = paymentService.memberBalanceToInt(tempMemberBalances);
-        List<String> groupPayments = paymentService.getPaymentDescriptionsForGroup(id);
+        List<Payment> paymentsGroup = paymentService.getPaymentForGroup(id);
+        LinkedHashMap<Payment, String> paymentsWithDesc = paymentService.getPaymentDescriptionsForGroupAndPaymentId(id);
+        httpSession.setAttribute("paymentList", paymentsWithDesc);
         httpSession.setAttribute("groupMembers", groupMembers);
         httpSession.setAttribute("groupName", groupName);
         httpSession.setAttribute("groupId", id);
         httpSession.setAttribute("costDescriptions", costs);
         httpSession.setAttribute("totalCost", totalCost);
         httpSession.setAttribute("memberBalances", memberBalances);
-        httpSession.setAttribute("groupPayments", groupPayments);
+
         return "PBOneGroup";
     }
 

@@ -44,33 +44,33 @@ public class PaymentService {
 
         double totalSum = calcTotalSumForGroup(listOfCostsByGroup);
 
-        listOfCostsByGroup.get(0).getPaybackGroup().setTotalSum(totalSum);
-        paybackGroupRepository.save(listOfCostsByGroup.get(0).getPaybackGroup());
+            listOfCostsByGroup.get(0).getPaybackGroup().setTotalSum(totalSum);
+            paybackGroupRepository.save(listOfCostsByGroup.get(0).getPaybackGroup());
 
-        LinkedHashMap<User, Double> costMapping = calcMembersBalance(totalSum, listOfCostsByGroup);
+            LinkedHashMap<User, Double> costMapping = calcMembersBalance(totalSum, listOfCostsByGroup);
 
-        for (int i = 0; i < costMapping.size(); i++) {
-            for (int j = i + 1; j < costMapping.size(); j++) {
-                if (costMapping.containsKey(listOfCostsByGroup.get(i).getUser())) {
-                    if (costMapping.get(listOfCostsByGroup.get(i).getUser()) + costMapping.get(listOfCostsByGroup.get(j).getUser()) == 0) {
-                        if (costMapping.get(listOfCostsByGroup.get(i).getUser()) < 0) {
-                            createEqualPayment(listOfCostsByGroup.get(j).getCosts(), listOfCostsByGroup.get(i).getUser().getId(), costMapping.get(listOfCostsByGroup.get(j).getUser()));
-                            costMapping.remove(listOfCostsByGroup.get(i).getUser());
-                            costMapping.remove(listOfCostsByGroup.get(j).getUser());
-                        } else {
-                            createEqualPayment(listOfCostsByGroup.get(i).getCosts(), listOfCostsByGroup.get(j).getUser().getId(), costMapping.get(listOfCostsByGroup.get(i).getUser()));
-                            costMapping.remove(listOfCostsByGroup.get(i).getUser());
-                            costMapping.remove(listOfCostsByGroup.get(j).getUser());
+            for (int i = 0; i < costMapping.size(); i++) {
+                for (int j = i + 1; j < costMapping.size(); j++) {
+                    if (costMapping.containsKey(listOfCostsByGroup.get(i).getUser())) {
+                        if (costMapping.get(listOfCostsByGroup.get(i).getUser()) + costMapping.get(listOfCostsByGroup.get(j).getUser()) == 0) {
+                            if (costMapping.get(listOfCostsByGroup.get(i).getUser()) < 0) {
+                                createEqualPayment(listOfCostsByGroup.get(j).getCosts(), listOfCostsByGroup.get(i).getUser().getId(), costMapping.get(listOfCostsByGroup.get(j).getUser()));
+                                costMapping.remove(listOfCostsByGroup.get(i).getUser());
+                                costMapping.remove(listOfCostsByGroup.get(j).getUser());
+                            } else {
+                                createEqualPayment(listOfCostsByGroup.get(i).getCosts(), listOfCostsByGroup.get(j).getUser().getId(), costMapping.get(listOfCostsByGroup.get(i).getUser()));
+                                costMapping.remove(listOfCostsByGroup.get(i).getUser());
+                                costMapping.remove(listOfCostsByGroup.get(j).getUser());
+                            }
                         }
                     }
                 }
             }
-        }
 
-        orderMapByValue(costMapping);
-        if (costMapping.size() > 0) {
-            createDividedPayment(costMapping, listOfCostsByGroup);
-        }
+            orderMapByValue(costMapping);
+            if (costMapping.size() > 0 && totalSum != 0) {
+                createDividedPayment(costMapping, listOfCostsByGroup);
+            }
     }
 
     public List<Payment> getPaymentsForAGroup(Long groupId) {
@@ -85,12 +85,39 @@ public class PaymentService {
     public List<String> getPaymentDescriptionsForGroup(Long groupId) {
         List<String> paymentDescriptions = new ArrayList<>();
         List<Payment> payments = getPaymentsForAGroup(groupId);
+<<<<<<< HEAD
         for (Payment payment : payments) {
+=======
+
+        for(Payment payment : payments) {
+>>>>>>> a40a256198174ddb473d9fffb17dbb5df609bc95
             User userFrom = userRepository.findById(payment.getPayerId()).get();
             User userTo = payment.getCost().getGroupMember().getUser();
-            paymentDescriptions.add(payment.getSum() + " kr from " + userFrom.getUserName() + " to " + userTo.getUserName());
+            paymentDescriptions.add((int)payment.getSum() + " kr from " + userFrom.getUserName() + " to " + userTo.getUserName());
         }
         return paymentDescriptions;
+    }
+
+    public List<Payment> getPaymentForGroup(Long groupId) {
+        List<Payment> payments = getPaymentsForAGroup(groupId);
+        return payments;
+    }
+
+    public LinkedHashMap<Payment, String> getPaymentDescriptionsForGroupAndPaymentId(Long groupId) {
+        LinkedHashMap<Payment, String> paymentList = new LinkedHashMap<>();
+        String paymentDescriptions;
+        List<Payment> payments = getPaymentsForAGroup(groupId);
+
+        for(Payment payment : payments) {
+            User userFrom = userRepository.findById(payment.getPayerId()).get();
+            User userTo = payment.getCost().getGroupMember().getUser();
+            paymentDescriptions =((int)payment.getSum() + " kr from " + userFrom.getUserName() + " to " + userTo.getUserName());
+
+                payment.setId(payment.getId() + payments.size());
+                paymentList.put(payment, paymentDescriptions);
+
+        }
+        return paymentList;
     }
 
     public double calcTotalSumForGroup(List<GroupMember> listOfCostsByGroup) {
@@ -118,33 +145,36 @@ public class PaymentService {
                 usersTotalCost += listOfCostsByGroup.get(i).getCosts().get(j).getCost();
             }
             owedMoney = usersTotalCost - averageSum;
-            costMapping.put(listOfCostsByGroup.get(i).getUser(), owedMoney);
+                costMapping.put(listOfCostsByGroup.get(i).getUser(), owedMoney);
         }
 
-        for (int i = 0; i < listOfCostsByGroup.size(); i++) {
-            for (int j = 0; j < listOfCostsByGroup.get(i).getCosts().size(); j++) {
-                for (int k = 0; k < listOfCostsByGroup.get(i).getCosts().get(j).getPayments().size(); k++) {
-                    if (listOfCostsByGroup.get(i).getCosts().get(j).getPayments().get(k).isPaybackd()) {
-                        User user = userRepository.findById(listOfCostsByGroup.get(i).getCosts().get(j).getPayments().get(k).getPayerId()).get();
-                        listOfPaidCosts.put(user, listOfCostsByGroup.get(i).getCosts().get(j).getPayments().get(k).getSum());
+            for (int i = 0; i < listOfCostsByGroup.size(); i++) {
+                for (int j = 0; j < listOfCostsByGroup.get(i).getCosts().size(); j++) {
+                    for (int k = 0; k < listOfCostsByGroup.get(i).getCosts().get(j).getPayments().size(); k++) {
+                        if (listOfCostsByGroup.get(i).getCosts().get(j).getPayments().get(k).isPaybackd()) {
+                            User user = userRepository.findById(listOfCostsByGroup.get(i).getCosts().get(j).getPayments().get(k).getPayerId()).get();
+                            listOfPaidCosts.put(user, listOfCostsByGroup.get(i).getCosts().get(j).getPayments().get(k).getSum());
+                            double sum1 = costMapping.get(listOfCostsByGroup.get(i).getUser());
+                            double sum2 = listOfCostsByGroup.get(i).getCosts().get(j).getPayments().get(k).getSum();
+                            double totalPayerSum = sum1 - sum2;
+                            costMapping.put(listOfCostsByGroup.get(i).getUser(), totalPayerSum);
+                        }
                     }
                 }
             }
-        }
 
-        for (int i = 0; i < costMapping.size(); i++) {
-            if (listOfPaidCosts.get(listOfCostsByGroup.get(i).getUser()) != null) {
-                double sum1 = costMapping.get(listOfCostsByGroup.get(i).getUser());
-                double sum2 = listOfPaidCosts.get(listOfCostsByGroup.get(i).getUser());
-                double totalPayerSum = sum1 + sum2;
-                if (totalPayerSum == 0) {
-                    costMapping.remove(listOfCostsByGroup.get(i).getUser());
-                } else {
-                    costMapping.put(listOfCostsByGroup.get(i).getUser(), totalPayerSum);
+            for (int i = 0; i < costMapping.size(); i++) {
+                if (listOfPaidCosts.get(listOfCostsByGroup.get(i).getUser()) != null) {
+                    double sum1 = costMapping.get(listOfCostsByGroup.get(i).getUser());
+                    double sum2 = listOfPaidCosts.get(listOfCostsByGroup.get(i).getUser());
+                    double totalPayerSum = sum1 + sum2;
+                    if (totalPayerSum == 0) {
+                        costMapping.remove(listOfCostsByGroup.get(i).getUser());
+                    } else {
+                        costMapping.put(listOfCostsByGroup.get(i).getUser(), totalPayerSum);
+                    }
                 }
             }
-        }
-
         return costMapping;
     }
 
@@ -163,14 +193,12 @@ public class PaymentService {
                         double negCostToPos = Math.abs(entryList.get(i).getValue());
                         paymentRepository.save(new Payment(cost.get(0), false, entryList.get(i).getKey().getId(), negCostToPos));
                         entryList.get(j).setValue(paymentSum);
-                        entryList.remove(i);
-
+                        entryList.remove(i); 
                     } else if (paymentSum <= 0) {
                         List<Cost> cost = getOneMembersListOfCostsForCreatingPayments(entryList.get(j).getKey(), listOfCostsByGroup, counter);
                         paymentRepository.save(new Payment(cost.get(0), false, entryList.get(i).getKey().getId(), entryList.get(j).getValue()));
                         entryList.get(i).setValue(paymentSum);
                         entryList.remove(j);
-
                     }
                 }
             }
@@ -245,5 +273,4 @@ public class PaymentService {
         }
         return map2;
     }
-
 }

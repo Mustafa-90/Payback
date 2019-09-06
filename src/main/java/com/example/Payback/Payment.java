@@ -11,6 +11,7 @@ public class Payment {
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "Cost_id")
+    @PersistenceContext(type = PersistenceContextType.TRANSACTION)
     private Cost cost;
 
     @Column (name = "Ispaybackd")
