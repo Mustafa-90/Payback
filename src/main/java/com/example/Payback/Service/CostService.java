@@ -34,7 +34,7 @@ public class CostService {
         for (GroupMember member : groupMembers) {
             List<Cost> costs = member.getCosts();
             for(Cost cost : costs) {
-                costDescriptions.add(cost.getGroupMember().getUser().getUserName() + " payed " + cost.getCost() + " kr for " + cost.getType() + ".");
+                costDescriptions.add(cost.getGroupMember().getUser().getUserName() + " paid " + cost.getCost() + " kr for " + cost.getType() + ".");
             }
         }
 
