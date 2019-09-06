@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
-  <head>
+<head>
     <title>Payback!</title>
-    <meta charset="utf.8" />
-    <link rel="stylesheet" type="text/css" href="normalize.css" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <link rel="stylesheet" type="text/css" href="dropdown.css" />
-    <link rel="stylesheet" type="text/css" href="BoxStyle.css" />
+    <meta charset="utf.8"/>
+    <link rel="stylesheet" type="text/css" href="normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link rel="stylesheet" type="text/css" href="dropdown.css"/>
+    <link rel="stylesheet" type="text/css" href="BoxStyle.css"/>
 
     <script src="PB.js"></script>
-  </head>
-  <body class="FrontPage">
-    <div class="Logo">
-      <img id="logo" src="logo.png" />
-    </div>
-    <div class="Header">
-      <div class="dropdown">
+</head>
+<body class="FrontPage">
+<div class="Logo">
+    <img id="logo" src="logo.png"/>
+</div>
+<div class="Header">
+    <div class="dropdown">
         <button id="hamburger">
-          <img src="burgermenu-icon.png" />
+            <img src="burgermenu-icon.png"/>
         </button>
 
         <div class="dropdown-content">
@@ -35,21 +35,25 @@
                 <a href="/policy">Policy</a>
               </span>
         </div>
-      </div>
     </div>
+</div>
 
 <div class="PageContent">
     <h2>Create group!</h2>
     <p>Add members to your group:</p>
     <p th:if="${session.result}" th:text="${session.result}"></p>
-    <form action="/addgroupmember" method="post">
-        <div class="PageNavigation">
+    <div class="PageNavigation">
+        <div class="BoxProfilX">
+            <p th:each="user : ${session.userList}" th:text="${user.userName} + ' added to group'"></p>
+        </div>
+
+
+        <form action="/addgroupmember" method="post">
+
             <input class="InputMember" type="text" placeholder="New Group Member" name="identifier">
             <input class="addMember" type="submit" value="+">
-        </div>
-    </form>
-    <div class="AddedGroupMembers">
-        <p th:each="user : ${session.userList}" th:text="${user.userName} + ' added to group'"></p>
+
+        </form>
     </div>
     <form action="/addgroup" method="post">
         <div class="PageNavigation">
@@ -65,6 +69,6 @@
         </form>
     </div>
 </div>
-    <div class="footer">Copyright © 2019 Payback</div>
-  </body>
+<div class="footer">Copyright © 2019 Payback</div>
+</body>
 </html>

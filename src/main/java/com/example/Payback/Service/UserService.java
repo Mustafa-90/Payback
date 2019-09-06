@@ -18,7 +18,7 @@ public class UserService {
 
     public String addUser(User user) {
         String result = checkUser(user);
-        if (result.equals("username") || result.equals("email") || result.equals("phoneNr")) {
+        if (result.equals("userName") || result.equals("email") || result.equals("phoneNr")) {
             return result;
         } else {
             user.setPassword(encoder.encode(user.getPassword()));

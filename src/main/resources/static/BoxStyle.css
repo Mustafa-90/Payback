@@ -85,6 +85,22 @@
   text-align: center;
 }
 
+
+.BoxProfilX {
+  align-content: center;
+  border-radius: 25px;
+  width: 250px;
+
+  height: 400px;
+  background-color: #58a58136;
+  box-shadow: 0 0 10px #3c5f4f36;
+  margin: 20px;
+  color: white;
+  border: 2px solid black;
+  box-sizing: border-box;
+  text-align: center;
+}
+
 .BoxAddCost {
   align-content: center;
   border-radius: 25px;

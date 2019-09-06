@@ -28,22 +28,28 @@ public class UserController {
     }
 
     @PostMapping("/adduser")
-    public String addUser(@ModelAttribute User user, Model model, @RequestParam String repPassword) {
+    public String addUser(@ModelAttribute User user, Model model, @RequestParam String repPassword, HttpSession httpSession) {
+        httpSession.removeAttribute("result");
 
         if (repPassword.equals(user.getPassword())) {
             String result = userService.addUser(user);
+            httpSession.setAttribute("result", result);
+
             if (result.equals("OK")) {
                 return "redirect:/login";
             } else {
                 model.addAttribute("user", user);
                 return "PBCreateUser";
             }
+        } else {
+            String result = "password";
+            httpSession.setAttribute("result", result);
         }
         return "PBCreateUser";
     }
 
     @GetMapping("/user")
-    public String userPage(HttpSession httpSession) throws Exception{
+    public String userPage(HttpSession httpSession) throws Exception {
         User user = groupService.getLoggedinUser();
         Long id = user.getId();
         List<PaybackGroup> groups = groupService.getGroupListByUserId(id);

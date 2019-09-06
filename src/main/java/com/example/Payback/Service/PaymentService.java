@@ -8,6 +8,7 @@ import com.example.Payback.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.util.*;
 
@@ -84,7 +85,7 @@ public class PaymentService {
     public List<String> getPaymentDescriptionsForGroup(Long groupId) {
         List<String> paymentDescriptions = new ArrayList<>();
         List<Payment> payments = getPaymentsForAGroup(groupId);
-        for(Payment payment : payments) {
+        for (Payment payment : payments) {
             User userFrom = userRepository.findById(payment.getPayerId()).get();
             User userTo = payment.getCost().getGroupMember().getUser();
             paymentDescriptions.add(payment.getSum() + " kr from " + userFrom.getUserName() + " to " + userTo.getUserName());

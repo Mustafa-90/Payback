@@ -37,6 +37,13 @@
 <div class="PageContent">
     <h2>Sign up!</h2>
     <p>Please fill in this form to create an account.</p>
+    <!--<th th:if="${session.result} == username" th:text="WRONG"/>-->
+    <div id="error" th:switch="${session.result}">
+        <p th:case="'userName'">Username is taken. Please choose another username.</p>
+        <p th:case="'email'">This email has already been used, please try another email.</p>
+        <p th:case="'phoneNr'">This phonenumber has already been used, please try another phonenumber.</p>
+        <p th:case="'password'">Incorrect password, please try again.</p>
+    </div>
     <form action="/adduser" method="POST" th:object="${user}">
         <div class="PageNavigation">
             <input

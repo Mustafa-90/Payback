@@ -76,7 +76,7 @@ public class PaybackGroupController {
     }
 
     @GetMapping("/groups")
-    public String groupsPage(HttpSession httpSession) throws Exception{
+    public String groupsPage(HttpSession httpSession) throws Exception {
         Long id = groupService.getLoggedinUserId();
         List<PaybackGroup> groups = groupService.getGroupListByUserId(id);
         httpSession.setAttribute("groups", groups);
@@ -91,10 +91,10 @@ public class PaybackGroupController {
         List<User> users = (List) httpSession.getAttribute("userList");
         User user = userService.getUserByIdentifier(identifier);
         String result = groupMemberService.checkAddNewGroupMember(user, users);
-        if(!result.contains(groupMemberService.getSuccessfullyAdded())){
+        if (!result.contains(groupMemberService.getSuccessfullyAdded())) {
             httpSession.setAttribute("result", result);
         }
-        if(result.contains(groupMemberService.getSuccessfullyAdded())) {
+        if (result.contains(groupMemberService.getSuccessfullyAdded())) {
             users.add(user);
         }
         httpSession.setAttribute("userList", users);
@@ -108,12 +108,12 @@ public class PaybackGroupController {
         return "PBInloggad";
     }
 
-    @GetMapping ("/group")
+    @GetMapping("/group")
     public String showOneGroup() {
         return "PBOneGroup";
     }
 
-    @GetMapping ("/profile")
+    @GetMapping("/profile")
     public String profile() {
         return "PBUserProfiel";
     }
