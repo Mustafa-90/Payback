@@ -13,9 +13,7 @@
 li {
   list-style-type: none;
   overflow: hidden;
-}
-li {
-  float: left;
+  text-align: left;
 }
 
 .PageItemInput {

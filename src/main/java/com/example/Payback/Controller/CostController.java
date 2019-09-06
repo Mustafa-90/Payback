@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Controller
+@Transactional
 public class CostController {
 
     @Autowired
@@ -36,6 +38,7 @@ public class CostController {
         User user = groupService.getLoggedinUser();
         GroupMember creator = costService.getGroupMember(user.getId(), group.getId());
         costService.saveCost(new Cost(creator, cost, type));
+        paymentService.createPaymentsForAGroup(id);
         List<String> groupPayments = paymentService.getPaymentDescriptionsForGroup(id);
         httpSession.setAttribute("groupPayments", groupPayments);
         httpSession.setAttribute("creator", creator);
