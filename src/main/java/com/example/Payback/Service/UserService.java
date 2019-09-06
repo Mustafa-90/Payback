@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -101,29 +102,39 @@ public class UserService {
     }
 
     public List<Cost> getAllLoggedInUsersCosts() throws Exception {
+        User user = groupService.getLoggedinUser();
         List<Cost> costs = new ArrayList<>();
         List<PaybackGroup> paybackGroups = getAllUsersGroups();
+        List<Cost> costsTemp = new ArrayList<>();
         for (PaybackGroup group : paybackGroups) {
             costs.addAll(costService.getCostsForGroupMembersByGroupId(group.getId()));
         }
-        return costs;
+        if (costs.size() > 0) {
+            for (Cost cost : costs) {
+                if (cost.getGroupMember().getUser().equals(user)) {
+                    costsTemp.add(cost);
+                }
+            }
+        }
+        return costsTemp;
     }
 
     public List<String> getAllLoggedInUsersPayments() throws Exception {
         User user = groupService.getLoggedinUser();
         List<String> payments = new ArrayList<>();
         List<PaybackGroup> paybackGroups = getAllUsersGroups();
+        List<String> paymentsTemp = new ArrayList<>();
         for (PaybackGroup group : paybackGroups) {
             payments.addAll(paymentService.getPaymentDescriptionsForGroup(group.getId()));
         }
         if (payments.size() > 0) {
             for (String payment : payments) {
-                if (!payment.contains("from " + user.getUserName())) {
-                    payments.remove(payment);
+                if (payment.contains("from " + user.getUserName())) {
+                    paymentsTemp.add(payment);
                 }
             }
         }
-        return payments;
+        return paymentsTemp;
     }
 
 

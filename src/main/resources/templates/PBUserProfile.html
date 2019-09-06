@@ -55,6 +55,8 @@
         <p th:each="cost : ${session.costs}"
            th:text="${cost.cost} + ', for ' + ${cost.type}"></p>
         <p></p>
+        <p>---------------------</p>
+        <p></p>
         <h4>Payments</h4>
         <p th:each="payment : ${session.payments}"
            th:text="${payment}"></p>
